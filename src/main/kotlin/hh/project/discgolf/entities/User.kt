@@ -12,12 +12,21 @@ import lombok.ToString
 @ToString
 class User(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     var userId: Long = -1,
+
     @Column(nullable = false, unique = true)
     var username: String = "",
+
+    @Column(unique = true)
     var email: String = "",
+
+    @Column(nullable = false)
     var password: String = "",
+
     @Enumerated(EnumType.STRING)
-    var role: UserRole? = null
-    //TODO: Don't know connections yet. Finish when diagrams are done.
+    var role: UserRole? = null,
+
+    @OneToMany(mappedBy = "userId")
+    var games: List<Game> = emptyList()
 )

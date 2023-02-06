@@ -23,6 +23,9 @@ class Game(
     @ManyToOne
     var user: User? = null,
 
+    @ManyToOne
+    var course: Course? = null,
+
     var strokes: Number = -1,
 
     var steps: Number = 0,
