@@ -1,13 +1,15 @@
 package hh.project.discgolf.entities
 
 import hh.project.discgolf.enums.UserRole
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
+import lombok.Getter
+import lombok.Setter
+import lombok.ToString
 
 @Entity
+@Getter
+@Setter
+@ToString
 class User(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var userId: Long = -1,
@@ -15,5 +17,7 @@ class User(
     var username: String = "",
     var email: String = "",
     var password: String = "",
+    @Enumerated(EnumType.STRING)
     var role: UserRole? = null
+    //TODO: Don't know connections yet. Finish when diagrams are done.
 )
