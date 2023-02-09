@@ -13,18 +13,15 @@ import lombok.Setter
 import lombok.ToString
 
 @Entity
-@Getter
-@Setter
-@ToString
 class Course(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     var courseId: Long = -1L,
 
-    @OneToMany(mappedBy = "holeId")
+    @OneToMany(mappedBy = "course")
     var holes: List<Hole> = emptyList(),
 
-    @OneToMany(mappedBy = "gameId")
+    @OneToMany(mappedBy = "course")
     var games: List<Game> = emptyList(),
 
     @Column(unique = true)
@@ -37,4 +34,6 @@ class Course(
     var coursePostalcode: String = "",
 
 
-)
+
+
+    )

@@ -49,7 +49,7 @@ class DiscgolfApplication {
 		val gameAtTali = gameRepo.save(Game(user = keijo, course = tali, steps = 4500, startingDatetime = LocalDateTime.now(),
 			endingDatetime = LocalDateTime.now().plusMinutes(200)))
 
-		println(puolarmaari.toString())
+
 	}
 
 }

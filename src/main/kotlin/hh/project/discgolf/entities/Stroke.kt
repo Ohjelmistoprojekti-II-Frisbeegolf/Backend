@@ -15,9 +15,11 @@ class Stroke (
     var strokeId: Long = -1L,
 
     @ManyToOne
+    @JoinColumn(name = "holeId")
     var hole: Hole? = null,
 
     @ManyToOne
+    @JoinColumn(name = "gameId")
     var game: Game? = null,
 
     var score: Int = 0,
