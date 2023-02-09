@@ -14,10 +14,11 @@ class Stroke (
     @Column(nullable = false, updatable = false)
     var strokeId: Long = -1L,
 
+    @ManyToOne
     var hole: Hole? = null,
-
-    var score: Number = 0,
 
     @ManyToOne
     var game: Game? = null,
+
+    var score: Number = 0,
 )
