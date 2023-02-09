@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import lombok.Getter
 import lombok.Setter
 import lombok.ToString
@@ -26,13 +27,12 @@ class Game(
     @ManyToOne
     var course: Course? = null,
 
-    var strokes: Number = -1,
+    @OneToMany(mappedBy = "strokeId")
+    var strokes: List<Stroke> = emptyList(),
 
     var steps: Number = 0,
 
-    var score: Number = 0,
+    var startingDatetime: LocalDateTime? = null,
 
-    var date: LocalDateTime? = null
-
-
+    var endingDatetime: LocalDateTime? = null,
 )
