@@ -20,5 +20,5 @@ class Stroke (
     @ManyToOne
     var game: Game? = null,
 
-    var score: Number = 0,
+    var score: Int = 0,
 )

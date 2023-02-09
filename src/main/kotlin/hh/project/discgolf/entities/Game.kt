@@ -30,7 +30,7 @@ class Game(
     @OneToMany(mappedBy = "strokeId")
     var strokes: List<Stroke> = emptyList(),
 
-    var steps: Number = 0,
+    var steps: Int = 0,
 
     var startingDatetime: LocalDateTime? = null,
 
