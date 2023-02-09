@@ -1,20 +1,19 @@
 package hh.project.discgolf
 
-import hh.project.discgolf.entities.Course
-import hh.project.discgolf.entities.Hole
-import hh.project.discgolf.entities.User
+import hh.project.discgolf.entities.*
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
+import java.time.LocalDateTime
 
 @SpringBootApplication
 class DiscgolfApplication {
 	@Bean
 	fun fillDB(courseRepo : CourseRepository, gameRepo : GameRepository,
-			   holeRepo : HoleRepository, userRepo : UserRepository) = CommandLineRunner {
+			   holeRepo : HoleRepository, strokeRepo : StrokeRepository, userRepo : UserRepository) = CommandLineRunner {
 
 		// Users for testdata
 		val keijo = userRepo.save(User(username = "Keijo", email = "keijonen@gmail.com", password = "enolekeijo", role = UserRole.USER))
@@ -29,7 +28,6 @@ class DiscgolfApplication {
 		// Holes for Puolarmaari
 		for (hole in 1..20) {
 			holeRepo.save(Hole(course = puolarmaari, holeLength = 50, holeNumber = hole, holePar = 3))
-
 		}
 
 		// Holes for Oittaan Kalliometsä
@@ -42,8 +40,18 @@ class DiscgolfApplication {
 			holeRepo.save(Hole(course = tali, holeLength = 90, holeNumber = hole, holePar = 5))
 		}
 
+		val gameAtPuolarmaari = gameRepo.save(Game(user = keijo, course = puolarmaari, steps = 5000, startingDatetime = LocalDateTime.now(),
+			endingDatetime = LocalDateTime.now().plusMinutes(90)))
 
+		val gameAtOittaaKalliometsa = gameRepo.save(Game(user = maija, course = oittaaKalliometsa, steps = 8000, startingDatetime = LocalDateTime.now(),
+			endingDatetime = LocalDateTime.now().plusMinutes(120)))
+
+		val gameAtTali = gameRepo.save(Game(user = keijo, course = tali, steps = 4500, startingDatetime = LocalDateTime.now(),
+			endingDatetime = LocalDateTime.now().plusMinutes(200)))
+
+		println(puolarmaari.toString())
 	}
+
 }
 
 fun main(args: Array<String>) {
