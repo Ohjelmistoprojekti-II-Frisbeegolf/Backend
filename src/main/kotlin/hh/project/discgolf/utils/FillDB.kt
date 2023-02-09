@@ -95,7 +95,7 @@ class FillDB @Autowired constructor(
         // Holes for Puolarmaari
         for (hole in 1..20) {
             holeRepo.save(
-                Hole(course = puolarmaari, holeLength = (30..120).random(), holeNumber = hole, holePar = 3)
+                Hole(course = puolarmaari, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
             )
         }
 
@@ -103,7 +103,7 @@ class FillDB @Autowired constructor(
         // Holes for Oittaan Kalliometsä
         for (hole in 1..18) {
             holeRepo.save(
-                Hole(course = oittaaKalliometsa, holeLength = (30..120).random(), holeNumber = hole, holePar = 3)
+                Hole(course = oittaaKalliometsa, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
             )
         }
 
@@ -111,7 +111,7 @@ class FillDB @Autowired constructor(
         // Holes for Tali
         for (hole in 1..18) {
             holeRepo.save(
-                Hole(course = tali, holeLength = (30..120).random(), holeNumber = hole, holePar = 5)
+                Hole(course = tali, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
             )
         }
 
