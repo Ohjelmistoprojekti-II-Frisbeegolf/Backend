@@ -1,6 +1,7 @@
 package hh.project.discgolf
 
 import hh.project.discgolf.entities.Game
+import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.GameRepository
 import hh.project.discgolf.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,11 +16,27 @@ class GameRepositoryTests @Autowired constructor(
     val userRepository: UserRepository
 ) {
 
+    private val testUser = User()
+    private val testGame = Game(1, testUser)
     @Test
     fun `shouldSaveGame`() {
-        val game = Game()
-        val savedGame = gameRepository.save(game)
-        assertThat(savedGame).usingRecursiveComparison().ignoringFields("gameId").isEqualTo(game)
+        val savedGame = gameRepository.save(testGame)
+        assertThat(savedGame).usingRecursiveComparison().ignoringFields("gameId").isEqualTo(testGame)
     }
+
+    @Test
+    fun `shouldReturnGameById`(){
+        val game = gameRepository.findById(1)
+        assertThat(game).isPresent
+    }
+
+    @Test
+    fun `shouldReturnGameByUser`() {
+        userRepository.save(testUser)
+        gameRepository.save(testGame)
+        val game = gameRepository.findByUser(testUser)
+        assertThat(game).isNotNull
+    }
+
 
 }
