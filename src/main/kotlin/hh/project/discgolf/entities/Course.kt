@@ -1,13 +1,6 @@
 package hh.project.discgolf.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.ManyToMany
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 import lombok.Getter
 import lombok.Setter
 import lombok.ToString
@@ -18,10 +11,10 @@ class Course(
     @Column(nullable = false, updatable = false)
     var courseId: Long = -1L,
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     var holes: List<Hole> = emptyList(),
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     var games: List<Game> = emptyList(),
 
     @Column(unique = true)

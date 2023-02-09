@@ -1,36 +1,26 @@
 package hh.project.discgolf.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 import lombok.Getter
 import lombok.Setter
 import lombok.ToString
 import java.time.LocalDateTime
 
 @Entity
-@Getter
-@Setter
-@ToString
 class Game(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     var gameId: Long = -1L,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     var user: User? = null,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courseId")
     var course: Course? = null,
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     var strokes: List<Stroke> = emptyList(),
 
     var steps: Int = 0,

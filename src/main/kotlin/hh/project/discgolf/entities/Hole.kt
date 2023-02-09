@@ -1,12 +1,6 @@
 package hh.project.discgolf.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import lombok.Getter
 import lombok.Setter
 import lombok.ToString
@@ -17,7 +11,7 @@ class Hole(
     @Column(nullable = false, updatable = false)
     var holeId: Long = -1L,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courseId")
     var course: Course? = null,
 
