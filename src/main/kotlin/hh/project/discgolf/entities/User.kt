@@ -15,6 +15,9 @@ class User(
     @Column(nullable = false, updatable = false)
     var userId: Long = -1,
 
+    @OneToMany(mappedBy = "gameId")
+    var games: List<Game> = emptyList(),
+
     @Column(nullable = false, unique = true)
     var username: String = "",
 
@@ -27,6 +30,5 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRole? = null,
 
-    @OneToMany(mappedBy = "userId")
-    var games: List<Game> = emptyList()
+
 )
