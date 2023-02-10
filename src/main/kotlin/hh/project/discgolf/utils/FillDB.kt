@@ -4,6 +4,7 @@ import hh.project.discgolf.entities.*
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 

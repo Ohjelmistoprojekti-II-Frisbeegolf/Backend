@@ -1,28 +1,59 @@
 package hh.project.discgolf
 
 import hh.project.discgolf.entities.Game
-import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.GameRepository
-import hh.project.discgolf.repositories.UserRepository
-import hh.project.discgolf.utils.FillDB
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
 import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.*
-import org.springframework.boot.CommandLineRunner
-import org.springframework.context.annotation.Bean
+import org.junit.jupiter.api.BeforeEach
+import org.springframework.test.context.ActiveProfiles
 
+@ExtendWith(value = [SpringExtension::class])
 @DataJpaTest
-class GameRepositoryTests @Autowired constructor(
-    val gameRepository: GameRepository,
-) {
+@ActiveProfiles("test")
+class GameRepositoryTests {
 
-    @Test
-    fun `Should save game `() {
-        val game = Game()
-        val savedGame = gameRepository.save(game)
-        assertThat(game).usingRecursiveComparison().ignoringFields("gameId").isEqualTo(savedGame)
+    @Autowired
+    lateinit var gameRepository: GameRepository
+
+    @BeforeEach
+    fun init() {
+        gameRepository.deleteAll()
+        val game1 = Game(gameId = 1)
+        val game2 = Game(gameId = 2)
+        gameRepository.saveAll(listOf(game1, game2))
     }
 
+    @Test
+    fun `should save a game`() {
+        val savedGame = Game()
+        gameRepository.save(savedGame)
+        assertThat(savedGame.gameId).isEqualTo(-1)
+    }
+
+    @Test
+    fun `should return all games`() {
+        val games = gameRepository.findAll()
+        assertThat(games).hasSize(2)
+    }
+
+    @Test
+    fun `should return a game by id`() {
+        for (id in 1..gameRepository.findAll().count()) {
+            val game = gameRepository.findById(id.toLong())
+            assertThat(game).isNotNull
+        }
+    }
+
+    @Test
+    fun `should delete games by id`() {
+        for (id in 1..gameRepository.findAll().count()) {
+            gameRepository.deleteById(id.toLong())
+            assertThat(gameRepository.findById(id.toLong())).isEmpty
+        }
+    }
 }
