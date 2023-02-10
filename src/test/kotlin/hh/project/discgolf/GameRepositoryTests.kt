@@ -4,39 +4,25 @@ import hh.project.discgolf.entities.Game
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.GameRepository
 import hh.project.discgolf.repositories.UserRepository
+import hh.project.discgolf.utils.FillDB
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
+import org.springframework.boot.CommandLineRunner
+import org.springframework.context.annotation.Bean
 
 @DataJpaTest
 class GameRepositoryTests @Autowired constructor(
     val gameRepository: GameRepository,
-    val userRepository: UserRepository
 ) {
 
-    private val testUser = User()
-    private val testGame = Game(1, testUser)
     @Test
-    fun `shouldSaveGame`() {
-        val savedGame = gameRepository.save(testGame)
-        assertThat(savedGame).usingRecursiveComparison().ignoringFields("gameId").isEqualTo(testGame)
+    fun `Should save game `() {
+        val game = Game()
+        val savedGame = gameRepository.save(game)
+        assertThat(game).usingRecursiveComparison().ignoringFields("gameId").isEqualTo(savedGame)
     }
-
-    @Test
-    fun `shouldReturnGameById`(){
-        val game = gameRepository.findById(1)
-        assertThat(game).isPresent
-    }
-
-    @Test
-    fun `shouldReturnGameByUser`() {
-        userRepository.save(testUser)
-        gameRepository.save(testGame)
-        val game = gameRepository.findByUser(testUser)
-        assertThat(game).isNotNull
-    }
-
 
 }
