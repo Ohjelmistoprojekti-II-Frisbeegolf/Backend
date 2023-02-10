@@ -19,6 +19,15 @@ class FillDB @Autowired constructor(
     fun fill() {
 
         /*
+            First clear everything in database
+         */
+        courseRepo.deleteAll()
+        gameRepo.deleteAll()
+        holeRepo.deleteAll()
+        strokeRepo.deleteAll()
+        userRepo.deleteAll()
+
+        /*
          *  Users for testdata.
          */
 
