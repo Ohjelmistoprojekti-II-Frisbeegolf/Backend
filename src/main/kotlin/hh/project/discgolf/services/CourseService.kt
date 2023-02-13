@@ -9,4 +9,8 @@ class CourseService(private val courseRepository: CourseRepository) {
 
     fun getAllCourses(): List<Course> = courseRepository.findAll()
 
+    fun getCourseById(courseId: Long) : Course =
+        courseRepository.findById(courseId)
+            .orElseThrow()
+
 }
