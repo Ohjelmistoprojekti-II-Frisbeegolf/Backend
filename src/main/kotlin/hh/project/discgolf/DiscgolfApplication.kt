@@ -16,9 +16,7 @@ class DiscgolfApplication {
 	fun insertTestData(fillDB: FillDB) = CommandLineRunner {
 		fillDB.fill()
 	}
-
 }
-
 fun main(args: Array<String>) {
 	runApplication<DiscgolfApplication>(*args)
 }
