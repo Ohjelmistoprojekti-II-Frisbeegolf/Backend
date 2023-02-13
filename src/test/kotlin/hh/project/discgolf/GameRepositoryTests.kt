@@ -53,6 +53,7 @@ class GameRepositoryTests {
         for (game in gameRepository.findAll()) {
             gameRepository.deleteById(game.gameId)
             assertThat(gameRepository.findById(game.gameId)).isEmpty
+
         }
     }
 }
