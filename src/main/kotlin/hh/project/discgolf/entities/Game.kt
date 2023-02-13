@@ -23,7 +23,7 @@ class Game(
     @JsonIgnore
     var course: Course? = null,
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     var strokes: List<Stroke> = emptyList(),
 
     var steps: Int = 0,
