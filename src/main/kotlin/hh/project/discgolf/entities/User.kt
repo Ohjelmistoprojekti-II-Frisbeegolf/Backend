@@ -15,6 +15,7 @@ class User(
     var userId: Long = -1,
 
     @OneToMany(mappedBy = "gameId", fetch = FetchType.EAGER)
+    @JsonIgnore
     var games: List<Game> = emptyList(),
 
     @Column(nullable = false, unique = true)

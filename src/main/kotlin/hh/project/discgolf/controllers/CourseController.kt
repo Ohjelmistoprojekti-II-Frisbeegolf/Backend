@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController
 class CourseController(private  val courseService : CourseService) {
 
     @GetMapping(value = ["/courses"])
-    fun getAllCourses(): Iterable<Course> = courseService.getAllCourses()
+    fun getAllCourses(): List<Course> = courseService.getAllCourses()
 
 }

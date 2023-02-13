@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class CourseService(private val courseRepository: CourseRepository) {
 
-    fun getAllCourses(): Iterable<Course> = courseRepository.findAll()
+    fun getAllCourses(): List<Course> = courseRepository.findAll()
 
 }

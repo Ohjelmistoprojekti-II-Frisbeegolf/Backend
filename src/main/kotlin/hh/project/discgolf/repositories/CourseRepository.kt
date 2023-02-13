@@ -1,7 +1,8 @@
 package hh.project.discgolf.repositories
 
 import hh.project.discgolf.entities.Course
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 
-interface CourseRepository : CrudRepository<Course, Long> {
+interface CourseRepository : JpaRepository<Course, Long> {
+
 }

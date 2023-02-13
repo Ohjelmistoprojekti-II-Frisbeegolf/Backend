@@ -15,7 +15,6 @@ class Stroke (
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "holeId")
-    @JsonIgnoreProperties(value = ["strokes"])
     var hole: Hole? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)

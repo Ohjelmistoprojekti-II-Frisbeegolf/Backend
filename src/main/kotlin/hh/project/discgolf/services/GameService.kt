@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service
 @Service
 class GameService(private val gameRepository: GameRepository) {
 
-    fun getAllGames(): Iterable<Game> = gameRepository.findAll()
+    fun getAllGames(): List<Game> = gameRepository.findAll()
 }

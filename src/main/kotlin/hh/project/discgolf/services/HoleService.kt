@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service
 @Service
 class HoleService (private val holeRepository: HoleRepository){
 
-    fun getAllHoles(): MutableIterable<Hole> = holeRepository.findAll()
+    fun getAllHoles(): List<Hole> = holeRepository.findAll()
 }

@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController
 class HoleController (private val holeService: HoleService) {
 
     @GetMapping(value = ["/holes"])
-    fun getAllHoles(): MutableIterable<Hole> = holeService.getAllHoles()
+    fun getAllHoles(): List<Hole> = holeService.getAllHoles()
 }

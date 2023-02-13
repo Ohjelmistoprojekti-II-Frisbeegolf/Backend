@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController
 class GameController(private val gameService: GameService) {
 
     @GetMapping(value = ["/games"])
-    fun getAllGames(): Iterable<Game> = gameService.getAllGames()
+    fun getAllGames(): List<Game> = gameService.getAllGames()
 }

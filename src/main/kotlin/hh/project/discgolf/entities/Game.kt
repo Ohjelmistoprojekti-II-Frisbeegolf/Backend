@@ -16,7 +16,6 @@ class Game(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
-    @JsonIgnore
     var user: User? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
