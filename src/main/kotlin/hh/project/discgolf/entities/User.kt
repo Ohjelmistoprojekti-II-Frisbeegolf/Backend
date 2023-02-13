@@ -1,5 +1,7 @@
 package hh.project.discgolf.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import hh.project.discgolf.enums.UserRole
 import jakarta.persistence.*
 import lombok.Getter
