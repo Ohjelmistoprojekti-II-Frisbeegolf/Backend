@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
 @Component
-class FillDB @Autowired constructor(
+class InitializeDB @Autowired constructor(
     private val courseRepo : CourseRepository,
     private val gameRepo : GameRepository,
     private val holeRepo : HoleRepository,
@@ -17,7 +17,7 @@ class FillDB @Autowired constructor(
 
 ) {
 
-    fun initializeDB() {
+    fun initialize() {
         deleteEverythingFromDB()
         createTestUsersToDB()
         createTestCoursesToDB()
@@ -42,7 +42,6 @@ class FillDB @Autowired constructor(
             )
         )
 
-
         userRepo.save(
             User(
                 username = "Maija",
@@ -52,7 +51,6 @@ class FillDB @Autowired constructor(
             )
         )
 
-
         userRepo.save(
             User(
                 username = "admin",
@@ -61,8 +59,6 @@ class FillDB @Autowired constructor(
                 role = UserRole.ADMIN
             )
         )
-
-
     }
 
     private fun createTestCoursesToDB() {
@@ -87,7 +83,6 @@ class FillDB @Autowired constructor(
         )
 
         createHolesForCourse(course = oittaaKalliometsa, holeAmount = 18)
-
 
         val tali = courseRepo.save(
             Course(
@@ -134,7 +129,6 @@ class FillDB @Autowired constructor(
 
         createStrokesForGame(game = gameAtOittaaKalliometsa)
 
-
         val gameAtTali = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Keijo"),
@@ -146,7 +140,6 @@ class FillDB @Autowired constructor(
         )
 
         createStrokesForGame(game = gameAtTali)
-
     }
 
     private fun createStrokesForGame(game: Game){
