@@ -10,23 +10,23 @@ class UserService (private val userRepository: UserRepository){
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(id: Long): User =
-        userRepository.findById(id)
+    fun getUserById(userId: Long): User =
+        userRepository.findById(userId)
             .orElseThrow()
 
     fun createNewUser(user: User): User = userRepository.save(user)
 
-    fun deleteUser(id: Long) {
-        return if (userRepository.existsById(id)) {
-            userRepository.deleteById(id)
+    fun deleteUser(userId: Long) {
+        return if (userRepository.existsById(userId)) {
+            userRepository.deleteById(userId)
         } else throw NotFoundException()
     }
 
-    fun updateUser(id: Long, user: User): User {
-        return if (userRepository.existsById(id)) {
+    fun updateUser(userId: Long, user: User): User {
+        return if (userRepository.existsById(userId)) {
             userRepository.save(
                 User(
-                    userId = id,
+                    userId = userId,
                     games = user.games,
                     username = user.username,
                     email = user.email,
