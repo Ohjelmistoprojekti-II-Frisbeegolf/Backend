@@ -1,5 +1,6 @@
 package hh.project.discgolf.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import lombok.Getter
 import lombok.Setter
@@ -15,6 +16,7 @@ class Course(
     var holes: List<Hole> = emptyList(),
 
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    @JsonIgnore
     var games: List<Game> = emptyList(),
 
     @Column(unique = true)
