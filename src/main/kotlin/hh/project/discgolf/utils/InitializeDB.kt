@@ -4,7 +4,6 @@ import hh.project.discgolf.entities.*
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
@@ -17,22 +16,24 @@ class FillDB @Autowired constructor(
     private val userRepo : UserRepository
 
 ) {
-    fun fill() {
 
-        /*
-            First clear everything in database
-         */
+    fun initializeDB() {
+        deleteEverythingFromDB()
+        createTestUsersToDB()
+        createTestCoursesToDB()
+        createTestGamesToDB()
+    }
+
+    private fun deleteEverythingFromDB() {
         courseRepo.deleteAll()
         gameRepo.deleteAll()
         holeRepo.deleteAll()
         strokeRepo.deleteAll()
         userRepo.deleteAll()
+    }
 
-        /*
-         *  Users for testdata.
-         */
-
-        val keijo = userRepo.save(
+    private fun createTestUsersToDB() {
+        userRepo.save(
             User(
                 username = "Keijo",
                 email = "keijonen@gmail.com",
@@ -42,7 +43,7 @@ class FillDB @Autowired constructor(
         )
 
 
-        val maija = userRepo.save(
+        userRepo.save(
             User(
                 username = "Maija",
                 email = "maijakas@hotmail.com",
@@ -52,7 +53,7 @@ class FillDB @Autowired constructor(
         )
 
 
-        val admin = userRepo.save(
+        userRepo.save(
             User(
                 username = "admin",
                 email = "admin@discgolf.com",
@@ -62,11 +63,9 @@ class FillDB @Autowired constructor(
         )
 
 
-        /*
-         *  Courses for testdata.
-         */
+    }
 
-
+    private fun createTestCoursesToDB() {
         val puolarmaari = courseRepo.save(
             Course(
                 courseName = "Puolarmaari",
@@ -76,6 +75,7 @@ class FillDB @Autowired constructor(
             )
         )
 
+        createHolesForCourse(course = puolarmaari, holeAmount = 20)
 
         val oittaaKalliometsa = courseRepo.save(
             Course(
@@ -85,6 +85,8 @@ class FillDB @Autowired constructor(
                 courseTown = "Espoo"
             )
         )
+
+        createHolesForCourse(course = oittaaKalliometsa, holeAmount = 18)
 
 
         val tali = courseRepo.save(
@@ -96,100 +98,64 @@ class FillDB @Autowired constructor(
             )
         )
 
+        createHolesForCourse(course = tali, holeAmount = 18)
+    }
 
-        /*
-         *  Holes for testdata.
-         */
-
-
-        // Holes for Puolarmaari
-        for (hole in 1..20) {
+    private fun createHolesForCourse(course : Course, holeAmount: Int) {
+        for (hole in 1..holeAmount) {
             holeRepo.save(
-                Hole(course = puolarmaari, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
+                Hole(course = course, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
             )
         }
+    }
 
-
-        // Holes for Oittaan Kalliometsä
-        for (hole in 1..18) {
-            holeRepo.save(
-                Hole(course = oittaaKalliometsa, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
-            )
-        }
-
-
-        // Holes for Tali
-        for (hole in 1..18) {
-            holeRepo.save(
-                Hole(course = tali, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
-            )
-        }
-
-
-        /*
-         *  Games for testdata.
-         */
-
-
+    private fun createTestGamesToDB() {
         val gameAtPuolarmaari = gameRepo.save(
             Game(
-                user = keijo,
-                course = puolarmaari,
+                user = userRepo.findByUsername(username = "Keijo"),
+                course = courseRepo.findByCourseName(courseName = "Puolarmaari") ,
                 steps = 5000,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(90)
             )
         )
 
+        createStrokesForGame(game = gameAtPuolarmaari)
 
         val gameAtOittaaKalliometsa = gameRepo.save(
             Game(
-                user = maija,
-                course = oittaaKalliometsa,
+                user = userRepo.findByUsername(username = "Maija"),
+                course = courseRepo.findByCourseName(courseName = "Oittaa Kalliometsä"),
                 steps = 8000,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(120)
             )
         )
 
+        createStrokesForGame(game = gameAtOittaaKalliometsa)
+
 
         val gameAtTali = gameRepo.save(
             Game(
-                user = keijo,
-                course = tali, steps = 4500,
+                user = userRepo.findByUsername(username = "Keijo"),
+                course = courseRepo.findByCourseName(courseName = "Talin frisbeegolfpuisto"),
+                steps = 4500,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(200)
             )
         )
 
-
-        /*
-         *  Strokes for testdata.
-         */
-
-
-        // Strokes for game at Puolarmaari
-        for (hole: Hole in gameAtPuolarmaari.course!!.holes) {
-            strokeRepo.save(
-                Stroke(hole = hole, game = gameAtPuolarmaari, score = (1..10).random())
-            )
-        }
-
-
-        // Strokes for game at Oittaan Kalliometsä
-        for (hole: Hole in gameAtOittaaKalliometsa.course!!.holes) {
-            strokeRepo.save(
-                Stroke(hole = hole, game = gameAtOittaaKalliometsa, score = (1..10).random())
-            )
-        }
-
-
-        // Strokes for game at Tali.
-        for (hole: Hole in gameAtTali.course!!.holes) {
-            strokeRepo.save(
-                Stroke(hole = hole, game = gameAtTali, score = (1..10).random())
-            )
-        }
+        createStrokesForGame(game = gameAtTali)
 
     }
+
+    private fun createStrokesForGame(game: Game){
+        for (hole: Hole in game.course!!.holes) {
+            strokeRepo.save(
+                Stroke(hole = hole, game = game, score = (1..10).random())
+            )
+        }
+    }
+
+
 }
