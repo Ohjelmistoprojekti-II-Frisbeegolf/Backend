@@ -17,8 +17,7 @@ class GameController(private val gameService: GameService) {
     fun getAllGames(): List<Game> = gameService.getAllGames()
 
     @GetMapping(value = ["/games/{id}"])
-    fun getGameById(@PathVariable("id") gameId: Long): Game =
-        gameService.getGameById(gameId)
+    fun getGameById(@PathVariable("id") gameId: Long): Game = gameService.getGameById(gameId)
 
     @PostMapping(value = ["/games"])
     fun createGame(@RequestBody payload: Game): Game = gameService.createGame(payload)
