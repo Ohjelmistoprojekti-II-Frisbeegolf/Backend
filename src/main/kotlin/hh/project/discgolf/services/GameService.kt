@@ -15,6 +15,4 @@ class GameService(private val gameRepository: GameRepository) {
         .orElseThrow()
 
     fun createGame(game: Game): Game = gameRepository.save(game)
-
-    
 }
