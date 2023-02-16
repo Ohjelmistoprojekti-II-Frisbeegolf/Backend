@@ -28,7 +28,4 @@ class Course(
 
     var coursePostalcode: String = "",
 
-
-
-
     )

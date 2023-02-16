@@ -23,4 +23,5 @@ class Stroke (
     var game: Game? = null,
 
     var score: Int = 0,
+
 )

@@ -30,5 +30,4 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRole? = null,
 
-
     )

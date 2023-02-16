@@ -31,4 +31,5 @@ class Game(
     var startingDatetime: LocalDateTime? = null,
 
     var endingDatetime: LocalDateTime? = null,
+
 )

@@ -24,5 +24,4 @@ class Hole(
 
     var holeNumber: Int = 0,
 
-
     )

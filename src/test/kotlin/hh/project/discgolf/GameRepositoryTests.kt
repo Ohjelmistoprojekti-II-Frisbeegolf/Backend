@@ -22,8 +22,8 @@ class GameRepositoryTests {
     @BeforeEach
     fun init() {
         gameRepository.deleteAll()
-        val game1 = Game(gameId = 1)
-        val game2 = Game(gameId = 2)
+        val game1 = Game(gameId = 1L)
+        val game2 = Game(gameId = 2L)
         gameRepository.saveAll(listOf(game1, game2))
     }
 

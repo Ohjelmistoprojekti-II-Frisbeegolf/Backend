@@ -11,7 +11,8 @@ class GameService(private val gameRepository: GameRepository) {
 
     fun getAllGames(): List<Game> = gameRepository.findAll()
 
-    fun getGameById(gameId: Long): Game = gameRepository.findById(gameId)
+    fun getGameById(gameId: Long): Game =
+        gameRepository.findById(gameId)
         .orElseThrow()
 
     fun createGame(game: Game): Game = gameRepository.save(game)
