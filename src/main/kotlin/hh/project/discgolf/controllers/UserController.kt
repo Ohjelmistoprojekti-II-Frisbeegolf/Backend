@@ -20,16 +20,13 @@ class UserController(private val userService: UserService) {
     fun getAllUsers(): List<User> = userService.getAllUsers()
 
     @GetMapping(value = ["/users/{id}"])
-    fun getUserById(@PathVariable("id") id: Long): User =
-        userService.getUserById(id)
+    fun getUserById(@PathVariable("id") id: Long): User = userService.getUserById(id)
 
     @PostMapping(value = ["/users"])
-    fun createNewUser(@RequestBody payload: User): User =
-        userService.createNewUser(payload)
+    fun createNewUser(@RequestBody payload: User): User = userService.createNewUser(payload)
 
     @PutMapping(value = ["/users/{id}"])
-    fun updateUser(@PathVariable("id") id: Long, @RequestBody payload: User): User =
-        userService.updateUser(id, payload)
+    fun updateUser(@PathVariable("id") id: Long, @RequestBody payload: User): User = userService.updateUser(id, payload)
 
     @DeleteMapping(value = ["/users/{id}"])
     fun deleteUser(@PathVariable("id") id: Long) = userService.deleteUser(id)
