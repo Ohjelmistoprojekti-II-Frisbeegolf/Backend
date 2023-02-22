@@ -11,6 +11,6 @@ class CourseService(private val courseRepository: CourseRepository) {
 
     fun getCourseById(courseId: Long) : Course =
         courseRepository.findById(courseId)
-            .orElseThrow()
+            .orElseThrow {NoSuchElementException("Could not find course with given id")}
 
 }
