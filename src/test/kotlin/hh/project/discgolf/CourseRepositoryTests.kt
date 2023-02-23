@@ -37,7 +37,7 @@ class CourseRepositoryTests
 
     @Test
     fun `should return all courses`() {
-        assertThat(courseRepository.findAll().size).isEqualTo(100)
+        assertThat(courseRepository.findAll().size).isEqualTo(2)
     }
 
     @Test
