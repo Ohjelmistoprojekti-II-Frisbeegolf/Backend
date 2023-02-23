@@ -61,7 +61,6 @@ class CourseRepositoryTests
         val courseId = 1L
         val course = courseRepository.findById(courseId).get()
         course.courseName = "new name"
-
         assertThat(courseRepository.findById(courseId).get().courseName).isEqualTo("new name")
     }
 
