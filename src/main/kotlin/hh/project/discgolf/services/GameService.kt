@@ -5,6 +5,7 @@ import hh.project.discgolf.repositories.GameRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import java.util.*
+import kotlin.NoSuchElementException
 
 @Service
 class GameService(private val gameRepository: GameRepository) {
@@ -13,7 +14,7 @@ class GameService(private val gameRepository: GameRepository) {
 
     fun getGameById(gameId: Long): Game =
         gameRepository.findById(gameId)
-        .orElseThrow()
+        .orElseThrow { NoSuchElementException("Game with given id not present!")}
 
     fun createGame(game: Game): Game = gameRepository.save(game)
 }

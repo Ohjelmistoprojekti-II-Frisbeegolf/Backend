@@ -12,14 +12,14 @@ class UserService (private val userRepository: UserRepository){
 
     fun getUserById(userId: Long): User =
         userRepository.findById(userId)
-            .orElseThrow()
+            .orElseThrow { NoSuchElementException("User with given id not present!")}
 
     fun createNewUser(user: User): User = userRepository.save(user)
 
     fun deleteUser(userId: Long) {
         return if (userRepository.existsById(userId)) {
             userRepository.deleteById(userId)
-        } else throw NotFoundException()
+        } else throw NoSuchElementException("User doesn't exist with given id!")
     }
 
     fun updateUser(userId: Long, user: User): User {
