@@ -10,12 +10,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.assertj.core.api.Assertions.*
 import org.springframework.test.context.ActiveProfiles
+import java.util.*
 
 @ExtendWith(value = [SpringExtension::class])
 @DataJpaTest
 @ActiveProfiles("test")
 class CourseRepositoryTests
-@Autowired constructor(
+    @Autowired constructor(
     private val courseRepository : CourseRepository
 )
 
@@ -30,9 +31,9 @@ class CourseRepositoryTests
 
     @Test
     fun `should save a course`(){
-        val savedCourse = Course(courseId = 3L)
+        val savedCourse = Course(courseId = 3L, courseName = "Test3")
         courseRepository.save(savedCourse)
-        assertThat(courseRepository.findById(3L)).isNotEmpty
+        assertThat(courseRepository.findByCourseName("Test3")).isNotNull
     }
 
     @Test
@@ -42,14 +43,15 @@ class CourseRepositoryTests
 
     @Test
     fun `should return course by id`() {
-        assertThat(courseRepository.findById(2L)).isNotEmpty
+        val course = courseRepository.findByCourseName("Test1")
+        assertThat(course).isNotNull
     }
 
     @Test
     fun `should delete course by id`() {
-        val course = courseRepository.findById(2L).get()
-        courseRepository.delete(course)
-        assertThat(courseRepository.findById(2L)).isEmpty
+        val courseToBeDeleted = courseRepository.findByCourseName("Test1")
+        courseRepository.delete(courseToBeDeleted!!)
+        assertThat(courseRepository.findByCourseName("Test1")).isNull()
     }
 
     @Test
