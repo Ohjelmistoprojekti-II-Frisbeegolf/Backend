@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
@@ -34,7 +33,7 @@ internal class UserControllerTest
     }
 
     @Test
-    fun `should return user by give id`() {
+    fun `should return user by given id`() {
         val userId = 1L
         val user = userRepository.findById(userId).get()
 
@@ -49,7 +48,7 @@ internal class UserControllerTest
     }
 
     @Test
-    fun `should return not found with id that doesn't exist`() {
+    fun `should return is not found -status with id that doesn't exist`() {
         val incorrectId = -1L
 
         mockMvc.get("/users/$incorrectId")
