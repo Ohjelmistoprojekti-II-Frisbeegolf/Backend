@@ -9,5 +9,5 @@ interface UserRepository : JpaRepository<User, Long> {
     fun findByUsername(username : String) : User
 
     @Query("SELECT COUNT(user_id) FROM Game WHERE user_id = :userId", nativeQuery = true)
-    fun gameAmountForUser(userId : Long) : Int
+    fun countUsersGames(userId : Long) : Int
 }
