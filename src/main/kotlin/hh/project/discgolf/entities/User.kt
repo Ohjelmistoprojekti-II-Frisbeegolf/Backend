@@ -15,13 +15,13 @@ class User(
     var games: List<Game> = emptyList(),
 
     @Column(nullable = false, unique = true)
-    var username: String = "",
+    var username: String? = null,
 
     @Column(unique = true)
     var email: String = "",
 
     @Column(nullable = false)
-    var password: String = "",
+    var password: String? = null,
 
     @Enumerated(EnumType.STRING)
     var role: UserRole? = null,
