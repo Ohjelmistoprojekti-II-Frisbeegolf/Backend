@@ -1,7 +1,6 @@
-package hh.project.discgolf
+package hh.project.discgolf.repositories
 
 import hh.project.discgolf.entities.Game
-import hh.project.discgolf.repositories.GameRepository
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

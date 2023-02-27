@@ -1,4 +1,4 @@
-package hh.project.discgolf
+package hh.project.discgolf.repositories
 
 import hh.project.discgolf.entities.Course
 import hh.project.discgolf.repositories.CourseRepository
