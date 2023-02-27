@@ -10,9 +10,11 @@ class UserService (private val userRepository: UserRepository){
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(userId: Long): User =
-        userRepository.findById(userId)
-            .orElseThrow { NoSuchElementException("User with given id not present!")}
+    fun getUserById(userId: Long) : User {
+        val user = userRepository.findById(userId).get()
+        user.gameAmount = userRepository.gameAmountForUser(userId)
+        return user
+    }
 
     fun createNewUser(user: User): User = userRepository.save(user)
 
