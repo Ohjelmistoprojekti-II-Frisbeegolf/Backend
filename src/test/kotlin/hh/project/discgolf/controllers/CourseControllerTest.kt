@@ -51,7 +51,7 @@ internal class CourseControllerTest @Autowired constructor(
         mockMvc.get("/courses/$incorrectId")
             .andDo { print() }
             .andExpect {
-                status { HttpStatus.NOT_FOUND }
+                status { isNotFound() }
             }
     }
 
@@ -69,6 +69,18 @@ internal class CourseControllerTest @Autowired constructor(
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
                 jsonPath("$.courseName") { value("Golf-kenttä") }
+            }
+    }
+
+    @Test
+    fun `should return course with valid courseName`() {
+        val courseName = "Talin_frisbeegolfpuisto";
+        mockMvc.get("/courses/name/$courseName")
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+                jsonPath("$.courseName") { value("Talin frisbeegolfpuisto") }
             }
     }
 
