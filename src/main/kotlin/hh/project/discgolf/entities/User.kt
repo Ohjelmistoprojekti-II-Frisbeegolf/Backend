@@ -26,4 +26,7 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRole? = null,
 
+    @Transient
+    var gameAmount:  Int = 0
+
     )
