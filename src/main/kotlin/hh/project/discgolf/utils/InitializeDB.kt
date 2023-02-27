@@ -108,7 +108,7 @@ class InitializeDB @Autowired constructor(
         val gameAtPuolarmaari = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Keijo"),
-                course = courseRepo.findByCourseName(courseName = "Puolarmaari") ,
+                course = courseRepo.findByCourseName(courseName = "Puolarmaari").get(),
                 steps = 5000,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(90)
@@ -120,7 +120,7 @@ class InitializeDB @Autowired constructor(
         val gameAtOittaaKalliometsa = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Maija"),
-                course = courseRepo.findByCourseName(courseName = "Oittaa Kalliometsä"),
+                course = courseRepo.findByCourseName(courseName = "Oittaa Kalliometsä").get(),
                 steps = 8000,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(120)
@@ -132,7 +132,7 @@ class InitializeDB @Autowired constructor(
         val gameAtTali = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Keijo"),
-                course = courseRepo.findByCourseName(courseName = "Talin frisbeegolfpuisto"),
+                course = courseRepo.findByCourseName(courseName = "Talin frisbeegolfpuisto").get(),
                 steps = 4500,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(200)
