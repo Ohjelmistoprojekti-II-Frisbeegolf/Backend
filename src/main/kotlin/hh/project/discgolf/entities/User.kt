@@ -27,6 +27,6 @@ class User(
     var role: UserRole? = null,
 
     @Transient
-    var gameAmount:  Int = 0
+    var amountOfPlayedGames:  Int = 0
 
     )
