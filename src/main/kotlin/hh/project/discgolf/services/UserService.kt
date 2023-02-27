@@ -12,7 +12,7 @@ class UserService (private val userRepository: UserRepository){
 
     fun getUserById(userId: Long) : User {
         val user = userRepository.findById(userId).get()
-        user.gameAmount = userRepository.gameAmountForUser(userId)
+        user.amountOfPlayedGames = userRepository.countUsersGames(userId)
         return user
     }
 
