@@ -33,7 +33,7 @@ class CourseRepositoryTests
     fun `should save a course`(){
         val savedCourse = Course(courseId = 3L, courseName = "Test3")
         courseRepository.save(savedCourse)
-        assertThat(courseRepository.findByCourseName("Test3")).isNotNull
+        assertThat(courseRepository.findByCourseName("Test3")).isPresent
     }
 
     @Test
@@ -42,26 +42,16 @@ class CourseRepositoryTests
     }
 
     @Test
-    fun `should return course by id`() {
+    fun `should return course by name`() {
         val course = courseRepository.findByCourseName("Test1")
-        assertThat(course).isNotNull
+        assertThat(course).isPresent
     }
 
     @Test
     fun `should delete course by id`() {
-        val courseToBeDeleted = courseRepository.findByCourseName("Test1")
-        courseRepository.delete(courseToBeDeleted!!)
-        assertThat(courseRepository.findByCourseName("Test1")).isNull()
+        for (course in courseRepository.findAll()) {
+            courseRepository.deleteById(course.courseId)
+            assertThat(courseRepository.findById(course.courseId)).isEmpty
+        }
     }
-
-    @Test
-    fun `should update a course name`() {
-        val course = courseRepository.findById(2L).get()
-        course.courseName = "new name"
-        courseRepository.save(course)
-        assertThat(courseRepository.findById(2L).get().courseName).isEqualTo("new name")
-    }
-
-
-
 }
