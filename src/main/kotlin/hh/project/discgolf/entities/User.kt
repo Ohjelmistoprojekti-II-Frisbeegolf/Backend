@@ -30,6 +30,6 @@ class User(
     var gamesPlayed:  Int = 0,
 
     @Transient
-    var totalTimePlayed: String = ""
+    var totalTimePlayed: String = "00:00:00"
 
     )
