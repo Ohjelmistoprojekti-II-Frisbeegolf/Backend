@@ -40,21 +40,20 @@ class UserService (private val userRepository: UserRepository){
         } else throw NotFoundException()
     }
 
-    private fun generateString(listOfEpochs: List<Long>): String {
-        val totalTimePlayed = calculateTotalTimePlayed(listOfEpochs)
-        val calculatedTimeInString = calculateTime(totalTimePlayed)
-        return calculatedTimeInString
+     fun generateString(listOfDurationsInSeconds: List<Long>): String {
+        val totalTimePlayedInSeconds = calculateTotalTimePlayed(listOfDurationsInSeconds)
+        val calculatedTimeInString = calculateTime(totalTimePlayedInSeconds).split(",")
+        return "%02d".format(calculatedTimeInString[0].toInt()) + ":" + "%02d".format(calculatedTimeInString[1].toInt()) + ":" + "%02d".format(calculatedTimeInString[2].toInt())
     }
     private fun calculateTotalTimePlayed( listOfEpochs: List<Long>) : Long {
         return listOfEpochs.sum()
     }
 
-    private fun calculateTime(totalTimePlayedInEpoch : Long) : String {
-        val hours = totalTimePlayedInEpoch / 3_600
-        val minutes = (totalTimePlayedInEpoch % 3_600) / 60
-        val seconds = totalTimePlayedInEpoch % 60
-        return "%02d".format(hours) + ":" + "%02d".format(minutes) + ":" + "%02d".format(seconds)
-
+    fun calculateTime(totalTimePlayedInSeconds : Long) : String {
+        val hours = totalTimePlayedInSeconds / 3_600
+        val minutes = (totalTimePlayedInSeconds % 3_600) / 60
+        val seconds = totalTimePlayedInSeconds % 60
+        return "$hours,$minutes,$seconds"
     }
 }
 
