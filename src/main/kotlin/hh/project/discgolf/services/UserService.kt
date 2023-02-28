@@ -12,7 +12,8 @@ class UserService (private val userRepository: UserRepository){
 
     fun getUserById(userId: Long) : User {
         val user = userRepository.findById(userId).get()
-        user.amountOfPlayedGames = userRepository.countUsersGames(userId)
+        user.gamesPlayed = user.games.size
+        user.totalTimePlayed = generateString(userRepository.totalTimePlayed(userId))
         return user
     }
 
@@ -38,4 +39,22 @@ class UserService (private val userRepository: UserRepository){
             )
         } else throw NotFoundException()
     }
+
+    private fun generateString(listOfEpochs: List<Long>): String {
+        val totalTimePlayed = calculateTotalTimePlayed(listOfEpochs)
+        val calculatedTimeInString = calculateTime(totalTimePlayed)
+        return calculatedTimeInString
+    }
+    private fun calculateTotalTimePlayed( listOfEpochs: List<Long>) : Long {
+        return listOfEpochs.sum()
+    }
+
+    private fun calculateTime(totalTimePlayedInEpoch : Long) : String {
+        val hours = totalTimePlayedInEpoch / 3_600
+        val minutes = (totalTimePlayedInEpoch % 3_600) / 60
+        val seconds = totalTimePlayedInEpoch % 60
+        return "%02d".format(hours) + ":" + "%02d".format(minutes) + ":" + "%02d".format(seconds)
+
+    }
 }
+
