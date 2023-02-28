@@ -1,23 +1,20 @@
 package hh.project.discgolf
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import hh.project.discgolf.repositories.UserRepository
 import hh.project.discgolf.services.UserService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.web.servlet.MockMvc
 import org.assertj.core.api.Assertions.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class CalculateTimePlayedTests
+class TotalPlayedTimeInStringTests
     @Autowired constructor (
         val userService: UserService
 )
 
-{
+    {
     @Test
     fun `Every value is 0`() {
         val correctValue = "00:00:00"
@@ -66,9 +63,5 @@ class CalculateTimePlayedTests
         val valueFromFunction = userService.generateString(listOf(11L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
-
-
-
-
 
     }
