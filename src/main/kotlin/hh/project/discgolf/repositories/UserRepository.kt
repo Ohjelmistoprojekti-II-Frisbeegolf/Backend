@@ -8,6 +8,6 @@ interface UserRepository : JpaRepository<User, Long> {
 
     fun findByUsername(username : String) : User
 
-    @Query("SELECT COUNT(user_id) FROM Game WHERE user_id = :userId", nativeQuery = true)
-    fun countUsersGames(userId : Long) : Int
+    @Query("SELECT EXTRACT(EPOCH FROM (ending_datetime - starting_datetime)) FROM Game WHERE user_id = :userId", nativeQuery = true)
+    fun totalTimePlayed(userId : Long) : List<Long>
 }
