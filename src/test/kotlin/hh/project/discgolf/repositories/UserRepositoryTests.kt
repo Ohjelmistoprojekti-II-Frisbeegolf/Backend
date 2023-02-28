@@ -1,4 +1,4 @@
-package hh.project.discgolf
+package hh.project.discgolf.repositories
 
 import org.assertj.core.api.Assertions.*
 import hh.project.discgolf.entities.User
