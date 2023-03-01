@@ -11,12 +11,14 @@ class UserService (private val userRepository: UserRepository){
     fun getAllUsers(): List<User> = userRepository.findAll()
 
     fun getUserById(userId: Long) : User {
-        val user = userRepository.findById(userId).get()
-        user.gamesPlayed = user.games.size
-        user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
-        user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)?:0
-        user.totalSteps = userRepository.getStepsForUser(userId)?:0
-        return user
+        if (userRepository.findById(userId).isPresent) {
+            val user = userRepository.findById(userId).get()
+            user.gamesPlayed = user.games.size
+            user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
+            user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId) ?: 0
+            user.totalSteps = userRepository.getStepsForUser(userId) ?: 0
+            return user
+        } else throw NoSuchElementException("User doesn't exists with given id!")
     }
 
     fun createNewUser(user: User): User = userRepository.save(user)
