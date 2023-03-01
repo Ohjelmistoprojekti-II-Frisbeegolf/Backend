@@ -32,7 +32,7 @@ internal class UserControllerTest
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
-            jsonPath("$", hasSize<Array<User>>(quantityOfUsers))
+                jsonPath("$", hasSize<Array<User>>(quantityOfUsers))
             }
     }
 
