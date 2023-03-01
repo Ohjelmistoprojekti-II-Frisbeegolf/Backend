@@ -26,4 +26,16 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRole? = null,
 
+    @Transient
+    var gamesPlayed:  Int = 0,
+
+    @Transient
+    var totalTimePlayed: String = "00:00:00",
+
+    @Transient
+    var totalThrowsThrown : Int? = 0,
+
+    @Transient
+    var totalSteps : Int? = 0
+
     )

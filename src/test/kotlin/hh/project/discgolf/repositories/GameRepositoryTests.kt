@@ -13,11 +13,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(value = [SpringExtension::class])
 @DataJpaTest
 @ActiveProfiles("test")
-class GameRepositoryTests {
+class GameRepositoryTests
+        @Autowired constructor(
+        val gameRepository: GameRepository
+    )
 
-    @Autowired
-    lateinit var gameRepository: GameRepository
-
+{
     @BeforeEach
     fun init() {
         gameRepository.deleteAll()

@@ -2,7 +2,6 @@ package hh.project.discgolf.services
 
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.UserRepository
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -10,9 +9,16 @@ class UserService (private val userRepository: UserRepository){
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(userId: Long): User =
-        userRepository.findById(userId)
-            .orElseThrow { NoSuchElementException("User with given id not present!")}
+    fun getUserById(userId: Long) : User {
+        if (userRepository.findById(userId).isPresent) {
+            val user = userRepository.findById(userId).get()
+            user.gamesPlayed = user.games.size
+            user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
+            user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId) ?: 0
+            user.totalSteps = userRepository.getStepsForUser(userId) ?: 0
+            return user
+        } else throw NoSuchElementException("User doesn't exists with given id!")
+    }
 
     fun createNewUser(user: User): User = userRepository.save(user)
 
@@ -34,6 +40,30 @@ class UserService (private val userRepository: UserRepository){
                     role = user.role
                 )
             )
-        } else throw NotFoundException()
+        } else throw NoSuchElementException("User doesn't exist with give id!")
     }
+
+    /*
+     * Returns formatted string from the given values.
+     * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
+     * the return value is 01:07:08.
+     */
+     fun formatTotalTimePlayed(listOfDurationsInSeconds: List<Long>): String {
+         val totalTimePlayedInSeconds = calculateTotalTimePlayed(listOfDurationsInSeconds)
+         val wantedFormat = "%02d" // 1 -> 01.
+         val hours = calculateHours(totalTimePlayedInSeconds)
+         val minutes = calculateMinutes(totalTimePlayedInSeconds)
+         val seconds = calculateSeconds(totalTimePlayedInSeconds)
+         return "${wantedFormat.format(hours)}:${wantedFormat.format(minutes)}:${wantedFormat.format(seconds)}"
+    }
+    private fun calculateTotalTimePlayed( listOfEpochs: List<Long>) : Long {
+        return listOfEpochs.sum()
+    }
+
+    fun calculateHours(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds / 3_600
+
+    fun calculateMinutes(totalTimePlayedInSeconds: Long) = (totalTimePlayedInSeconds % 3_600) / 60
+
+    fun calculateSeconds(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds % 60
 }
+
