@@ -40,6 +40,6 @@ class User(
     var totalSteps : Int? = 0,
 
     @Transient
-    var scores : LinkedHashMap<ScoringSystem, Int> = LinkedHashMap<ScoringSystem, Int> ()
+    var scores : LinkedHashMap<ScoringSystem, Int> = LinkedHashMap()
 
     )
