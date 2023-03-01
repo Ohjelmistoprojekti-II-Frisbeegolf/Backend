@@ -143,7 +143,7 @@ class UserServiceTest
 
     @Test
     fun`user haves two games, one with 222 steps, and one with 8 000 steps - should return 8 222`() {
-        val user = User(username = "user", password = "password", email = "email3@email.com")
+        val user = User(username = "user3", password = "password", email = "email3@email.com")
         val savedUser = userRepository.save(user)
         val game1 = Game(steps = 222, user = savedUser)
         val game2 = Game(steps = 8_000, user = savedUser)
