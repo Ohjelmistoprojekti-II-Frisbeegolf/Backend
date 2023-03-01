@@ -14,6 +14,7 @@ class UserService (private val userRepository: UserRepository){
         val user = userRepository.findById(userId).get()
         user.gamesPlayed = user.games.size
         user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
+        user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)?:0
         return user
     }
 
