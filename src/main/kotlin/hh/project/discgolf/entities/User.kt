@@ -37,5 +37,4 @@ class User(
 
     @Transient
     var totalSteps : Int? = 0
-
     )
