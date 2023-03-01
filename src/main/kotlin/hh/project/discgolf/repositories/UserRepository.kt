@@ -19,4 +19,8 @@ interface UserRepository : JpaRepository<User, Long> {
             nativeQuery = true
     )
     fun getTotalThrowsThrown(userId : Long) : Int? = 0
+
+    @Query("SELECT SUM(steps) FROM GAME WHERE user_id = :userId", nativeQuery = true)
+    fun getStepsForUser(userId: Long) : Int? = 0
+
 }
