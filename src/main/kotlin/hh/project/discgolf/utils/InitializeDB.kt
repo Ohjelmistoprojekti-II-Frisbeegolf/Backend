@@ -99,7 +99,7 @@ class InitializeDB @Autowired constructor(
     private fun createHolesForCourse(course : Course, holeAmount: Int) {
         for (hole in 1..holeAmount) {
             holeRepo.save(
-                Hole(course = course, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..4).random())
+                Hole(course = course, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..5).random())
             )
         }
     }
@@ -145,7 +145,7 @@ class InitializeDB @Autowired constructor(
     private fun createStrokesForGame(game: Game){
         for (hole: Hole in game.course!!.holes) {
             strokeRepo.save(
-                Stroke(hole = hole, game = game, score = (1..10).random())
+                Stroke(hole = hole, game = game, score = (1..5).random())
             )
         }
     }
