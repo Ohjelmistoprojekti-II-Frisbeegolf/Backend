@@ -1,6 +1,7 @@
 package hh.project.discgolf.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import hh.project.discgolf.enums.ScoringSystem
 import hh.project.discgolf.enums.UserRole
 import jakarta.persistence.*
 
@@ -33,8 +34,12 @@ class User(
     var totalTimePlayed: String = "00:00:00",
 
     @Transient
-    var totalThrowsThrown : Int? = 0,
+    var totalThrowsThrown : Int = 0,
 
     @Transient
-    var totalSteps : Int? = 0
+    var totalSteps : Int? = 0,
+
+    @Transient
+    var scores : LinkedHashMap<ScoringSystem, Int> = LinkedHashMap<ScoringSystem, Int> ()
+
     )
