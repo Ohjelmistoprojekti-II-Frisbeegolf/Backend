@@ -40,7 +40,6 @@ class UserService (private val userRepository: UserRepository){
         } else throw NotFoundException()
     }
 
-
     /*
      * Returns formatted string from the given values.
      * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
