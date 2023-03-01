@@ -125,15 +125,16 @@ class UserServiceTest
      */
 
     @Test
-    fun`user haves zero games - DB returns null - result should be zero`() {
-        val user = User(username = "user", password = "password")
+    fun`user haves zero games - DB should return null - result should be zero`() {
+        val user = User(username = "user1", password = "password", email = "email1@email.com")
         val savedUser = userRepository.save(user)
-        assertThat(userRepository.getStepsForUser(savedUser.userId)?:0).isEqualTo(1)
+        assertThat(userRepository.getStepsForUser(savedUser.userId)).isNull()
+        assertThat(userRepository.getStepsForUser(savedUser.userId)?:0).isEqualTo(0)
     }
 
     @Test
     fun`user haves one game with 222 steps - should return 222`() {
-        val user = User(username = "user", password = "password")
+        val user = User(username = "user2", password = "password", email = "email2@email.com")
         val savedUser = userRepository.save(user)
         val game = Game(steps = 222, user = savedUser)
         gameRepository.save(game)
@@ -142,7 +143,7 @@ class UserServiceTest
 
     @Test
     fun`user haves two games, one with 222 steps, and one with 8 000 steps - should return 8 222`() {
-        val user = User(username = "user", password = "password")
+        val user = User(username = "user", password = "password", email = "email3@email.com")
         val savedUser = userRepository.save(user)
         val game1 = Game(steps = 222, user = savedUser)
         val game2 = Game(steps = 8_000, user = savedUser)
