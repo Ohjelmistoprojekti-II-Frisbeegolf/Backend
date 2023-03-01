@@ -1,5 +1,9 @@
 package hh.project.discgolf.services
 
+import hh.project.discgolf.entities.Game
+import hh.project.discgolf.entities.User
+import hh.project.discgolf.repositories.GameRepository
+import hh.project.discgolf.repositories.UserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest
 @AutoConfigureMockMvc
 class UserServiceTest
     @Autowired constructor(
-        val userService: UserService
+        val userService: UserService,
+        val userRepository: UserRepository,
+        val gameRepository: GameRepository
     )
 
 {
@@ -112,5 +118,36 @@ class UserServiceTest
     @Test
     fun`should return one second with 61 seconds as an input `() {
         assertThat(userService.calculateSeconds(61L)).isEqualTo(1L)
+    }
+
+    /*
+     * ----------------- Testing getStepsForUser() function -----------------
+     */
+
+    @Test
+    fun`user haves zero games - DB returns null - result should be zero`() {
+        val user = User(username = "user", password = "password")
+        val savedUser = userRepository.save(user)
+        assertThat(userRepository.getStepsForUser(savedUser.userId)?:0).isEqualTo(1)
+    }
+
+    @Test
+    fun`user haves one game with 222 steps - should return 222`() {
+        val user = User(username = "user", password = "password")
+        val savedUser = userRepository.save(user)
+        val game = Game(steps = 222, user = savedUser)
+        gameRepository.save(game)
+        assertThat(userRepository.getStepsForUser(savedUser.userId)).isEqualTo(222)
+    }
+
+    @Test
+    fun`user haves two games, one with 222 steps, and one with 8 000 steps - should return 8 222`() {
+        val user = User(username = "user", password = "password")
+        val savedUser = userRepository.save(user)
+        val game1 = Game(steps = 222, user = savedUser)
+        val game2 = Game(steps = 8_000, user = savedUser)
+        gameRepository.save(game1)
+        gameRepository.save(game2)
+        assertThat(userRepository.getStepsForUser(savedUser.userId)).isEqualTo(8_222)
     }
 }
