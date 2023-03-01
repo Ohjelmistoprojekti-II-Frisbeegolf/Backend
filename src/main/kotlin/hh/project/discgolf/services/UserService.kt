@@ -2,7 +2,6 @@ package hh.project.discgolf.services
 
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.UserRepository
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -34,6 +33,6 @@ class UserService (private val userRepository: UserRepository){
                     role = user.role
                 )
             )
-        } else throw NotFoundException()
+        } else throw NoSuchElementException("User doesn't exist with give id!")
     }
 }
