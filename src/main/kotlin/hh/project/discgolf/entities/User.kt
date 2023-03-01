@@ -10,7 +10,7 @@ class User(
     @Column(nullable = false, updatable = false)
     var userId: Long = -1,
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = [CascadeType.REFRESH])
     @JsonIgnore
     var games: List<Game> = emptyList(),
 
