@@ -15,10 +15,12 @@ class UserService (private val userRepository: UserRepository){
         if (userRepository.findById(userId).isPresent) {
             val user = userRepository.findById(userId).get()
             user.gamesPlayed = user.games.size
-            user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
-            user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId) ?: 0
-            user.totalSteps = userRepository.getStepsForUser(userId) ?: 0
-            user.scores = generateLinkedHashMapOfScores(userId)
+            if (user.games.isNotEmpty()) {
+                user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
+                user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)
+                user.totalSteps = userRepository.getStepsForUser(userId)?: 0
+                user.scores = generateLinkedHashMapOfScores(userId)
+            }
             return user
         } else throw NoSuchElementException("User doesn't exists with given id!")
     }
