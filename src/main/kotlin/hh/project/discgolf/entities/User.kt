@@ -34,7 +34,7 @@ class User(
     var totalTimePlayed: String = "00:00:00",
 
     @Transient
-    var totalThrowsThrown : Int? = 0,
+    var totalThrowsThrown : Int = 0,
 
     @Transient
     var totalSteps : Int? = 0,
