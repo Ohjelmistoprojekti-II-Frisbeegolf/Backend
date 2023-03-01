@@ -41,19 +41,21 @@ class UserService (private val userRepository: UserRepository){
     }
 
      fun formatTotalTimePlayed(listOfDurationsInSeconds: List<Long>): String {
-        val totalTimePlayedInSeconds = calculateTotalTimePlayed(listOfDurationsInSeconds)
-        val calculatedTimeInString = calculateTime(totalTimePlayedInSeconds).split(",")
-        return "%02d".format(calculatedTimeInString[0].toInt()) + ":" + "%02d".format(calculatedTimeInString[1].toInt()) + ":" + "%02d".format(calculatedTimeInString[2].toInt())
+         val totalTimePlayedInSeconds = calculateTotalTimePlayed(listOfDurationsInSeconds)
+         val wantedFormat = "%02d" // 1 -> 01.
+         val hours = calculateHours(totalTimePlayedInSeconds)
+         val minutes = calculateMinutes(totalTimePlayedInSeconds)
+         val seconds = calculateSeconds(totalTimePlayedInSeconds)
+         return "${wantedFormat.format(hours)}:${wantedFormat.format(minutes)}:${wantedFormat.format(seconds)}"
     }
     private fun calculateTotalTimePlayed( listOfEpochs: List<Long>) : Long {
         return listOfEpochs.sum()
     }
 
-    fun calculateTime(totalTimePlayedInSeconds : Long) : String {
-        val hours = totalTimePlayedInSeconds / 3_600
-        val minutes = (totalTimePlayedInSeconds % 3_600) / 60
-        val seconds = totalTimePlayedInSeconds % 60
-        return "$hours,$minutes,$seconds"
-    }
+    fun calculateHours(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds / 3_600
+
+    fun calculateMinutes(totalTimePlayedInSeconds: Long) = (totalTimePlayedInSeconds % 3_600) / 60
+
+    fun calculateSeconds(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds % 60
 }
 
