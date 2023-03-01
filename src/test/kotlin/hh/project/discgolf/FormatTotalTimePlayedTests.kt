@@ -9,7 +9,7 @@ import org.assertj.core.api.Assertions.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class TotalPlayedTimeInStringTests
+class FormatTotalTimePlayedTests
     @Autowired constructor (
         val userService: UserService
 )
@@ -18,49 +18,49 @@ class TotalPlayedTimeInStringTests
     @Test
     fun `Every value is 0`() {
         val correctValue = "00:00:00"
-        val valueFromFunction = userService.generateString(listOf(0L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(0L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
     @Test
     fun `Over zero hours but under ten hours - other values are zeros`() {
         val correctValue = "02:00:00"
-        val valueFromFunction = userService.generateString(listOf(7_200L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(7_200L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
     @Test
     fun `Over ten hours - other values are zeros`() {
         val correctValue = "13:00:00"
-        val valueFromFunction = userService.generateString(listOf(46_800L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(46_800L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
     @Test
     fun `Over zero minutes but under ten minutes - other values are zeros`() {
         val correctValue = "00:08:00"
-        val valueFromFunction = userService.generateString(listOf(480L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(480L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
     @Test
     fun `Over ten minutes - other values are zeros`() {
         val correctValue = "00:11:00"
-        val valueFromFunction = userService.generateString(listOf(660L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(660L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
     @Test
     fun `Over zero seconds but under ten seconds - other values are zeros`() {
         val correctValue = "00:00:01"
-        val valueFromFunction = userService.generateString(listOf(1L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(1L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
     @Test
     fun `Over ten seconds - other values are zeros`() {
         val correctValue = "00:00:11"
-        val valueFromFunction = userService.generateString(listOf(11L))
+        val valueFromFunction = userService.formatTotalTimePlayed(listOf(11L))
         assertThat(valueFromFunction).isEqualTo(correctValue)
     }
 
