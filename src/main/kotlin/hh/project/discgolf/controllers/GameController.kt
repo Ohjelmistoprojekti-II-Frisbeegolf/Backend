@@ -29,5 +29,4 @@ class GameController(private val gameService: GameService) {
 
     @DeleteMapping(value = ["/games/{id}"])
     fun deleteGame(@PathVariable("id") id: Long) = gameService.deleteGame(id)
-
 }

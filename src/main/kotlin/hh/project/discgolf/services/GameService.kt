@@ -12,6 +12,7 @@ import kotlin.NoSuchElementException
 @Service
 class GameService(private val gameRepository: GameRepository) {
 
+
     fun getAllGames(): List<Game> = gameRepository.findAll()
 
     fun getGameById(gameId: Long): Game =
