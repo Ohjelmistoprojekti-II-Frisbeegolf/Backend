@@ -40,6 +40,12 @@ class UserService (private val userRepository: UserRepository){
         } else throw NotFoundException()
     }
 
+
+    /*
+     * Returns formatted string from the given values.
+     * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
+     * the return value is 01:07:08.
+     */
      fun formatTotalTimePlayed(listOfDurationsInSeconds: List<Long>): String {
          val totalTimePlayedInSeconds = calculateTotalTimePlayed(listOfDurationsInSeconds)
          val wantedFormat = "%02d" // 1 -> 01.
