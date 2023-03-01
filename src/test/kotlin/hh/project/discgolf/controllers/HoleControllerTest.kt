@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
-import java.awt.PageAttributes.MediaType
+import org.springframework.http.MediaType
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -20,7 +20,7 @@ internal class HoleControllerTest @Autowired constructor(
             .andDo { print() }
             .andExpect {
                 status { isOk() }
-                content { contentType(org.springframework.http.MediaType.APPLICATION_JSON) }
+                content { contentType(MediaType.APPLICATION_JSON) }
             }
     }
 }
