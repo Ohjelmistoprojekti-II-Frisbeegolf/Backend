@@ -80,6 +80,7 @@ internal class StrokeControllerTest @Autowired constructor(
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(updatedStroke.score)
         }
+
         performPatch
             .andDo { print() }
             .andExpect {
