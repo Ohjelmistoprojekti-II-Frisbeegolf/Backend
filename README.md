@@ -42,4 +42,646 @@ If there is no SDK selected, the application won't work. The Kotlin SDK doesn't 
 
 If there are no options for SDK or there is only Kotlin SDK, you have to download the SDK.
 
+## Api documentation
+Please format JSON here: https://jsonformatter.curiousconcept.com/
+### Deployments
+- dev URL: https://dev-discgolf.herokuapp.com/
+- prod URL: https://disc-golf-database.herokuapp.com/
+### User
+#### Get all users from DB
+GET Endpoint: /users
+
+Format:
+```
+[
+   {
+      "userId":1,
+      "username":"Keijo",
+      "email":"keijonen@gmail.com",
+      "password":"enolekeijo",
+      "role":"USER",
+      "gamesPlayed":0,
+      "totalTimePlayed":"00:00:00",
+      "totalThrowsThrown":0,
+      "totalSteps":0
+   },
+   {
+      "userId":2,
+      "username":"Maija",
+      "email":"maijakas@hotmail.com",
+      "password":"olenmaija",
+      "role":"USER",
+      "gamesPlayed":0,
+      "totalTimePlayed":"00:00:00",
+      "totalThrowsThrown":0,
+      "totalSteps":0
+   },
+   {
+      "userId":3,
+      "username":"admin",
+      "email":"admin@discgolf.com",
+      "password":"admin",
+      "role":"ADMIN",
+      "gamesPlayed":0,
+      "totalTimePlayed":"00:00:00",
+      "totalThrowsThrown":0,
+      "totalSteps":0
+   },
+   {...}
+]
+```
+#### Find user by user id
+
+Endpoint: /users/:userId
+
+Format:
+```
+{
+   "userId":1,
+   "username":"Keijo",
+   "email":"keijonen@gmail.com",
+   "password":"enolekeijo",
+   "role":"USER",
+   "gamesPlayed":2,
+   "totalTimePlayed":"04:50:00",
+   "totalThrowsThrown":205,
+   "totalSteps":9500
+}
+```
+
+### Game
+#### Get all games from DB
+
+GET Endpoint: /games
+
+Format: 
+```
+[
+   {
+      "gameId":1,
+      "user":{
+         "userId":1,
+         "username":"Keijo",
+         "email":"keijonen@gmail.com",
+         "password":"enolekeijo",
+         "role":"USER"
+      },
+      "strokes":[
+         {
+            "strokeId":1,
+            "hole":{
+               "holeId":1,
+               "holePar":3,
+               "holeLength":82,
+               "holeNumber":1
+            },
+            "score":3
+         },
+         {
+            "strokeId":2,
+            "hole":{
+               "holeId":2,
+               "holePar":3,
+               "holeLength":86,
+               "holeNumber":2
+            },
+            "score":3
+         },
+         {
+            "strokeId":3,
+            "hole":{
+               "holeId":3,
+               "holePar":2,
+               "holeLength":48,
+               "holeNumber":3
+            },
+            "score":7
+         },
+         {
+            "strokeId":4,
+            "hole":{
+               "holeId":4,
+               "holePar":4,
+               "holeLength":110,
+               "holeNumber":4
+            },
+            "score":8
+         },
+         {
+            "strokeId":5,
+            "hole":{
+               "holeId":5,
+               "holePar":2,
+               "holeLength":72,
+               "holeNumber":5
+            },
+            "score":3
+         },
+         {
+            "strokeId":6,
+            "hole":{
+               "holeId":6,
+               "holePar":3,
+               "holeLength":74,
+               "holeNumber":6
+            },
+            "score":5
+         },
+         {
+            "strokeId":7,
+            "hole":{
+               "holeId":7,
+               "holePar":3,
+               "holeLength":120,
+               "holeNumber":7
+            },
+            "score":1
+         },
+         {
+            "strokeId":8,
+            "hole":{
+               "holeId":8,
+               "holePar":4,
+               "holeLength":73,
+               "holeNumber":8
+            },
+            "score":7
+         },
+         {
+            "strokeId":9,
+            "hole":{
+               "holeId":9,
+               "holePar":4,
+               "holeLength":61,
+               "holeNumber":9
+            },
+            "score":10
+         },
+         {
+            "strokeId":10,
+            "hole":{
+               "holeId":10,
+               "holePar":4,
+               "holeLength":107,
+               "holeNumber":10
+            },
+            "score":3
+         },
+         {
+            "strokeId":11,
+            "hole":{
+               "holeId":11,
+               "holePar":4,
+               "holeLength":47,
+               "holeNumber":11
+            },
+            "score":5
+         },
+         {
+            "strokeId":12,
+            "hole":{
+               "holeId":12,
+               "holePar":4,
+               "holeLength":93,
+               "holeNumber":12
+            },
+            "score":3
+         },
+         {
+            "strokeId":13,
+            "hole":{
+               "holeId":13,
+               "holePar":4,
+               "holeLength":38,
+               "holeNumber":13
+            },
+            "score":6
+         },
+         {
+            "strokeId":14,
+            "hole":{
+               "holeId":14,
+               "holePar":3,
+               "holeLength":38,
+               "holeNumber":14
+            },
+            "score":6
+         },
+         {
+            "strokeId":15,
+            "hole":{
+               "holeId":15,
+               "holePar":2,
+               "holeLength":111,
+               "holeNumber":15
+            },
+            "score":9
+         },
+         {
+            "strokeId":16,
+            "hole":{
+               "holeId":16,
+               "holePar":4,
+               "holeLength":56,
+               "holeNumber":16
+            },
+            "score":3
+         },
+         {
+            "strokeId":17,
+            "hole":{
+               "holeId":17,
+               "holePar":4,
+               "holeLength":30,
+               "holeNumber":17
+            },
+            "score":10
+         },
+         {
+            "strokeId":18,
+            "hole":{
+               "holeId":18,
+               "holePar":2,
+               "holeLength":44,
+               "holeNumber":18
+            },
+            "score":3
+         },
+         {
+            "strokeId":19,
+            "hole":{
+               "holeId":19,
+               "holePar":2,
+               "holeLength":40,
+               "holeNumber":19
+            },
+            "score":3
+         },
+         {
+            "strokeId":20,
+            "hole":{
+               "holeId":20,
+               "holePar":4,
+               "holeLength":89,
+               "holeNumber":20
+            },
+            "score":1
+         }
+      ],
+      "steps":5000,
+      "startingDatetime":"2023-02-13T14:28:54.360072",
+      "endingDatetime":"2023-02-13T15:58:54.360072"
+   } ,
+   {...}
+]
+```
+
+### Course
+#### Get all courses from DB.
+
+GET Endpoint: /courses
+
+Format:
+```
+[
+   {
+      "courseId":1,
+      "holes":[
+         {
+            "holeId":1,
+            "holePar":3,
+            "holeLength":82,
+            "holeNumber":1
+         },
+         {
+            "holeId":2,
+            "holePar":3,
+            "holeLength":86,
+            "holeNumber":2
+         },
+         {
+            "holeId":3,
+            "holePar":2,
+            "holeLength":48,
+            "holeNumber":3
+         },
+         {
+            "holeId":4,
+            "holePar":4,
+            "holeLength":110,
+            "holeNumber":4
+         },
+         {
+            "holeId":5,
+            "holePar":2,
+            "holeLength":72,
+            "holeNumber":5
+         },
+         {
+            "holeId":6,
+            "holePar":3,
+            "holeLength":74,
+            "holeNumber":6
+         },
+         {
+            "holeId":7,
+            "holePar":3,
+            "holeLength":120,
+            "holeNumber":7
+         },
+         {
+            "holeId":8,
+            "holePar":4,
+            "holeLength":73,
+            "holeNumber":8
+         },
+         {
+            "holeId":9,
+            "holePar":4,
+            "holeLength":61,
+            "holeNumber":9
+         },
+         {
+            "holeId":10,
+            "holePar":4,
+            "holeLength":107,
+            "holeNumber":10
+         },
+         {
+            "holeId":11,
+            "holePar":4,
+            "holeLength":47,
+            "holeNumber":11
+         },
+         {
+            "holeId":12,
+            "holePar":4,
+            "holeLength":93,
+            "holeNumber":12
+         },
+         {
+            "holeId":13,
+            "holePar":4,
+            "holeLength":38,
+            "holeNumber":13
+         },
+         {
+            "holeId":14,
+            "holePar":3,
+            "holeLength":38,
+            "holeNumber":14
+         },
+         {
+            "holeId":15,
+            "holePar":2,
+            "holeLength":111,
+            "holeNumber":15
+         },
+         {
+            "holeId":16,
+            "holePar":4,
+            "holeLength":56,
+            "holeNumber":16
+         },
+         {
+            "holeId":17,
+            "holePar":4,
+            "holeLength":30,
+            "holeNumber":17
+         },
+         {
+            "holeId":18,
+            "holePar":2,
+            "holeLength":44,
+            "holeNumber":18
+         },
+         {
+            "holeId":19,
+            "holePar":2,
+            "holeLength":40,
+            "holeNumber":19
+         },
+         {
+            "holeId":20,
+            "holePar":4,
+            "holeLength":89,
+            "holeNumber":20
+         }
+      ],
+      "courseName":"Puolarmaari",
+      "courseStreetaddress":"Puolarmaari 3",
+      "courseTown":"Espoo",
+      "coursePostalcode":"02210"
+   } ,
+   {...}
+]
+```
+#### Get course by id
+
+GET Endpoint: /courses/:courseId
+
+Format:
+```
+{
+   "courseId":1,
+   "holes":[
+      {
+         "holeId":1,
+         "holePar":3,
+         "holeLength":42,
+         "holeNumber":1
+      },
+      {
+         "holeId":2,
+         "holePar":3,
+         "holeLength":109,
+         "holeNumber":2
+      },
+      {
+         "holeId":3,
+         "holePar":2,
+         "holeLength":109,
+         "holeNumber":3
+      },
+      {
+         "holeId":4,
+         "holePar":4,
+         "holeLength":72,
+         "holeNumber":4
+      },
+      {
+         "holeId":5,
+         "holePar":3,
+         "holeLength":109,
+         "holeNumber":5
+      },
+      {
+         "holeId":6,
+         "holePar":4,
+         "holeLength":113,
+         "holeNumber":6
+      },
+      {
+         "holeId":7,
+         "holePar":2,
+         "holeLength":70,
+         "holeNumber":7
+      },
+      {
+         "holeId":8,
+         "holePar":3,
+         "holeLength":89,
+         "holeNumber":8
+      },
+      {
+         "holeId":9,
+         "holePar":2,
+         "holeLength":61,
+         "holeNumber":9
+      },
+      {
+         "holeId":10,
+         "holePar":4,
+         "holeLength":61,
+         "holeNumber":10
+      },
+      {
+         "holeId":11,
+         "holePar":3,
+         "holeLength":111,
+         "holeNumber":11
+      },
+      {
+         "holeId":12,
+         "holePar":3,
+         "holeLength":37,
+         "holeNumber":12
+      },
+      {
+         "holeId":13,
+         "holePar":2,
+         "holeLength":63,
+         "holeNumber":13
+      },
+      {
+         "holeId":14,
+         "holePar":2,
+         "holeLength":101,
+         "holeNumber":14
+      },
+      {
+         "holeId":15,
+         "holePar":2,
+         "holeLength":36,
+         "holeNumber":15
+      },
+      {
+         "holeId":16,
+         "holePar":4,
+         "holeLength":64,
+         "holeNumber":16
+      },
+      {
+         "holeId":17,
+         "holePar":4,
+         "holeLength":81,
+         "holeNumber":17
+      },
+      {
+         "holeId":18,
+         "holePar":2,
+         "holeLength":80,
+         "holeNumber":18
+      },
+      {
+         "holeId":19,
+         "holePar":4,
+         "holeLength":48,
+         "holeNumber":19
+      },
+      {
+         "holeId":20,
+         "holePar":3,
+         "holeLength":60,
+         "holeNumber":20
+      }
+   ],
+   "courseName":"Puolarmaari",
+   "courseStreetaddress":"Puolarmaari 3",
+   "courseTown":"Espoo",
+   "coursePostalcode":"02210"
+}
+```
+
+### Hole
+#### Get all holes from DB
+
+GET Endpoint: /holes
+
+Format:
+```
+[
+   {
+      "holeId":1,
+      "holePar":3,
+      "holeLength":82,
+      "holeNumber":1
+   },
+   {
+      "holeId":2,
+      "holePar":3,
+      "holeLength":86,
+      "holeNumber":2
+   },
+   {
+      "holeId":3,
+      "holePar":2,
+      "holeLength":48,
+      "holeNumber":3
+   },
+   {
+      "holeId":4,
+      "holePar":4,
+      "holeLength":110,
+      "holeNumber":4
+   },
+   {
+      "holeId":5,
+      "holePar":2,
+      "holeLength":72,
+      "holeNumber":5
+   },
+   {
+      "holeId":6,
+      "holePar":3,
+      "holeLength":74,
+      "holeNumber":6
+   },
+   {
+      "holeId":7,
+      "holePar":3,
+      "holeLength":120,
+      "holeNumber":7
+   },
+   {
+      "holeId":8,
+      "holePar":4,
+      "holeLength":73,
+      "holeNumber":8
+   },
+   {
+      "holeId":9,
+      "holePar":4,
+      "holeLength":61,
+      "holeNumber":9
+   },
+   {
+      "holeId":10,
+      "holePar":4,
+      "holeLength":107,
+      "holeNumber":10
+   },
+   {...}
+]
+```
 
