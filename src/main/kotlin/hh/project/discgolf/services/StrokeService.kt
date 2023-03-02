@@ -1,5 +1,6 @@
 package hh.project.discgolf.services
 
+import hh.project.discgolf.entities.Hole
 import hh.project.discgolf.entities.Stroke
 import hh.project.discgolf.repositories.StrokeRepository
 import org.springframework.stereotype.Service
@@ -17,10 +18,8 @@ class StrokeService (private val strokeRepository: StrokeRepository) {
 
     fun updateStrokeScore(strokeId: Long, newScore: Int): Stroke {
         return if (strokeRepository.existsById(strokeId)) {
-            val updatedStroke = Stroke(
-                strokeId = strokeId,
-                score = newScore
-            )
+            val updatedStroke: Stroke = strokeRepository.findById(strokeId).get()
+            updatedStroke.score = newScore
             strokeRepository.save(updatedStroke)
         } else throw NoSuchElementException("Stroke with given id doesn't exist")
     }
