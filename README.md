@@ -63,7 +63,8 @@ Format:
       "gamesPlayed":0,
       "totalTimePlayed":"00:00:00",
       "totalThrowsThrown":0,
-      "totalSteps":0
+      "totalSteps":0,
+      "scores":{ }
    },
    {
       "userId":2,
@@ -74,7 +75,8 @@ Format:
       "gamesPlayed":0,
       "totalTimePlayed":"00:00:00",
       "totalThrowsThrown":0,
-      "totalSteps":0
+      "totalSteps":0,
+      "scores":{ }
    },
    {
       "userId":3,
@@ -85,7 +87,8 @@ Format:
       "gamesPlayed":0,
       "totalTimePlayed":"00:00:00",
       "totalThrowsThrown":0,
-      "totalSteps":0
+      "totalSteps":0,
+      "scores":{ }
    },
    {...}
 ]
@@ -104,8 +107,19 @@ Format:
    "role":"USER",
    "gamesPlayed":2,
    "totalTimePlayed":"04:50:00",
-   "totalThrowsThrown":205,
-   "totalSteps":9500
+   "totalThrowsThrown":38,
+   "totalSteps":9500,
+   "scores":{
+      "ACE":4,
+      "ALBATROSS":1,
+      "EAGLE":5,
+      "BIRDIE":8,
+      "PAR":8,
+      "BOGEY":7,
+      "DOUBLE_BOGEY":3,
+      "TRIPLE_BOGEY":2,
+      "OVER_TRIPLE_BOGEY":0
+   }
 }
 ```
 
