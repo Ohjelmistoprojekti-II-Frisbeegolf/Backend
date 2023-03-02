@@ -17,5 +17,29 @@ You can get the link by pressing the green button that says <>code. Picture belo
 
 6. When the application has opened you can open the next address in your web browser: http://localhost:8080/. There should be a text saying "Welcome to disc-golf app back-end!!"
 
-## Problems with installation
+## Problems with running the application
+### Wrong SDK
+#### Problem
+If the application is not starting you can check that you have a correct SDK selected. 
+These are the signs that you have wrong SDK version.
+![image](https://user-images.githubusercontent.com/92360393/222414193-10214288-db2c-438d-ae44-00eaeefb22cc.png) 
+
+Trying to run the application with wrong SDK version:
+
+![image](https://user-images.githubusercontent.com/92360393/222414244-7dabc41c-d882-46ba-b8fb-0664e2c6ca96.png)
+
+#### Possible solution
+
+In the IntelliJ IDEA go to the file > Project Structure. 
+
+If there is no SDK selected, the application won't work. The Kotlin SDK doesn't work.
+
+![image](https://user-images.githubusercontent.com/92360393/222412647-305678cb-4bbd-4840-960b-da8d06afde3d.png)
+ 
+ In this picture below, there is a working SDK version. 
+
+![image](https://user-images.githubusercontent.com/92360393/222412782-b5a2fd8e-bb37-4833-9278-b9ef80530601.png)
+
+If there are no options for SDK or there is only Kotlin SDK, you have to download the SDK.
+
 
