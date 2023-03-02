@@ -15,7 +15,6 @@ class Stroke (
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gameId")
-    @JsonIgnore
     var game: Game? = null,
 
     var score: Int = 0,
