@@ -14,4 +14,14 @@ class StrokeService (private val strokeRepository: StrokeRepository) {
             .orElseThrow { NoSuchElementException("Stroke with given id doesn't exist!") }
 
     fun createNewStroke(stroke: Stroke): Stroke = strokeRepository.save(stroke)
+
+    fun updateStrokeScore(strokeId: Long, newScore: Int): Stroke {
+        return if (strokeRepository.existsById(strokeId)) {
+            val updatedStroke = Stroke(
+                strokeId = strokeId,
+                score = newScore
+            )
+            strokeRepository.save(updatedStroke)
+        } else throw NoSuchElementException("Stroke with given id doesn't exist")
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
 
 @SpringBootTest
@@ -67,6 +68,30 @@ internal class StrokeControllerTest @Autowired constructor(
                 status { isCreated() }
                 content { contentType(MediaType.APPLICATION_JSON) }
                 jsonPath("$.score") { value(3)}
+            }
+    }
+
+    @Test
+    fun `should update stroke score with given id and score`() {
+        val strokeId = 1L
+        val updatedStroke = Stroke(strokeId = 1L, score = 7)
+
+        val performPatch = mockMvc.patch("/strokes/$strokeId") {
+            contentType = MediaType.APPLICATION_JSON
+            content = objectMapper.writeValueAsString(updatedStroke.score)
+        }
+        performPatch
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+                jsonPath("$.score") { value(7) }
+            }
+        mockMvc.get("/strokes/$strokeId")
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+                jsonPath("$.score") { value(7) }
             }
     }
 }
