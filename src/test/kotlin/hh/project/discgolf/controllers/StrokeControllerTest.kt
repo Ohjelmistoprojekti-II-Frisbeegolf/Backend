@@ -2,6 +2,7 @@ package hh.project.discgolf.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import hh.project.discgolf.entities.Stroke
+import hh.project.discgolf.repositories.StrokeRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -16,7 +17,8 @@ import org.springframework.test.web.servlet.post
 @AutoConfigureMockMvc
 internal class StrokeControllerTest @Autowired constructor(
     val mockMvc: MockMvc,
-    val objectMapper: ObjectMapper
+    val objectMapper: ObjectMapper,
+    val strokeRepository: StrokeRepository
 ) {
 
     @Test
@@ -31,14 +33,14 @@ internal class StrokeControllerTest @Autowired constructor(
 
     @Test
     fun `should return stroke with given id`() {
-        val strokeId = 1L
+        val strokeId = strokeRepository.findAll()[0].strokeId
 
         mockMvc.get("/strokes/$strokeId")
             .andDo { print() }
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
-                jsonPath("$.strokeId") { value(1L)}
+                jsonPath("$.strokeId") { value(1)}
             }
     }
 
@@ -73,7 +75,7 @@ internal class StrokeControllerTest @Autowired constructor(
 
     @Test
     fun `should update stroke score with given id and score`() {
-        val strokeId = 1L
+        val strokeId = strokeRepository.findAll()[0].strokeId
         val updatedStroke = Stroke(strokeId = 1L, score = 7)
 
         val performPatch = mockMvc.patch("/strokes/$strokeId") {
