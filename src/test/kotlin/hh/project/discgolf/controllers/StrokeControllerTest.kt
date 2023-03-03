@@ -40,7 +40,7 @@ internal class StrokeControllerTest @Autowired constructor(
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
-                jsonPath("$.strokeId") { value(1)}
+                jsonPath("$.strokeId") { value(strokeId)}
             }
     }
 
