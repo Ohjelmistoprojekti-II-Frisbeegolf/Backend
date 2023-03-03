@@ -29,3 +29,11 @@ jobs:
         cache: maven
     - name: Run tests
       run: mvn test
+    - name: Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: Maven tests
+        path: target/surefire-reports/*.xml
+        reporter: java-junit
+        fail-on-error: true
