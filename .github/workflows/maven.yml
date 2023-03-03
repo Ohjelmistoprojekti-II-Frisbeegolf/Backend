@@ -8,10 +8,12 @@
 
 # Edited this to fit our needs. This workflow runs test from our project.
 
-name: Java CI with Maven
+
+name: CI with Maven
 permissions:
   contents: read
   checks: write
+
 
 on:
   push:
