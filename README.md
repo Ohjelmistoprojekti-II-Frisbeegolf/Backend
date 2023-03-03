@@ -43,9 +43,9 @@ If there is no SDK selected, the application won't work. The Kotlin SDK doesn't 
 If there are no options for SDK or there is only Kotlin SDK, you have to download the SDK.
 
 ## Api documentation
-### Deployments
-- dev URL: https://dev-discgolf.herokuapp.com/
-  - API-documentation: https://dev-discgolf.herokuapp.com/swagger-ui/index.html
-- prod URL: https://disc-golf-database.herokuapp.com/
+### Development deployment: https://dev-discgolf.herokuapp.com/swagger-ui/index.html
+### Production deployment: 
 
-
+## Deployments
+### Development deployment: https://dev-discgolf.herokuapp.com/
+### Production deployment: https://disc-golf-database.herokuapp.com/
