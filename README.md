@@ -252,3 +252,44 @@ Format:
 ]
 ```
 
+### Stroke
+#### Get all strokes from DB
+
+Get Endpoint: /strokes
+
+Format:
+```
+[
+   {
+      "strokeId":1,
+      "hole":{
+         "holeId":1,
+         "holePar":4,
+         "holeLength":49,
+         "holeNumber":1
+      },
+      "game":{
+         "gameId":1,
+         "user":{
+            "userId":1,
+            "username":"Keijo",
+            "email":"keijonen@gmail.com",
+            "password":"enolekeijo",
+            "role":"USER",
+            "gamesPlayed":0,
+            "totalTimePlayed":"00:00:00",
+            "totalThrowsThrown":0,
+            "totalSteps":0,
+            "scores":{
+               
+            }
+         },
+         "steps":5000,
+         "startingDatetime":"2023-03-03T09:56:16.485351",
+         "endingDatetime":"2023-03-03T11:26:16.485351"
+      },
+      "score":1
+   },
+   {...}
+]
+
