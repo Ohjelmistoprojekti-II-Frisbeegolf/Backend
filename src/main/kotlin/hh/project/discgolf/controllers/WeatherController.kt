@@ -15,7 +15,7 @@ import java.net.http.HttpResponse
 class WeatherController(private val weatherService: WeatherService) {
 
     @GetMapping(value = ["/weather/lon={lon}/lat={lat}"])
-    fun getWeather(@PathVariable("lon") lon : Double, @PathVariable("lat") lat : Double ) = weatherService.fetchWeather(lon, lat)
+    fun getWeather(@PathVariable("lon") lon : Double, @PathVariable("lat") lat : Double ) = weatherService.handleWeather(lon, lat)
 
 
 }
