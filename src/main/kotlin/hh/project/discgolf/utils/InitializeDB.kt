@@ -1,6 +1,7 @@
 package hh.project.discgolf.utils
 
 import hh.project.discgolf.entities.*
+import hh.project.discgolf.enums.Difficulty
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -68,6 +69,7 @@ class InitializeDB @Autowired constructor(
                 courseStreetaddress = "Puolarmaari 3",
                 coursePostalcode = "02210",
                 courseTown = "Espoo",
+                difficulty = Difficulty.A1,
                 latitude = 60.17669136116457,
                 longitude = 24.698378641732024
             )
@@ -81,6 +83,7 @@ class InitializeDB @Autowired constructor(
                 courseStreetaddress = "Oittaantie",
                 coursePostalcode = "02740",
                 courseTown = "Espoo",
+                difficulty = Difficulty.A1,
                 latitude = 60.240064261888136,
                 longitude = 24.665466041735332
             )
@@ -94,6 +97,7 @@ class InitializeDB @Autowired constructor(
                 courseStreetaddress = "Takkatie 36",
                 coursePostalcode = "00370",
                 courseTown = "Helsinki",
+                difficulty = Difficulty.AA1,
                 latitude = 60.21311666971948,
                 longitude = 24.847708022685616
             )
