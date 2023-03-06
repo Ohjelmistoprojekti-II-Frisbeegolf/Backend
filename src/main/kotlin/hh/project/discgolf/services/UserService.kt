@@ -47,10 +47,12 @@ class UserService (private val userRepository: UserRepository){
         } else throw NoSuchElementException("User doesn't exist with give id!")
     }
 
-    /*
-     * Returns formatted string from the given values.
-     * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
-     * the return value is 01:07:08.
+    /**
+     @param how many seconds user has played.
+     @return formatted string.
+      *
+      * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
+      * the return value is 01:07:08.
      */
      fun formatTotalTimePlayed(totalTimePlayedInSeconds: Long): String {
          val wantedFormat = "%02d" // 1 -> 01.
