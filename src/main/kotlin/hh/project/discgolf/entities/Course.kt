@@ -10,9 +10,6 @@ class Course(
     var courseId: Long = -1L,
 
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
-    var holes: List<Hole> = emptyList(),
-
-    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     @JsonIgnore
     var games: List<Game> = emptyList(),
 
@@ -25,4 +22,12 @@ class Course(
 
     var coursePostalcode: String = "",
 
+    @Column(nullable = false)
+    var latitude: Double = 0.0,
+
+    @Column(nullable = false)
+    var longitude: Double = 0.0,
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    var holes: List<Hole> = emptyList()
     )
