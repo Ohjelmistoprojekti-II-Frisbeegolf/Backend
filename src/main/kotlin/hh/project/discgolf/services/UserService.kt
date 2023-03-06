@@ -15,7 +15,7 @@ class UserService (private val userRepository: UserRepository){
             val user = userRepository.findById(userId).get()
             user.gamesPlayed = user.games.size
             if (user.games.isNotEmpty()) {
-                user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId))
+                user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId)?:0)
                 user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)
                 user.totalSteps = userRepository.getStepsForUser(userId)?: 0
                 user.scores = generateLinkedHashMapOfScores(userId)
@@ -52,16 +52,12 @@ class UserService (private val userRepository: UserRepository){
      * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
      * the return value is 01:07:08.
      */
-     fun formatTotalTimePlayed(listOfDurationsInSeconds: List<Long>): String {
-         val totalTimePlayedInSeconds = calculateTotalTimePlayed(listOfDurationsInSeconds)
+     fun formatTotalTimePlayed(totalTimePlayedInSeconds: Long): String {
          val wantedFormat = "%02d" // 1 -> 01.
          val hours = calculateHours(totalTimePlayedInSeconds)
          val minutes = calculateMinutes(totalTimePlayedInSeconds)
          val seconds = calculateSeconds(totalTimePlayedInSeconds)
          return "${wantedFormat.format(hours)}:${wantedFormat.format(minutes)}:${wantedFormat.format(seconds)}"
-    }
-    private fun calculateTotalTimePlayed( listOfEpochs: List<Long>) : Long {
-        return listOfEpochs.sum()
     }
 
     fun calculateHours(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds / 3_600
