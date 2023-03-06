@@ -51,7 +51,7 @@ class UserService (private val userRepository: UserRepository){
      @param how many seconds user has played.
      @return formatted string.
       *
-      * Example: If the total played time is 1 hour, 7 minutes and 8 seconds,
+      * Example: If the total played time is 4 028 seconds
       * the return value is 01:07:08.
      */
      fun formatTotalTimePlayed(totalTimePlayedInSeconds: Long): String {
