@@ -8,8 +8,8 @@ interface UserRepository : JpaRepository<User, Long> {
 
     fun findByUsername(username : String) : User
 
-    @Query("SELECT EXTRACT(EPOCH FROM (ending_datetime - starting_datetime)) FROM Game WHERE user_id = :userId", nativeQuery = true)
-    fun totalTimePlayed(userId : Long) : List<Long>
+    @Query("SELECT SUM(EXTRACT(EPOCH FROM (ending_datetime - starting_datetime))) FROM Game WHERE user_id = :userId", nativeQuery = true)
+    fun totalTimePlayed(userId : Long) : Long? = 0
 
     @Query("SELECT COUNT(s.score)" +
             "FROM STROKE s " +
