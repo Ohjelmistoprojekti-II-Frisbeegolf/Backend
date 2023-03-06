@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 
 @RestControllerAdvice
 class RestResponseEntityExceptionHandler {
@@ -21,5 +22,9 @@ class RestResponseEntityExceptionHandler {
     // When updating stroke score, handles JSON parse error if given value is not type of Int
     @ExceptionHandler(HttpMessageNotReadableException::class)
     fun handleJSONParseError(e: HttpMessageNotReadableException): ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException::class)
+    fun handleBadMethodArgument(e: MethodArgumentTypeMismatchException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
 }
