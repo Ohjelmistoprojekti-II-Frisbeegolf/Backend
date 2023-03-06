@@ -20,7 +20,7 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
