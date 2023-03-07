@@ -18,7 +18,7 @@ class WeatherService {
             val response = fetchWeather(lonAsDouble, latAsDouble)
             generateGsonObject(response)
         } catch ( e : NumberFormatException) {
-            throw DataIntegrityViolationException(e.message!!)
+            throw NumberFormatException(e.message)
         } catch ( e : JsonSyntaxException) {
             throw JsonSyntaxException("Could not parse JSON.")
         }
