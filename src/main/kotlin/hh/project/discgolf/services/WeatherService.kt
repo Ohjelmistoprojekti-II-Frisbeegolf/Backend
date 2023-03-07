@@ -3,17 +3,11 @@ package hh.project.discgolf.services
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.http.HttpStatusCode
-import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.stereotype.Service
-import org.springframework.web.client.HttpClientErrorException.BadRequest
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
-import java.text.ParseException
-import kotlin.NumberFormatException
-import kotlin.jvm.Throws
 
 @Service
 class WeatherService {
