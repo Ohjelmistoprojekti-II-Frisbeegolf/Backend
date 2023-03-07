@@ -6,13 +6,28 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.text.ParseException
+import kotlin.NumberFormatException
+import kotlin.jvm.Throws
 
 @Service
 class WeatherService {
 
-    fun handleWeather(lon : Double, lat : Double): WeatherObject? {
-            val response = fetchWeather(lon, lat)
-            return generateGsonObject(response)
+    fun handleWeather(lon : String, lat : String): WeatherObject? {
+        return try {
+            val lonAsDouble = parseToDouble(lon)
+            val latAsDouble = parseToDouble(lat)
+            val response = fetchWeather(lonAsDouble, latAsDouble)
+            generateGsonObject(response)
+        } catch ( parseException : NumberFormatException) {
+            null
+        }
+
+    }
+
+    @Throws(NumberFormatException::class)
+    fun parseToDouble( value : String) : Double {
+        return  value.toDouble()
     }
 
     //https://zetcode.com/kotlin/getpostrequest/
