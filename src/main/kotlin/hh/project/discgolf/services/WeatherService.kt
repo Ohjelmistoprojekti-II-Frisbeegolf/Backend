@@ -1,7 +1,12 @@
 package hh.project.discgolf.services
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.http.HttpStatusCode
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.stereotype.Service
+import org.springframework.web.client.HttpClientErrorException.BadRequest
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -12,23 +17,21 @@ import kotlin.jvm.Throws
 
 @Service
 class WeatherService {
-
     fun handleWeather(lon : String, lat : String): WeatherObject? {
         return try {
             val lonAsDouble = parseToDouble(lon)
             val latAsDouble = parseToDouble(lat)
             val response = fetchWeather(lonAsDouble, latAsDouble)
             generateGsonObject(response)
-        } catch ( parseException : NumberFormatException) {
-            null
+        } catch ( e : NumberFormatException) {
+            throw DataIntegrityViolationException(e.message!!)
+        } catch ( e : JsonSyntaxException) {
+            throw JsonSyntaxException("Could not parse JSON.")
         }
-
     }
 
     @Throws(NumberFormatException::class)
-    fun parseToDouble( value : String) : Double {
-        return  value.toDouble()
-    }
+    fun parseToDouble( value : String) : Double = value.toDouble()
 
     //https://zetcode.com/kotlin/getpostrequest/
     fun fetchWeather(lon : Double, lat : Double) : HttpResponse<String> {
@@ -40,28 +43,30 @@ class WeatherService {
     }
 
     //https://www.techiedelight.com/parse-a-json-string-in-kotlin/
+    @Throws(JsonSyntaxException::class)
     fun generateGsonObject(response: HttpResponse<String>): WeatherObject? {
         return Gson().fromJson(response.body(), WeatherObject::class.java)
+    }
+
+    class WeatherObject {
+        var name : String? = ""
+        var main : Main? = null
+        var weather : Array<Weather>? = null
+        var wind : Wind? = null
+    }
+
+    class Weather {
+        var description : String? = ""
+        var icon : String? = ""
+    }
+
+    class Main {
+        var temp : Double? = 0.0
+    }
+
+    class Wind {
+        var speed : Double? = 0.0
     }
 }
 
 
-class WeatherObject {
-    var name : String? = ""
-    var main : Main? = null
-    var weather : Array<Weather>? = null
-    var wind : Wind? = null
-}
-
-class Weather {
-    var description : String? = ""
-    var icon : String? = ""
-}
-
-class Main {
-    var temp : Double? = 0.0
-}
-
-class Wind {
-    var speed : Double? = 0.0
-}
