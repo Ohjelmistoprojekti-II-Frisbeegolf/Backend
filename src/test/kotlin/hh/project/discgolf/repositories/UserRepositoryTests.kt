@@ -20,6 +20,9 @@ class UserRepositoryTests @Autowired constructor(
     val userRepository: UserRepository,
     val gameRepository: GameRepository
 ) {
+    val user1 = User(username = "user1", password = "password", email = "user1@gmail.com")
+    val user2 = User(username = "user2", password = "password", email = "user2@hotmail.com")
+    val user3 = User(username = "user3", password = "password", email = "user3@luukku.fi")
 
     @BeforeEach
     fun init() {
@@ -92,9 +95,8 @@ class UserRepositoryTests @Autowired constructor(
         assertThat(userRepository.getStepsForUser(savedUser.userId)).isEqualTo(8_222)
     }
     @Test
-    fun `totalTimePlayed returns a correct value`() {
-        val newUser = User(username = "user4", password = "password", email = "mail22@hotmail.com")
-        val saveUser = userRepository.save(newUser)
+    fun `user has played a game of 2 hours - should return 7 200 seconds`() {
+        val saveUser = userRepository.save(user1)
         val newGame = Game(
             startingDatetime = LocalDateTime.now(),
             endingDatetime = LocalDateTime.now().plusMinutes(120),
@@ -102,6 +104,31 @@ class UserRepositoryTests @Autowired constructor(
         gameRepository.save(newGame)
         assertThat(userRepository.totalTimePlayed(saveUser.userId)).isEqualTo(7_200L)
     }
+    @Test
+    fun `user has played two games, total of 1,5 hours - should return 9 000 seconds`() {
+        val saveUser = userRepository.save(user1)
+        val game1 = Game(
+            startingDatetime =  LocalDateTime.now(),
+            endingDatetime = LocalDateTime.now().plusMinutes(60),
+            user = saveUser
+        )
+        val game2 = Game(
+            startingDatetime =  LocalDateTime.now(),
+            endingDatetime = LocalDateTime.now().plusMinutes(90),
+            user = saveUser
+        )
+        gameRepository.saveAll(listOf(game1, game2))
+        assertThat(userRepository.totalTimePlayed(saveUser.userId)).isEqualTo(9_000L)
+
+    }
+
+    @Test
+    fun `user has played no games, should return null`() {
+        val saveUser = userRepository.save(user3)
+        assertThat(userRepository.totalTimePlayed(saveUser.userId)).isEqualTo(null)
+    }
+
+
 }
 
 
