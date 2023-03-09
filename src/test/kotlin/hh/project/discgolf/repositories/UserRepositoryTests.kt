@@ -105,7 +105,7 @@ class UserRepositoryTests @Autowired constructor(
         assertThat(userRepository.totalTimePlayed(saveUser.userId)).isEqualTo(7_200L)
     }
     @Test
-    fun `user has played two games, total of 1,5 hours - should return 9 000 seconds`() {
+    fun `user has played two games, total of 2,5 hours - should return 9 000 seconds`() {
         val saveUser = userRepository.save(user1)
         val game1 = Game(
             startingDatetime =  LocalDateTime.now(),
@@ -119,9 +119,7 @@ class UserRepositoryTests @Autowired constructor(
         )
         gameRepository.saveAll(listOf(game1, game2))
         assertThat(userRepository.totalTimePlayed(saveUser.userId)).isEqualTo(9_000L)
-
     }
-
     @Test
     fun `user has played no games, should return null`() {
         val saveUser = userRepository.save(user3)
