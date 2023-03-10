@@ -4,8 +4,6 @@ import hh.project.discgolf.entities.Course
 import hh.project.discgolf.enums.Difficulty
 import hh.project.discgolf.repositories.CourseRepository
 import org.springframework.stereotype.Service
-import org.springframework.validation.BindingResult
-import java.lang.NullPointerException
 
 @Service
 class CourseService(private val courseRepository: CourseRepository) {
