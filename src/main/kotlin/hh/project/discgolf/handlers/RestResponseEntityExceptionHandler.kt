@@ -27,11 +27,10 @@ class RestResponseEntityExceptionHandler {
     fun handleJSONParseError(e: HttpMessageNotReadableException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
 
-<<<<<<< HEAD
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     fun handleBadMethodArgument(e: MethodArgumentTypeMismatchException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
-=======
+
     @ExceptionHandler(JsonParseException::class)
     fun handleGsonParseError( e : JsonSyntaxException) : ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
@@ -43,5 +42,4 @@ class RestResponseEntityExceptionHandler {
     @ExceptionHandler(NumberFormatException::class)
     fun handleNumberFormatException( e: NumberFormatException) : ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
->>>>>>> dev
 }
