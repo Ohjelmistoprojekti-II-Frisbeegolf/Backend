@@ -122,15 +122,18 @@ class UserRepositoryTests @Autowired constructor(
         assertThat(userRepository.totalTimePlayed(savedUser.userId)).isEqualTo(null)
     }
     @Test
-    fun `user has played a game with one stroke - should return 1`() {
+    fun `user has played a game with 5 strokes - should return 5`() {
         val savedUser = userRepository.findByUsername("user3")
         val newGame = Game(user = savedUser)
         val savedGame = gameRepository.save(newGame)
-        val newStroke = Stroke(game = savedGame)
-        strokeRepository.save(newStroke)
-
-        assertThat(userRepository.getTotalThrowsThrown(savedUser.userId)).isEqualTo(1)
+            for (i in 1..5) {
+                strokeRepository.save(
+                    Stroke(game = savedGame, score = 1)
+                )}
+        assertThat(userRepository.getTotalThrowsThrown(savedUser.userId)).isEqualTo(5)
     }
+
+
 }
 
 
