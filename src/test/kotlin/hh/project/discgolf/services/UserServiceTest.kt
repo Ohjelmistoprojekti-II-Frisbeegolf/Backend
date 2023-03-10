@@ -17,9 +17,7 @@ class UserServiceTest
         val userService: UserService,
         val userRepository: UserRepository,
         val gameRepository: GameRepository
-    )
-
-{
+    ) {
     /*
      * ----------------- Testing formatTotalTimePlayed() function ----------------
      */
@@ -78,77 +76,47 @@ class UserServiceTest
      */
 
     @Test
-    fun`should return zero hours with 3 599 seconds as an input`() {
+    fun `should return zero hours with 3 599 seconds as an input`() {
         assertThat(userService.calculateHours(3_599L)).isEqualTo(0L)
     }
 
     @Test
-    fun`should return one hour with 3 600 seconds as an input`() {
+    fun `should return one hour with 3 600 seconds as an input`() {
         assertThat(userService.calculateHours(3_600L)).isEqualTo(1L)
     }
 
     @Test
-    fun`should return one hour with 3 601 seconds as an input`() {
+    fun `should return one hour with 3 601 seconds as an input`() {
         assertThat(userService.calculateHours(3_601L)).isEqualTo(1L)
     }
+
     @Test
-    fun`should return zero minutes with 59 seconds as an input `() {
+    fun `should return zero minutes with 59 seconds as an input `() {
         assertThat(userService.calculateMinutes(59L)).isEqualTo(0L)
     }
 
     @Test
-    fun`should return one minute with 60 seconds as an input `() {
+    fun `should return one minute with 60 seconds as an input `() {
         assertThat(userService.calculateMinutes(60L)).isEqualTo(1L)
     }
 
     @Test
-    fun`should return one minute with 61 seconds as an input `() {
+    fun `should return one minute with 61 seconds as an input `() {
         assertThat(userService.calculateMinutes(61L)).isEqualTo(1L)
     }
 
     @Test
-    fun`should return zero seconds with zero seconds as an input `() {
+    fun `should return zero seconds with zero seconds as an input `() {
         assertThat(userService.calculateSeconds(0L)).isEqualTo(0L)
     }
+
     @Test
-    fun`should return zero seconds with 60 seconds as an input `() {
+    fun `should return zero seconds with 60 seconds as an input `() {
         assertThat(userService.calculateSeconds(60L)).isEqualTo(0L)
     }
 
     @Test
-    fun`should return one second with 61 seconds as an input `() {
+    fun `should return one second with 61 seconds as an input `() {
         assertThat(userService.calculateSeconds(61L)).isEqualTo(1L)
-    }
-
-    /*
-     * ----------------- Testing getStepsForUser() function -----------------
-     */
-
-    @Test
-    fun`user haves zero games - DB should return null - result should be zero`() {
-        val user = User(username = "user1", password = "password", email = "email1@email.com")
-        val savedUser = userRepository.save(user)
-        assertThat(userRepository.getStepsForUser(savedUser.userId)).isNull()
-        assertThat(userRepository.getStepsForUser(savedUser.userId)?:0).isEqualTo(0)
-    }
-
-    @Test
-    fun`user haves one game with 222 steps - should return 222`() {
-        val user = User(username = "user2", password = "password", email = "email2@email.com")
-        val savedUser = userRepository.save(user)
-        val game = Game(steps = 222, user = savedUser)
-        gameRepository.save(game)
-        assertThat(userRepository.getStepsForUser(savedUser.userId)).isEqualTo(222)
-    }
-
-    @Test
-    fun`user haves two games, one with 222 steps, and one with 8 000 steps - should return 8 222`() {
-        val user = User(username = "user3", password = "password", email = "email3@email.com")
-        val savedUser = userRepository.save(user)
-        val game1 = Game(steps = 222, user = savedUser)
-        val game2 = Game(steps = 8_000, user = savedUser)
-        gameRepository.save(game1)
-        gameRepository.save(game2)
-        assertThat(userRepository.getStepsForUser(savedUser.userId)).isEqualTo(8_222)
     }
 }

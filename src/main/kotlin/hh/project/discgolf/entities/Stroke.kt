@@ -13,7 +13,7 @@ class Stroke (
     @JoinColumn(name = "holeId")
     var hole: Hole? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "gameId")
     var game: Game? = null,
 
