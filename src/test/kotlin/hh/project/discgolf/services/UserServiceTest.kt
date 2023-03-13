@@ -1,9 +1,5 @@
 package hh.project.discgolf.services
 
-import hh.project.discgolf.entities.Game
-import hh.project.discgolf.entities.User
-import hh.project.discgolf.repositories.GameRepository
-import hh.project.discgolf.repositories.UserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,9 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @AutoConfigureMockMvc
 class UserServiceTest
     @Autowired constructor(
-        val userService: UserService,
-        val userRepository: UserRepository,
-        val gameRepository: GameRepository
+        val userService: UserService
     ) {
     /*
      * ----------------- Testing formatTotalTimePlayed() function ----------------

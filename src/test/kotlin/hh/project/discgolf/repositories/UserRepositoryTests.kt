@@ -2,7 +2,6 @@ package hh.project.discgolf.repositories
 
 import hh.project.discgolf.entities.*
 import org.assertj.core.api.Assertions.*
-import hh.project.discgolf.repositories.UserRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,16 +25,16 @@ class UserRepositoryTests @Autowired constructor(
     @BeforeEach
     fun init() {
         userRepository.deleteAll()
-        val user1 = User(userId = 1L, username = "Matti", email = "matti@mail.com", password = "df68327ghj")
-        val user2 = User(userId = 2L, username = "Maija", email = "maija@mail.com", password = "jdncs788ds")
-        val user3 = User(userId = 3L, username = "user3", email = "user3@mail.com", password = "password")
+        val user1 = User(username = "Matti", email = "matti@mail.com", password = "df68327ghj")
+        val user2 = User(username = "Maija", email = "maija@mail.com", password = "jdncs788ds")
+        val user3 = User(username = "user3", email = "user3@mail.com", password = "password")
         userRepository.saveAll(listOf(user1, user2, user3))
     }
 
     @Test
     fun `should save a user`() {
-        val savedUser = userRepository.findByUsername("Maija")
-        assertThat(userRepository.findById(3L)).isNotNull
+        val savedUser = userRepository.findByUsername("user3")
+        assertThat(userRepository.findById(savedUser.userId)).isNotNull
     }
 
     @Test

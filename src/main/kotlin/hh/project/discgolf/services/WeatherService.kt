@@ -2,7 +2,6 @@ package hh.project.discgolf.services
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import java.net.URI
 import java.net.http.HttpClient

@@ -1,6 +1,5 @@
 package hh.project.discgolf.entities
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 @Entity

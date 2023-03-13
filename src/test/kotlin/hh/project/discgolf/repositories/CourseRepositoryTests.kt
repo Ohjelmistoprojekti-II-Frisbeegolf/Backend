@@ -24,14 +24,14 @@ class CourseRepositoryTests
     @BeforeEach
     fun init() {
         courseRepository.deleteAll()
-        val course1 = Course(courseId = 1L, courseName = "Test1", courseDifficulty = CourseDifficulty.A1)
-        val course2 = Course(courseId = 2L, courseName = "Test2", courseDifficulty = CourseDifficulty.A3)
+        val course1 = Course(courseName = "Test1", courseDifficulty = CourseDifficulty.A1)
+        val course2 = Course(courseName = "Test2", courseDifficulty = CourseDifficulty.A3)
         courseRepository.saveAll(listOf(course1, course2))
     }
 
     @Test
     fun `should save a course`(){
-        val savedCourse = Course(courseId = 3L, courseName = "Test3")
+        val savedCourse = Course(courseName = "Test3")
         courseRepository.save(savedCourse)
         assertThat(courseRepository.findByCourseName("Test3")).isPresent
     }

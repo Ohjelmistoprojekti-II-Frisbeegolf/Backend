@@ -69,7 +69,7 @@ class UserService (private val userRepository: UserRepository){
     fun calculateSeconds(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds % 60
 
     fun generateLinkedHashMapOfResults(userId: Long) : LinkedHashMap<ScoringSystem, Int> {
-        var linkedHashMapOfResults = LinkedHashMap<ScoringSystem, Int>()
+        val linkedHashMapOfResults = LinkedHashMap<ScoringSystem, Int>()
         linkedHashMapOfResults[ScoringSystem.ACE] = userRepository.getAces(userId)
         for (result in -3..3) {
             when (result) {

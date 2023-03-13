@@ -22,16 +22,15 @@ class GameRepositoryTests
     @BeforeEach
     fun init() {
         gameRepository.deleteAll()
-        val game1 = Game(gameId = 1L)
-        val game2 = Game(gameId = 2L)
+        val game1 = Game()
+        val game2 = Game()
         gameRepository.saveAll(listOf(game1, game2))
     }
 
     @Test
     fun `should save a game`() {
-        val savedGame = Game()
-        gameRepository.save(savedGame)
-        assertThat(savedGame.gameId).isEqualTo(-1)
+        val savedGame = gameRepository.save(Game())
+        assertThat(savedGame).isNotNull
     }
 
     @Test

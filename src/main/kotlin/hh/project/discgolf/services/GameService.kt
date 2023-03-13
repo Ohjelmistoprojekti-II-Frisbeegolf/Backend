@@ -1,13 +1,9 @@
 package hh.project.discgolf.services
 
 import hh.project.discgolf.entities.Game
-import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.GameRepository
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import java.util.*
-import kotlin.NoSuchElementException
 
 @Service
 class GameService(private val gameRepository: GameRepository) {

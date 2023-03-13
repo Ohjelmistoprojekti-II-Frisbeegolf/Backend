@@ -72,7 +72,7 @@ internal class CourseControllerTest @Autowired constructor(
 
     @Test
     fun `should return course with valid courseName`() {
-        val courseName = "Talin_frisbeegolfpuisto";
+        val courseName = "Talin_frisbeegolfpuisto"
         mockMvc.get("/courses/name/$courseName")
             .andDo { print() }
             .andExpect {
