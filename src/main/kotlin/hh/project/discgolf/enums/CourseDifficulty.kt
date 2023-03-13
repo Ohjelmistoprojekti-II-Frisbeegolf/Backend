@@ -2,7 +2,7 @@ package hh.project.discgolf.enums
 
 // Can be found on https://frisbeegolfradat.fi/radat/luokitukset/
 
-enum class Difficulty {
+enum class CourseDifficulty {
     A1,
     A2,
     A3,

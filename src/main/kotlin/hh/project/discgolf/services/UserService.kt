@@ -19,7 +19,7 @@ class UserService (private val userRepository: UserRepository){
                 user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId)?:0)
                 user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)
                 user.totalSteps = userRepository.getStepsForUser(userId)?: 0
-                user.scores = generateLinkedHashMapOfScores(userId)
+                user.results = generateLinkedHashMapOfResults(userId)
             }
             return user
         } else throw NoSuchElementException("User doesn't exists with given id!")
@@ -69,22 +69,22 @@ class UserService (private val userRepository: UserRepository){
 
     fun calculateSeconds(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds % 60
 
-    fun generateLinkedHashMapOfScores(userId: Long) : LinkedHashMap<ScoringSystem, Int> {
-        var linkedHashMapOfScores = LinkedHashMap<ScoringSystem, Int>()
-        linkedHashMapOfScores[ScoringSystem.ACE] = userRepository.getAces(userId)
-        for (score in -3..3) {
-            when (score) {
-                -3 -> linkedHashMapOfScores[ScoringSystem.ALBATROSS] = userRepository.getScores(score, userId)
-                -2 -> linkedHashMapOfScores[ScoringSystem.EAGLE] = userRepository.getScores(score, userId)
-                -1 -> linkedHashMapOfScores[ScoringSystem.BIRDIE] = userRepository.getScores(score, userId)
-                0 -> linkedHashMapOfScores[ScoringSystem.PAR] = userRepository.getScores(score, userId)
-                1 -> linkedHashMapOfScores[ScoringSystem.BOGEY] = userRepository.getScores(score, userId)
-                2 -> linkedHashMapOfScores[ScoringSystem.DOUBLE_BOGEY] = userRepository.getScores(score, userId)
-                3 -> linkedHashMapOfScores[ScoringSystem.TRIPLE_BOGEY] = userRepository.getScores(score, userId)
+    fun generateLinkedHashMapOfResults(userId: Long) : LinkedHashMap<ScoringSystem, Int> {
+        var linkedHashMapOfResults = LinkedHashMap<ScoringSystem, Int>()
+        linkedHashMapOfResults[ScoringSystem.ACE] = userRepository.getAces(userId)
+        for (result in -3..3) {
+            when (result) {
+                -3 -> linkedHashMapOfResults[ScoringSystem.ALBATROSS] = userRepository.getResults(result, userId)
+                -2 -> linkedHashMapOfResults[ScoringSystem.EAGLE] = userRepository.getResults(result, userId)
+                -1 -> linkedHashMapOfResults[ScoringSystem.BIRDIE] = userRepository.getResults(result, userId)
+                0 -> linkedHashMapOfResults[ScoringSystem.PAR] = userRepository.getResults(result, userId)
+                1 -> linkedHashMapOfResults[ScoringSystem.BOGEY] = userRepository.getResults(result, userId)
+                2 -> linkedHashMapOfResults[ScoringSystem.DOUBLE_BOGEY] = userRepository.getResults(result, userId)
+                3 -> linkedHashMapOfResults[ScoringSystem.TRIPLE_BOGEY] = userRepository.getResults(result, userId)
             }
         }
-        linkedHashMapOfScores[ScoringSystem.OVER_TRIPLE_BOGEY] = userRepository.getOverTripleBogeys(userId)
-        return linkedHashMapOfScores
+        linkedHashMapOfResults[ScoringSystem.OVER_TRIPLE_BOGEY] = userRepository.getOverTripleBogeys(userId)
+        return linkedHashMapOfResults
     }
 }
 

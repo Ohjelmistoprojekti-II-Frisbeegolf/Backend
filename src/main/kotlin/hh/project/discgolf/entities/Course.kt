@@ -1,7 +1,7 @@
 package hh.project.discgolf.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import hh.project.discgolf.enums.Difficulty
+import hh.project.discgolf.enums.CourseDifficulty
 import jakarta.persistence.*
 
 @Entity
@@ -24,7 +24,7 @@ class Course(
     var coursePostalcode: String = "",
 
     @Enumerated(EnumType.STRING)
-    var difficulty: Difficulty? = null,
+    var courseDifficulty: CourseDifficulty? = null,
 
     @Column(nullable = false)
     var latitude: Double = 0.0,
