@@ -9,7 +9,7 @@ class Hole(
     @Column(nullable = false, updatable = false)
     var holeId: Long = -1L,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "courseId")
     @JsonIgnore
     var course: Course? = null,

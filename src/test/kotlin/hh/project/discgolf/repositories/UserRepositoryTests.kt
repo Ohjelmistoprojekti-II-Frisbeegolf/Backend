@@ -132,7 +132,23 @@ class UserRepositoryTests @Autowired constructor(
                 )}
         assertThat(userRepository.getTotalThrowsThrown(savedUser.userId)).isEqualTo(5)
     }
+    @Test
+    fun `user has played a game with score of 2 - should return 2`() {
+        val savedUser = userRepository.findByUsername("user3")
+        val newCourse = Course(courseName = "Golf")
+        val savedCourse = courseRepository.save(newCourse)
 
+        val newHole = Hole(course = savedCourse, holePar = 2)
+        val savedHole = holeRepository.save(newHole)
+
+        val newGame = Game(user = savedUser, course = savedCourse)
+        val savedGame = gameRepository.save(newGame)
+
+        val newStroke = Stroke(game = savedGame, score = 4, hole = savedHole)
+        val savedStroke = strokeRepository.save(newStroke)
+
+        assertThat(userRepository.getResults(2, savedUser.userId)).isEqualTo(1)
+    }
 
 }
 
