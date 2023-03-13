@@ -44,7 +44,7 @@ If there are no options for SDK or there is only Kotlin SDK, you have to downloa
 
 ## Api documentation
 ### Development deployment: https://dev-discgolf.herokuapp.com/swagger-ui/index.html
-### Production deployment: 
+### Production deployment: https://disc-golf-database.herokuapp.com/swagger-ui/index.html
 
 ## Deployments
 ### Development deployment: https://dev-discgolf.herokuapp.com/
