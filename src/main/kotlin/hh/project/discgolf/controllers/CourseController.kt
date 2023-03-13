@@ -1,7 +1,7 @@
 package hh.project.discgolf.controllers
 
 import hh.project.discgolf.entities.Course
-import hh.project.discgolf.enums.Difficulty
+import hh.project.discgolf.enums.CourseDifficulty
 import hh.project.discgolf.services.CourseService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -25,8 +25,8 @@ class CourseController(private val courseService: CourseService) {
         courseService.getCourseByCourseName(courseName)
 
     @GetMapping(value = ["/courses/difficulty/{diff}"])
-    fun getCoursesByDifficulty(@PathVariable("diff") difficulty: Difficulty): List<Course> =
-        courseService.getCoursesByDifficulty(difficulty)
+    fun getCoursesByDifficulty(@PathVariable("diff") courseDifficulty: CourseDifficulty): List<Course> =
+        courseService.getCoursesByDifficulty(courseDifficulty)
 
     @PostMapping(value = ["/courses"])
     fun createNewCourse(@RequestBody payload: Course): Course =

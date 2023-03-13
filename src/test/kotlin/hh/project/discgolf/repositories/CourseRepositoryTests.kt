@@ -1,8 +1,7 @@
 package hh.project.discgolf.repositories
 
 import hh.project.discgolf.entities.Course
-import hh.project.discgolf.enums.Difficulty
-import hh.project.discgolf.repositories.CourseRepository
+import hh.project.discgolf.enums.CourseDifficulty
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -25,8 +24,8 @@ class CourseRepositoryTests
     @BeforeEach
     fun init() {
         courseRepository.deleteAll()
-        val course1 = Course(courseId = 1L, courseName = "Test1", difficulty = Difficulty.A1)
-        val course2 = Course(courseId = 2L, courseName = "Test2", difficulty = Difficulty.A3)
+        val course1 = Course(courseId = 1L, courseName = "Test1", courseDifficulty = CourseDifficulty.A1)
+        val course2 = Course(courseId = 2L, courseName = "Test2", courseDifficulty = CourseDifficulty.A3)
         courseRepository.saveAll(listOf(course1, course2))
     }
 
@@ -58,8 +57,8 @@ class CourseRepositoryTests
 
     @Test
     fun `should return list of courses by difficulty`() {
-        val difficulty = Difficulty.A1
-        val courses = courseRepository.findAllByDifficulty(difficulty)
+        val courseDifficulty = CourseDifficulty.A1
+        val courses = courseRepository.findAllByDifficulty(courseDifficulty)
         assertThat(courses.size).isEqualTo(1)
     }
 }
