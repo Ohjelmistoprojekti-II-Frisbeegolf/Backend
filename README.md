@@ -44,11 +44,13 @@ If there are no options for SDK or there is only Kotlin SDK, you have to downloa
 
 ## Api documentation
 Development deployment: https://dev-discgolf.herokuapp.com/swagger-ui/index.html
+
 Production deployment: https://disc-golf-database.herokuapp.com/swagger-ui/index.html
 
 ## Deployments
 Development deployment: https://dev-discgolf.herokuapp.com/
+
 Production deployment: https://disc-golf-database.herokuapp.com/
 
 ## Mobile-App
-Link to mobile-app is [here](https://github.com/Ohjelmistoprojekti-II-Frisbeegolf/Mobile-app)
+Link to mobile-app repository is [here](https://github.com/Ohjelmistoprojekti-II-Frisbeegolf/Mobile-app)
