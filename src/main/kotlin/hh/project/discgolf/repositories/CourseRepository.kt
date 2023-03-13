@@ -9,6 +9,6 @@ interface CourseRepository : JpaRepository<Course, Long> {
 
     fun findByCourseName(courseName: String): Optional<Course>
 
-    fun findAllByDifficulty(courseDifficulty: CourseDifficulty): List<Course>
+    fun findAllByCourseDifficulty(courseDifficulty: CourseDifficulty): List<Course>
 
 }

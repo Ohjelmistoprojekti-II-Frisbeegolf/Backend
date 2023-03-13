@@ -58,7 +58,7 @@ class CourseRepositoryTests
     @Test
     fun `should return list of courses by difficulty`() {
         val courseDifficulty = CourseDifficulty.A1
-        val courses = courseRepository.findAllByDifficulty(courseDifficulty)
+        val courses = courseRepository.findAllByCourseDifficulty(courseDifficulty)
         assertThat(courses.size).isEqualTo(1)
     }
 }

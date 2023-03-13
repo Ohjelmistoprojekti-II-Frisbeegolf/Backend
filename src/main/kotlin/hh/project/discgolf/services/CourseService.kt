@@ -22,5 +22,5 @@ class CourseService(private val courseRepository: CourseRepository) {
         courseRepository.save(course)
 
     fun getCoursesByDifficulty(courseDifficulty: CourseDifficulty): List<Course> =
-        courseRepository.findAllByDifficulty(courseDifficulty)
+        courseRepository.findAllByCourseDifficulty(courseDifficulty)
 }
