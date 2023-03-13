@@ -49,3 +49,6 @@ If there are no options for SDK or there is only Kotlin SDK, you have to downloa
 ## Deployments
 ### Development deployment: https://dev-discgolf.herokuapp.com/
 ### Production deployment: https://disc-golf-database.herokuapp.com/
+
+## Mobile-App
+### Link to mobile-app is [here](https://github.com/Ohjelmistoprojekti-II-Frisbeegolf/Mobile-app)
