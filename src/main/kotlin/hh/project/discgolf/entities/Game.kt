@@ -16,7 +16,6 @@ class Game(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courseId")
-    @JsonIgnore
     var course: Course? = null,
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])

@@ -2,6 +2,7 @@ package hh.project.discgolf.controllers
 
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.services.UserService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 
@@ -16,7 +17,7 @@ class UserController(private val userService: UserService) {
     fun getUserById(@PathVariable("id") id: Long): User = userService.getUserById(id)
 
     @PostMapping(value = ["/users"])
-    fun createNewUser(@RequestBody payload: User): User = userService.createNewUser(payload)
+    fun createNewUser(@Valid @RequestBody payload: User): User = userService.createNewUser(payload)
 
     @PutMapping(value = ["/users/{id}"])
     fun updateUser(@PathVariable("id") id: Long, @RequestBody payload: User): User = userService.updateUser(id, payload)

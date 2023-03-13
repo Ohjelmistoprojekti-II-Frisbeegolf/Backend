@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import hh.project.discgolf.enums.ScoringSystem
 import hh.project.discgolf.enums.UserRole
 import jakarta.persistence.*
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.Size
 
 @Entity(name = "users")
 class User(
@@ -16,15 +19,20 @@ class User(
     var games: List<Game> = emptyList(),
 
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "username is mandatory")
+    @Size(min = 4, max = 32)
     var username: String? = null,
 
     @Column(unique = true)
     var email: String = "",
 
     @Column(nullable = false)
+    @NotBlank(message = "password is mandatory")
+    @Size(min = 8, max = 32)
     var password: String? = null,
 
     @Enumerated(EnumType.STRING)
+    @NotEmpty
     var role: UserRole? = null,
 
     @Transient
