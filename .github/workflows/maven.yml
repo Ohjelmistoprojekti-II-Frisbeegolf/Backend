@@ -10,10 +10,6 @@
 
 
 name: CI with Maven
-permissions:
-  contents: read
-  checks: write
-
 
 on:
   push:
