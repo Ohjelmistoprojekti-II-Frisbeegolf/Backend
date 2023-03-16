@@ -7,7 +7,7 @@
 # documentation.
 
 
-# Edited this to fit our needs. This workflow runs test from our project and generates report. 
+# Edited this to fit our needs. This workflow runs test from our project and generates report.
 
 
 
@@ -20,7 +20,9 @@ permissions:
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ dev ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test:
