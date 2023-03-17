@@ -1,0 +1,315 @@
+[
+  {
+    "courseName": "Puolarmaari frisbeegolf",
+    "courseStreetaddress": "Puolarmaari 12",
+    "courseTown": "Espoo",
+    "coursePostalcode": "02210",
+    "courseDifficulty": "A1",
+    "latitude": 60.17662,
+    "longitude": 24.69777,
+    "holes": [
+      {
+        "holeNumber": 1,
+        "holeLength": 84,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 2,
+        "holeLength": 58,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 3,
+        "holeLength": 50,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 4,
+        "holeLength": 82,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 5,
+        "holeLength": 111,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 6,
+        "holeLength": 65,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 7,
+        "holeLength": 60,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 8,
+        "holeLength": 78,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 9,
+        "holeLength": 67,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 10,
+        "holeLength": 46,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 11,
+        "holeLength": 53,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 12,
+        "holeLength": 68,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 13,
+        "holeLength": 48,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 14,
+        "holeLength": 67,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 15,
+        "holeLength": 64,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 16,
+        "holeLength": 71,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 17,
+        "holeLength": 57,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 18,
+        "holeLength": 57,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 19,
+        "holeLength": 55,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 20,
+        "holeLength": 71,
+        "holePar": 3
+      }
+    ]
+  },
+  {
+    "courseName": "Oittaa Kalliometsä",
+    "courseStreetaddress": "Oittaantie",
+    "courseTown": "Espoo",
+    "coursePostalcode": "02740",
+    "courseDifficulty": "A1",
+    "latitude": 60.24059,
+    "longitude": 24.66485,
+    "holes": [
+      {
+        "holeNumber": 1,
+        "holeLength": 84,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 2,
+        "holeLength": 67,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 3,
+        "holeLength": 82,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 4,
+        "holeLength": 74,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 5,
+        "holeLength": 110,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 6,
+        "holeLength": 80,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 7,
+        "holeLength": 74,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 8,
+        "holeLength": 72,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 9,
+        "holeLength": 69,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 10,
+        "holeLength": 125,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 11,
+        "holeLength": 74,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 12,
+        "holeLength": 77,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 13,
+        "holeLength": 91,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 14,
+        "holeLength": 91,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 15,
+        "holeLength": 136,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 16,
+        "holeLength": 154,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 17,
+        "holeLength": 86,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 18,
+        "holeLength": 82,
+        "holePar": 3
+      }
+    ]
+  },
+  {
+    "courseName": "Talin frisbeegolfpuisto",
+    "courseStreetaddress": "Takkatie 36",
+    "courseTown": "Helsinki",
+    "coursePostalcode": "00370",
+    "courseDifficulty": "AA1",
+    "latitude": 60.21346,
+    "longitude": 24.84729,
+    "holes": [
+      {
+        "holeNumber": 1,
+        "holeLength": 216,
+        "holePar": 5
+      },
+      {
+        "holeNumber": 2,
+        "holeLength": 72,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 3,
+        "holeLength": 81,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 4,
+        "holeLength": 61,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 5,
+        "holeLength": 77,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 6,
+        "holeLength": 101,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 7,
+        "holeLength": 103,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 8,
+        "holeLength": 89,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 9,
+        "holeLength": 62,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 10,
+        "holeLength": 170,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 11,
+        "holeLength": 108,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 12,
+        "holeLength": 82,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 13,
+        "holeLength": 127,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 14,
+        "holeLength": 131,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 15,
+        "holeLength": 75,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 16,
+        "holeLength": 72,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 17,
+        "holeLength": 205,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 18,
+        "holeLength": 83,
+        "holePar": 3
+      }
+    ]
+  }
+]

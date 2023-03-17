@@ -1,11 +1,16 @@
 package hh.project.discgolf.utils
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import hh.project.discgolf.entities.*
 import hh.project.discgolf.enums.CourseDifficulty
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.io.File
 import java.time.LocalDateTime
 
 @Component
@@ -15,7 +20,6 @@ class InitializeDB @Autowired constructor(
     private val holeRepo : HoleRepository,
     private val strokeRepo : StrokeRepository,
     private val userRepo : UserRepository
-
 ) {
 
     fun initialize() {
@@ -63,53 +67,33 @@ class InitializeDB @Autowired constructor(
     }
 
     private fun createTestCoursesToDB() {
-        val puolarmaari = courseRepo.save(
-            Course(
-                courseName = "Puolarmaari",
-                courseStreetaddress = "Puolarmaari 3",
-                coursePostalcode = "02210",
-                courseTown = "Espoo",
-                courseDifficulty = CourseDifficulty.A1,
-                latitude = 60.17669136116457,
-                longitude = 24.698378641732024
+        val jsonTextList = parseJsonFileToCourseList()
+        for (course in jsonTextList) {
+            val newCourse = Course(
+                courseName = course.courseName,
+                courseStreetaddress = course.courseStreetaddress,
+                courseTown = course.courseTown,
+                coursePostalcode = course.coursePostalcode,
+                courseDifficulty = course.courseDifficulty,
+                latitude = course.latitude,
+                longitude = course.longitude,
             )
-        )
-
-        createHolesForCourse(course = puolarmaari, holeAmount = 20)
-
-        val oittaaKalliometsa = courseRepo.save(
-            Course(
-                courseName = "Oittaa Kalliometsä",
-                courseStreetaddress = "Oittaantie",
-                coursePostalcode = "02740",
-                courseTown = "Espoo",
-                courseDifficulty = CourseDifficulty.A1,
-                latitude = 60.240064261888136,
-                longitude = 24.665466041735332
-            )
-        )
-
-        createHolesForCourse(course = oittaaKalliometsa, holeAmount = 18)
-
-        val tali = courseRepo.save(
-            Course(
-                courseName = "Talin frisbeegolfpuisto",
-                courseStreetaddress = "Takkatie 36",
-                coursePostalcode = "00370",
-                courseTown = "Helsinki",
-                courseDifficulty = CourseDifficulty.AA1,
-                latitude = 60.21311666971948,
-                longitude = 24.847708022685616
-            )
-        )
-
-        createHolesForCourse(course = tali, holeAmount = 18)
+            val savedCourse = courseRepo.save(newCourse)
+            createHolesForCourse(savedCourse, course.holes)
+        }
     }
 
-    private fun createHolesForCourse(course : Course, holeAmount: Int) {
-        for (hole in 1..holeAmount) {
+    private fun parseJsonFileToCourseList(): List<Course> {
+        val mapper = jacksonObjectMapper()
+
+        val jsonString: String = File("./src/main/resources/courses.json").readText(Charsets.UTF_8)
+        return mapper.readValue<List<Course>>(jsonString)
+    }
+
+    private fun createHolesForCourse(course : Course, holes: List<Hole>) {
+        for (hole: Hole in holes) {
             holeRepo.save(
-                Hole(course = course, holeLength = (30..120).random(), holeNumber = hole, holePar = (2..5).random())
+                Hole(course = course, holeLength = hole.holeLength, holeNumber = hole.holeNumber, holePar = hole.holePar)
             )
         }
     }
@@ -118,7 +102,7 @@ class InitializeDB @Autowired constructor(
         val gameAtPuolarmaari = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Keijo"),
-                course = courseRepo.findByCourseName(courseName = "Puolarmaari").get(),
+                course = courseRepo.findByCourseName(courseName = "Puolarmaari frisbeegolf").get(),
                 steps = 5000,
                 startingDatetime = LocalDateTime.now(),
                 endingDatetime = LocalDateTime.now().plusMinutes(90)
@@ -127,7 +111,8 @@ class InitializeDB @Autowired constructor(
 
         createStrokesForGame(game = gameAtPuolarmaari)
 
-        val gameAtOittaaKalliometsa = gameRepo.save(
+
+        /* val gameAtOittaaKalliometsa = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Maija"),
                 course = courseRepo.findByCourseName(courseName = "Oittaa Kalliometsä").get(),
@@ -138,7 +123,7 @@ class InitializeDB @Autowired constructor(
         )
 
         createStrokesForGame(game = gameAtOittaaKalliometsa)
-
+        */
         val gameAtTali = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Keijo"),

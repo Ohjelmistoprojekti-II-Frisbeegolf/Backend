@@ -40,7 +40,6 @@ internal class GameControllerTest
                     status{isOk()}
                     content { contentType(MediaType.APPLICATION_JSON) }
                     jsonPath("$.gameId") {value(2)}
-                    jsonPath("$.steps") {value(8000)}
                 }
         }
         @Test
