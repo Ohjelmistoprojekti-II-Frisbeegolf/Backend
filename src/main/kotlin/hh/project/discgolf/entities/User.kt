@@ -48,6 +48,6 @@ class User(
     var totalSteps : Int? = 0,
 
     @Transient
-    var results : LinkedHashMap<ScoringSystem, Int> = LinkedHashMap()
+    var results : Map<ScoringSystem, Int> = emptyMap()
 
     )
