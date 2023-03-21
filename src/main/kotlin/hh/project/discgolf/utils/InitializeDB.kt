@@ -112,7 +112,7 @@ class InitializeDB @Autowired constructor(
         createStrokesForGame(game = gameAtPuolarmaari)
 
 
-        /* val gameAtOittaaKalliometsa = gameRepo.save(
+         val gameAtOittaaKalliometsa = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Maija"),
                 course = courseRepo.findByCourseName(courseName = "Oittaa Kalliometsä").get(),
@@ -123,7 +123,7 @@ class InitializeDB @Autowired constructor(
         )
 
         createStrokesForGame(game = gameAtOittaaKalliometsa)
-        */
+
         val gameAtTali = gameRepo.save(
             Game(
                 user = userRepo.findByUsername(username = "Keijo"),
