@@ -14,8 +14,8 @@ class UserService (private val userRepository: UserRepository){
     fun getUserById(userId: Long) : User {
         if (userRepository.findById(userId).isPresent) {
             val user = userRepository.findById(userId).get()
-            user.gamesPlayed = user.games.size
             if (user.games.isNotEmpty()) {
+                user.gamesPlayed = user.games.size
                 user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId)?:0)
                 user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)
                 user.totalSteps = userRepository.getStepsForUser(userId)?: 0
