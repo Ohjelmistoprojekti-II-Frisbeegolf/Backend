@@ -14,12 +14,12 @@ class UserService (private val userRepository: UserRepository){
     fun getUserById(userId: Long) : User {
         if (userRepository.findById(userId).isPresent) {
             val user = userRepository.findById(userId).get()
-            user.gamesPlayed = user.games.size
             if (user.games.isNotEmpty()) {
+                user.gamesPlayed = user.games.size
                 user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId)?:0)
                 user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)
                 user.totalSteps = userRepository.getStepsForUser(userId)?: 0
-                user.results = generateLinkedHashMapOfResults(userId)
+                user.results = generateMapOfResults(userId)
             }
             return user
         } else throw NoSuchElementException("User doesn't exists with given id!")
@@ -69,22 +69,8 @@ class UserService (private val userRepository: UserRepository){
 
     fun calculateSeconds(totalTimePlayedInSeconds: Long) = totalTimePlayedInSeconds % 60
 
-    fun generateLinkedHashMapOfResults(userId: Long) : LinkedHashMap<ScoringSystem, Int> {
-        val linkedHashMapOfResults = LinkedHashMap<ScoringSystem, Int>()
-        linkedHashMapOfResults[ScoringSystem.ACE] = userRepository.getAces(userId)
-        for (result in -3..3) {
-            when (result) {
-                -3 -> linkedHashMapOfResults[ScoringSystem.ALBATROSS] = userRepository.getResults(result, userId)
-                -2 -> linkedHashMapOfResults[ScoringSystem.EAGLE] = userRepository.getResults(result, userId)
-                -1 -> linkedHashMapOfResults[ScoringSystem.BIRDIE] = userRepository.getResults(result, userId)
-                0 -> linkedHashMapOfResults[ScoringSystem.PAR] = userRepository.getResults(result, userId)
-                1 -> linkedHashMapOfResults[ScoringSystem.BOGEY] = userRepository.getResults(result, userId)
-                2 -> linkedHashMapOfResults[ScoringSystem.DOUBLE_BOGEY] = userRepository.getResults(result, userId)
-                3 -> linkedHashMapOfResults[ScoringSystem.TRIPLE_BOGEY] = userRepository.getResults(result, userId)
-            }
-        }
-        linkedHashMapOfResults[ScoringSystem.OVER_TRIPLE_BOGEY] = userRepository.getOverTripleBogeys(userId)
-        return linkedHashMapOfResults
-    }
+    // This one-liner code was made with the help of chat-gtp.
+    fun generateMapOfResults(userId: Long) : Map<ScoringSystem, Int> = ScoringSystem.values().associateWith { it.getResults(userId, userRepository) }
+
 }
 
