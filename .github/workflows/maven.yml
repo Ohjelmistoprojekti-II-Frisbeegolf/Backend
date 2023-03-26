@@ -21,15 +21,8 @@ on:
   push:
     branches:
       - 'dev'
-  pull_request_target:
-    types:
-      - closed
-    branches:
       - 'main'
-
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      
 jobs:
   test:
     runs-on: ubuntu-latest
