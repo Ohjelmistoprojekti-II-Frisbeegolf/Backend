@@ -22,7 +22,9 @@ on:
   push:
     branches: [ dev ]
   pull_request:
-    branches: [ main ]
+    branches:
+      - '!dev'
+      - 'main'
     types: 
       - closed
 
