@@ -311,5 +311,106 @@
         "holePar": 3
       }
     ]
+  },
+  {
+    "courseName": "Nummelanharjun frisbeegolfrata",
+    "courseStreetaddress": "Kehätie/Asemantie",
+    "courseTown": "Vihti",
+    "coursePostalcode": "3100",
+    "courseDifficulty": "A1",
+    "latitude": 60.32619463321596,
+    "longitude": 24.278041281106002,
+    "holes": [
+      {
+        "holeNumber": 1,
+        "holeLength": 28,
+        "holePar": 2
+      },
+      {
+        "holeNumber": 2,
+        "holeLength": 81,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 3,
+        "holeLength": 111,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 4,
+        "holeLength": 114,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 5,
+        "holeLength": 180,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 6,
+        "holeLength": 165,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 7,
+        "holeLength": 86,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 8,
+        "holeLength": 79,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 9,
+        "holeLength": 74,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 10,
+        "holeLength": 188,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 11,
+        "holeLength": 65,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 12,
+        "holeLength": 83,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 13,
+        "holeLength": 94,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 14,
+        "holeLength": 132,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 15,
+        "holeLength": 34,
+        "holePar": 2
+      },
+      {
+        "holeNumber": 16,
+        "holeLength": 107,
+        "holePar": 4
+      },
+      {
+        "holeNumber": 17,
+        "holeLength": 98,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 18,
+        "holeLength": 88,
+        "holePar": 3
+      }
+    ]
   }
 ]
