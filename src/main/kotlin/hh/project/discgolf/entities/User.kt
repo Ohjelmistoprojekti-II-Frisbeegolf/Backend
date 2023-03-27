@@ -19,17 +19,12 @@ class User(
     var games: List<Game> = emptyList(),
 
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "username is mandatory")
-    @Size(min = 4, max = 32)
     var username: String? = null,
 
     @Column(nullable = false)
-    @NotBlank(message = "password is mandatory")
-    @Size(min = 8, max = 32)
-    var password: String? = null,
+    var password: String = "",
 
     @Enumerated(EnumType.STRING)
-    @NotEmpty
     var role: UserRole? = null,
 
     @Transient

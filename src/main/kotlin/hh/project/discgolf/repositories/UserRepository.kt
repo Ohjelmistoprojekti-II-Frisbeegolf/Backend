@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query
 
 interface UserRepository : JpaRepository<User, Long> {
 
-    fun findByUsername(username : String) : User
+    fun findByUsername(username : String) : User? = null
 
     @Query("SELECT SUM(EXTRACT(EPOCH FROM (ending_datetime - starting_datetime))) FROM Game WHERE user_id = :userId", nativeQuery = true)
     fun totalTimePlayed(userId : Long) : Long? = 0

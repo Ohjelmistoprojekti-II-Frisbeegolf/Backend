@@ -12,10 +12,8 @@ import javax.crypto.spec.SecretKeySpec
 
 // Link source: https://tienisto.medium.com/securing-spring-boot-with-jwt-kotlin-7b529f99ca47
 @Configuration
-class JwtEncodingConfig(
-    private val jwtKey: String = System.getenv("SECURITY")
-) {
-    private val secretKey = SecretKeySpec(jwtKey.toByteArray(), "HmacSHA256")
+class JwtEncodingConfig{
+    private val secretKey = SecretKeySpec(System.getenv("SECRET").toByteArray(), "HmacSHA256")
 
     @Bean
     fun jwtDecoder(): JwtDecoder = NimbusJwtDecoder.withSecretKey(secretKey).build()
