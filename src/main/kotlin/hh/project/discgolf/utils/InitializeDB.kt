@@ -41,7 +41,6 @@ class InitializeDB @Autowired constructor(
         userRepo.save(
             User(
                 username = "Keijo",
-                email = "keijonen@gmail.com",
                 password = "enolekeijo",
                 role = UserRole.USER
             )
@@ -50,7 +49,6 @@ class InitializeDB @Autowired constructor(
         userRepo.save(
             User(
                 username = "Maija",
-                email = "maijakas@hotmail.com",
                 password = "olenmaija",
                 role = UserRole.USER
             )
@@ -59,7 +57,6 @@ class InitializeDB @Autowired constructor(
         userRepo.save(
             User(
                 username = "admin",
-                email = "admin@discgolf.com",
                 password = "admin",
                 role = UserRole.ADMIN
             )

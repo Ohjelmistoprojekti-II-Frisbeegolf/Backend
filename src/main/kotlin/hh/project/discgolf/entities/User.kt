@@ -23,9 +23,6 @@ class User(
     @Size(min = 4, max = 32)
     var username: String? = null,
 
-    @Column(unique = true)
-    var email: String = "",
-
     @Column(nullable = false)
     @NotBlank(message = "password is mandatory")
     @Size(min = 8, max = 32)

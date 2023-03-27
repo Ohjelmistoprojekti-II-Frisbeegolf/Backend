@@ -64,7 +64,7 @@ internal class UserControllerTest
 
     @Test
     fun `save new user with good credentials - Should return isOk()`() {
-        val newUser = User(username = "John", email = "john@gmail.com", password = "password", role = UserRole.USER)
+        val newUser = User(username = "John", password = "password", role = UserRole.USER)
 
         val performPost = mockMvc.post("/users") {
             contentType = MediaType.APPLICATION_JSON
@@ -78,7 +78,7 @@ internal class UserControllerTest
 
     @Test
     fun `saving new user with already taken username - Should return isBadRequest()`() {
-        val newUser = User(username = "Keijo", email = "keijo@gmail.com", password = "password", role = UserRole.USER)
+        val newUser = User(username = "Keijo", password = "password", role = UserRole.USER)
 
         val performPost = mockMvc.post("/users") {
             contentType = MediaType.APPLICATION_JSON
@@ -90,23 +90,10 @@ internal class UserControllerTest
             }
     }
 
-    @Test
-    fun `saving new user with already taken email - Should return isBadRequest()`() {
-        val newUser = User(username = "Keijo1", email = "keijonen@gmail.com", password = "password", role = UserRole.USER)
-
-        val performPost = mockMvc.post("/users") {
-            contentType = MediaType.APPLICATION_JSON
-            content = objectMapper.writeValueAsString(newUser)
-        }
-        performPost
-            .andExpect {
-                status { isBadRequest() }
-            }
-    }
 
     @Test
     fun `saving new user without an username - Should return isBadRequest()`() {
-        val newUser = User(email = "keijo@gmail.com", password = "password", role = UserRole.USER)
+        val newUser = User(password = "password", role = UserRole.USER)
 
         val performPost = mockMvc.post("/users") {
             contentType = MediaType.APPLICATION_JSON
@@ -121,7 +108,7 @@ internal class UserControllerTest
 
     @Test
     fun `saving new user without a password - Should return isBadRequest()`() {
-        val newUser = User(username = "Keijo1", email = "keijo@gmail.com", role = UserRole.USER)
+        val newUser = User(username = "Keijo1", role = UserRole.USER)
 
         val performPost = mockMvc.post("/users") {
             contentType = MediaType.APPLICATION_JSON

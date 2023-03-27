@@ -40,7 +40,6 @@ class UserService (private val userRepository: UserRepository){
                     userId = userId,
                     games = user.games,
                     username = user.username,
-                    email = user.email,
                     password = user.password,
                     role = user.role
                 )

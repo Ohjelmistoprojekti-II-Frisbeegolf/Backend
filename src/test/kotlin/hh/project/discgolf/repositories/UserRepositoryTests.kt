@@ -25,9 +25,9 @@ class UserRepositoryTests @Autowired constructor(
     @BeforeEach
     fun init() {
         userRepository.deleteAll()
-        val user1 = User(username = "Matti", email = "matti@mail.com", password = "df68327ghj")
-        val user2 = User(username = "Maija", email = "maija@mail.com", password = "jdncs788ds")
-        val user3 = User(username = "user3", email = "user3@mail.com", password = "password")
+        val user1 = User(username = "Matti", password = "df68327ghj")
+        val user2 = User(username = "Maija", password = "jdncs788ds")
+        val user3 = User(username = "user3", password = "password")
         userRepository.saveAll(listOf(user1, user2, user3))
     }
 
