@@ -33,7 +33,6 @@ class AuthService(
 
     // TODO: Exceptions
     fun handleRegister(newUserValidation: NewUserValidation) {
-        println(newUserValidation)
         if (userRepository.findByUsername(newUserValidation.username) != null) {
             throw NoSuchElementException("All")
         }
