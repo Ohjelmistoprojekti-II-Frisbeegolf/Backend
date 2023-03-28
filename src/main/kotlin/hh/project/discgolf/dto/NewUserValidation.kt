@@ -16,7 +16,6 @@ data class NewUserValidation(
     val password : String,
 
     @field:NotBlank
-    @field:Size(min = 7, max = 32, message = "Password must be 7-32 characters long")
     val passwordCheck : String,
 
 ) {
