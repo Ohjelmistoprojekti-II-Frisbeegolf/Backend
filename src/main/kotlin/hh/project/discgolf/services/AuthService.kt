@@ -6,7 +6,9 @@ import hh.project.discgolf.dto.NewUserValidation
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.UserRepository
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
+import javax.security.auth.login.CredentialException
 
 // Link source: https://tienisto.medium.com/securing-spring-boot-with-jwt-kotlin-7b529f99ca47
 
@@ -18,12 +20,15 @@ class AuthService(
 
 ) {
 
-    // TODO: Exceptions
     fun handleLogin(loginCredentials: LoginCredentials) : LoginResponseDto {
-        val user = userRepository.findByUsername(loginCredentials.username)?: throw NoSuchElementException("Login failed")
+        if (userRepository.findByUsername(loginCredentials.username).isEmpty) {
+            throw CredentialException("Wrong credentials.")
+        }
+
+        val user = userRepository.findByUsername(loginCredentials.username).get()
 
         if (!hashService.checkBcrypt(loginCredentials.password, user.password)) {
-            throw NoSuchElementException("Login failed.")
+            throw CredentialException("Wrong credentials.")
         }
 
         return LoginResponseDto(
@@ -31,14 +36,13 @@ class AuthService(
                 )
     }
 
-    // TODO: Exceptions
     fun handleRegister(newUserValidation: NewUserValidation) {
-        if (userRepository.findByUsername(newUserValidation.username) != null) {
-            throw NoSuchElementException("All")
+        if (userRepository.findByUsername(newUserValidation.username).isPresent) {
+            throw DataIntegrityViolationException("Username is already in use!")
         }
 
         if (newUserValidation.password != newUserValidation.passwordCheck) {
-            throw NoSuchElementException("TODO")
+            throw DataIntegrityViolationException("Passwords don't match!")
         }
 
         userRepository.save(User(
