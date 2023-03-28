@@ -33,8 +33,8 @@ class UserRepositoryTests @Autowired constructor(
 
     @Test
     fun `should save a user`() {
-        val savedUser = userRepository.findByUsername("user3")
-        assertThat(userRepository.findById(savedUser.userId)).isNotNull
+        val savedUser = userRepository.findByUsername("user3").get()
+        assertThat(userRepository.findByUsername("user3")).isPresent
     }
 
     @Test
@@ -67,14 +67,14 @@ class UserRepositoryTests @Autowired constructor(
 
     @Test
     fun`user haves zero games - DB should return null - result should be zero`() {
-        val savedUser = userRepository.findByUsername("Maija")
+        val savedUser = userRepository.findByUsername("Maija").get()
         assertThat(userRepository.getStepsForUser(savedUser.userId)).isNull()
         assertThat(userRepository.getStepsForUser(savedUser.userId)?:0).isEqualTo(0)
     }
 
     @Test
     fun`user haves one game with 222 steps - should return 222`() {
-        val savedUser = userRepository.findByUsername("Matti")
+        val savedUser = userRepository.findByUsername("Matti").get()
         val game = Game(steps = 222, user = savedUser)
         gameRepository.save(game)
         assertThat(userRepository.getStepsForUser(savedUser.userId)).isEqualTo(222)
@@ -82,7 +82,7 @@ class UserRepositoryTests @Autowired constructor(
 
     @Test
     fun`user haves two games, one with 222 steps, and one with 8 000 steps - should return 8 222`() {
-        val savedUser = userRepository.findByUsername("Maija")
+        val savedUser = userRepository.findByUsername("Maija").get()
         val game1 = Game(steps = 222, user = savedUser)
         val game2 = Game(steps = 8_000, user = savedUser)
         gameRepository.save(game1)
@@ -91,7 +91,7 @@ class UserRepositoryTests @Autowired constructor(
     }
     @Test
     fun `user has played a game of 2 hours - should return 7 200 seconds`() {
-        val savedUser = userRepository.findByUsername("Maija")
+        val savedUser = userRepository.findByUsername("Maija").get()
         val newGame = Game(
             startingDatetime = LocalDateTime.now(),
             endingDatetime = LocalDateTime.now().plusMinutes(120),
@@ -101,7 +101,7 @@ class UserRepositoryTests @Autowired constructor(
     }
     @Test
     fun `user has played two games, total of 2,5 hours - should return 9 000 seconds`() {
-        val savedUser = userRepository.findByUsername("Matti")
+        val savedUser = userRepository.findByUsername("Matti").get()
         val game1 = Game(
             startingDatetime =  LocalDateTime.now(),
             endingDatetime = LocalDateTime.now().plusMinutes(60),
@@ -117,12 +117,12 @@ class UserRepositoryTests @Autowired constructor(
     }
     @Test
     fun `user has played no games, should return null`() {
-        val savedUser = userRepository.findByUsername("Maija")
+        val savedUser = userRepository.findByUsername("Maija").get()
         assertThat(userRepository.totalTimePlayed(savedUser.userId)).isEqualTo(null)
     }
     @Test
     fun `user has played a game with 5 strokes - should return 5`() {
-        val savedUser = userRepository.findByUsername("user3")
+        val savedUser = userRepository.findByUsername("user3").get()
         val newGame = Game(user = savedUser)
         val savedGame = gameRepository.save(newGame)
             for (i in 1..5) {
@@ -133,7 +133,7 @@ class UserRepositoryTests @Autowired constructor(
     }
     @Test
     fun `user has played a game with score of 2 - should return 2`() {
-        val savedUser = userRepository.findByUsername("user3")
+        val savedUser = userRepository.findByUsername("user3").get()
         val newCourse = Course(courseName = "Golf")
         val savedCourse = courseRepository.save(newCourse)
 
