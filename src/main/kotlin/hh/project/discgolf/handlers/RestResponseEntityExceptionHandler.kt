@@ -6,10 +6,13 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.validation.ObjectError
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+import javax.security.auth.login.CredentialException
 
 @RestControllerAdvice
 class RestResponseEntityExceptionHandler {
@@ -42,4 +45,12 @@ class RestResponseEntityExceptionHandler {
     @ExceptionHandler(NumberFormatException::class)
     fun handleNumberFormatException( e: NumberFormatException) : ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleValidationErrorInNewUserValidation( e: MethodArgumentNotValidException) : ResponseEntity<List<String?>> =
+        ResponseEntity(e.bindingResult.allErrors.map { it.defaultMessage }, HttpStatus.BAD_REQUEST)
+
+    @ExceptionHandler(CredentialException::class)
+    fun handleWrongCredentials( e : CredentialException) : ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.FORBIDDEN)
 }
