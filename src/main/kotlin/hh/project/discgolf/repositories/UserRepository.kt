@@ -3,10 +3,11 @@ package hh.project.discgolf.repositories
 import hh.project.discgolf.entities.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import java.util.Optional
 
 interface UserRepository : JpaRepository<User, Long> {
 
-    fun findByUsername(username : String) : User? = null
+    fun findByUsername(username : String) : Optional<User>
 
     @Query("SELECT SUM(EXTRACT(EPOCH FROM (ending_datetime - starting_datetime))) FROM Game WHERE user_id = :userId", nativeQuery = true)
     fun totalTimePlayed(userId : Long) : Long? = 0
