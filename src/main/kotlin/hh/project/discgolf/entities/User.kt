@@ -22,9 +22,11 @@ class User(
     var username: String? = null,
 
     @Column(nullable = false)
+    @JsonIgnore
     var password: String = "",
 
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     var role: UserRole? = null,
 
     @Transient
