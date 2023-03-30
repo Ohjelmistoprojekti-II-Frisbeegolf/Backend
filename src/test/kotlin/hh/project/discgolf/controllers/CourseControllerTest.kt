@@ -2,6 +2,8 @@ package hh.project.discgolf.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import hh.project.discgolf.entities.Course
+import hh.project.discgolf.repositories.UserRepository
+import hh.project.discgolf.services.TokenService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -15,11 +17,17 @@ import org.springframework.test.web.servlet.post
 @AutoConfigureMockMvc
 internal class CourseControllerTest @Autowired constructor(
     val mockMvc: MockMvc,
-    val objectMapper: ObjectMapper
+    val objectMapper: ObjectMapper,
+    val tokenService: TokenService,
+    val userRepository: UserRepository
 ) {
+
+    val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
     @Test
     fun `should return all courses`() {
-        mockMvc.get("/courses")
+        mockMvc.get("/courses") {
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
             .andExpect {
                 status { isOk() }
@@ -34,6 +42,7 @@ internal class CourseControllerTest @Autowired constructor(
 
         mockMvc.get("/courses/$id")
             .andDo { print() }
+
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
