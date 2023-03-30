@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.post
 internal class GameControllerTest @Autowired constructor(
         val mockMvc: MockMvc,
         val objectMapper: ObjectMapper,
-        val tokenService: TokenService,
-        val userRepository: UserRepository
+        tokenService: TokenService,
+        userRepository: UserRepository
     )
 {
     val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
