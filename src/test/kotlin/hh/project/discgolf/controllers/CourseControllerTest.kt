@@ -39,7 +39,6 @@ internal class CourseControllerTest @Autowired constructor(
     @Test
     fun `should return course by given id`() {
         val id = 2L
-
         mockMvc.get("/courses/$id"){
             header("Authorization", "Bearer $token")
         }
