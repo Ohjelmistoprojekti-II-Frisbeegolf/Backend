@@ -4,6 +4,7 @@ import hh.project.discgolf.entities.User
 import hh.project.discgolf.enums.ScoringSystem
 import hh.project.discgolf.repositories.UserRepository
 import jakarta.validation.Valid
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service
 import org.springframework.validation.BindingResult
 
@@ -12,21 +13,20 @@ class UserService (private val userRepository: UserRepository){
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(userId: Long) : User {
-        if (userRepository.findById(userId).isPresent) {
-            val user = userRepository.findById(userId).get()
+    fun getUser(authentication: Authentication): User {
+        val user = authentication.principal as User
+
+        if (user != null) {
             if (user.games.isNotEmpty()) {
                 user.gamesPlayed = user.games.size
-                user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(userId)?:0)
-                user.totalThrowsThrown = userRepository.getTotalThrowsThrown(userId)
-                user.totalSteps = userRepository.getStepsForUser(userId)?: 0
-                user.results = generateMapOfResults(userId)
+                user.totalTimePlayed = formatTotalTimePlayed(userRepository.totalTimePlayed(user.userId)?:0)
+                user.totalThrowsThrown = userRepository.getTotalThrowsThrown(user.userId)
+                user.totalSteps = userRepository.getStepsForUser(user.userId)?: 0
+                user.results = generateMapOfResults(user.userId)
             }
             return user
-        } else throw NoSuchElementException("User doesn't exists with given id!")
+        } else throw NoSuchElementException("User doesn't exist!")
     }
-
-    fun createNewUser(user: User): User = userRepository.save(user)
 
     fun deleteUser(userId: Long) {
         return if (userRepository.existsById(userId)) {
