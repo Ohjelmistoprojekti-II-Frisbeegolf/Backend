@@ -1,13 +1,11 @@
 package hh.project.discgolf.utils
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import hh.project.discgolf.entities.*
-import hh.project.discgolf.enums.CourseDifficulty
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.*
+import hh.project.discgolf.services.HashService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.io.File
@@ -19,7 +17,8 @@ class InitializeDB @Autowired constructor(
     private val gameRepo : GameRepository,
     private val holeRepo : HoleRepository,
     private val strokeRepo : StrokeRepository,
-    private val userRepo : UserRepository
+    private val userRepo : UserRepository,
+    private val hashService: HashService
 ) {
 
     fun initialize() {
@@ -41,7 +40,7 @@ class InitializeDB @Autowired constructor(
         userRepo.save(
             User(
                 username = "Keijo",
-                password = "enolekeijo",
+                password = hashService.hashBcrypt("salasana"),
                 role = UserRole.USER
             )
         )
@@ -49,7 +48,7 @@ class InitializeDB @Autowired constructor(
         userRepo.save(
             User(
                 username = "Maija",
-                password = "olenmaija",
+                password = hashService.hashBcrypt("salasana"),
                 role = UserRole.USER
             )
         )
@@ -57,7 +56,7 @@ class InitializeDB @Autowired constructor(
         userRepo.save(
             User(
                 username = "admin",
-                password = "admin",
+                password = hashService.hashBcrypt("admin"),
                 role = UserRole.ADMIN
             )
         )
