@@ -98,7 +98,6 @@ internal class CourseControllerTest @Autowired constructor(
     @Test
     fun `should return error if courseName already exists`() {
         val invalidCourse = Course(courseName = "Talin frisbeegolfpuisto")
-
         val performPost = mockMvc.post("/courses") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(invalidCourse)
