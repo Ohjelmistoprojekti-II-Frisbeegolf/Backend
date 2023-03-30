@@ -1,9 +1,11 @@
 package hh.project.discgolf.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import hh.project.discgolf.dto.NewUserValidation
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.UserRepository
+import hh.project.discgolf.services.TokenService
 import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,14 +22,19 @@ internal class UserControllerTest
     @Autowired constructor (
         val mockMvc: MockMvc,
         val userRepository: UserRepository,
-        val objectMapper: ObjectMapper
-)
+        val objectMapper: ObjectMapper,
+        val tokenService: TokenService,
+) {
 
-{
+    val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
+
     @Test
     fun `should return all users`() {
         val quantityOfUsers = userRepository.findAll().size
-        mockMvc.get("/users")
+
+        mockMvc.get("/users") {
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
             .andExpect {
                 status { isOk() }
@@ -41,7 +48,9 @@ internal class UserControllerTest
         val userId = 1L
         val user = userRepository.findById(userId).get()
 
-        mockMvc.get("/users/$userId")
+        mockMvc.get("/users/$userId") {
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
             .andExpect {
                 status { isOk() }
@@ -55,7 +64,9 @@ internal class UserControllerTest
     fun `should return is not found -status with id that doesn't exist`() {
         val incorrectId = -1L
 
-        mockMvc.get("/users/$incorrectId")
+        mockMvc.get("/users/$incorrectId") {
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
             .andExpect {
                 status { isNotFound() }
@@ -64,11 +75,11 @@ internal class UserControllerTest
 
     @Test
     fun `save new user with good credentials - Should return isOk()`() {
-        val newUser = User(username = "John", password = "password", role = UserRole.USER)
+        val userValidation = NewUserValidation(username = "Meijo", password = "salasana", passwordCheck = "salasana")
 
-        val performPost = mockMvc.post("/users") {
+        val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
-            content = objectMapper.writeValueAsString(newUser)
+            content = objectMapper.writeValueAsString(userValidation)
         }
         performPost
             .andExpect {
@@ -78,11 +89,11 @@ internal class UserControllerTest
 
     @Test
     fun `saving new user with already taken username - Should return isBadRequest()`() {
-        val newUser = User(username = "Keijo", password = "password", role = UserRole.USER)
+        val user = User(username = "Keijo")
 
-        val performPost = mockMvc.post("/users") {
+        val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
-            content = objectMapper.writeValueAsString(newUser)
+            content = objectMapper.writeValueAsString(user)
         }
         performPost
             .andExpect {
@@ -95,7 +106,7 @@ internal class UserControllerTest
     fun `saving new user without an username - Should return isBadRequest()`() {
         val newUser = User(password = "password", role = UserRole.USER)
 
-        val performPost = mockMvc.post("/users") {
+        val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(newUser)
         }
@@ -110,7 +121,7 @@ internal class UserControllerTest
     fun `saving new user without a password - Should return isBadRequest()`() {
         val newUser = User(username = "Keijo1", role = UserRole.USER)
 
-        val performPost = mockMvc.post("/users") {
+        val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(newUser)
         }

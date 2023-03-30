@@ -5,6 +5,7 @@ import hh.project.discgolf.enums.ScoringSystem
 import hh.project.discgolf.repositories.UserRepository
 import jakarta.validation.Valid
 import org.springframework.stereotype.Service
+import org.springframework.validation.BindingResult
 
 @Service
 class UserService (private val userRepository: UserRepository){
@@ -25,7 +26,7 @@ class UserService (private val userRepository: UserRepository){
         } else throw NoSuchElementException("User doesn't exists with given id!")
     }
 
-    fun createNewUser(@Valid user: User): User = userRepository.save(user)
+    fun createNewUser(user: User): User = userRepository.save(user)
 
     fun deleteUser(userId: Long) {
         return if (userRepository.existsById(userId)) {
