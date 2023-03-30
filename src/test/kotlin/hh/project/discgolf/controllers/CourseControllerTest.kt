@@ -40,9 +40,10 @@ internal class CourseControllerTest @Autowired constructor(
     fun `should return course by given id`() {
         val id = 2L
 
-        mockMvc.get("/courses/$id")
+        mockMvc.get("/courses/$id"){
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
-
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
@@ -54,8 +55,9 @@ internal class CourseControllerTest @Autowired constructor(
     @Test
     fun `should return not found with id that doesn't exist`() {
         val incorrectId = -1L
-
-        mockMvc.get("/courses/$incorrectId")
+        mockMvc.get("/courses/$incorrectId") {
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
             .andExpect {
                 status { isNotFound() }
@@ -65,10 +67,10 @@ internal class CourseControllerTest @Autowired constructor(
     @Test
     fun `should return saved course`() {
         val newCourse = Course(courseName = "Golf-kenttä")
-
         val performPost = mockMvc.post("/courses") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(newCourse)
+            header("Authorization", "Bearer $token")
         }
         performPost
             .andDo { print() }
@@ -82,7 +84,9 @@ internal class CourseControllerTest @Autowired constructor(
     @Test
     fun `should return course with valid courseName`() {
         val courseName = "Talin_frisbeegolfpuisto"
-        mockMvc.get("/courses/name/$courseName")
+        mockMvc.get("/courses/name/$courseName") {
+            header("Authorization", "Bearer $token")
+        }
             .andDo { print() }
             .andExpect {
                 status { isOk() }
@@ -98,6 +102,7 @@ internal class CourseControllerTest @Autowired constructor(
         val performPost = mockMvc.post("/courses") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(invalidCourse)
+            header("Authorization", "Bearer $token")
         }
         performPost
             .andDo { print() }
