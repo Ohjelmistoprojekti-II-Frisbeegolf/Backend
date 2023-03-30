@@ -31,6 +31,7 @@ class SecurityConfig (
         http.authorizeHttpRequests()
             .requestMatchers(HttpMethod.POST, "/login").permitAll()
             .requestMatchers(HttpMethod.POST, "/register").permitAll()
+            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
             .requestMatchers("/**").authenticated()
             .anyRequest().permitAll()
 

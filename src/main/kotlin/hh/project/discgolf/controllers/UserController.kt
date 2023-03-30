@@ -2,6 +2,7 @@ package hh.project.discgolf.controllers
 
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.services.UserService
+import io.swagger.v3.oas.annotations.Hidden
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
