@@ -16,7 +16,7 @@ class UserController(
     @GetMapping(value = ["/users"])
     fun getAllUsers(): List<User> = userService.getAllUsers()
 
-    @GetMapping(value = ["/current-user"])
+    @GetMapping(value = ["/users/current"])
     fun getUser(authentication: Authentication): User = userService.getUser(authentication)
 
     @PutMapping(value = ["/users/{id}"])

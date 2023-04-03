@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.security.core.Authentication
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
@@ -23,7 +24,7 @@ internal class UserControllerTest
         val mockMvc: MockMvc,
         val userRepository: UserRepository,
         val objectMapper: ObjectMapper,
-        val tokenService: TokenService,
+        val tokenService: TokenService
 ) {
 
     val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
@@ -44,32 +45,25 @@ internal class UserControllerTest
     }
 
     @Test
-    fun `should return user by given id`() {
-        val userId = 1L
-        val user = userRepository.findById(userId).get()
+    fun `should return authenticated user`() {
 
-        mockMvc.get("/users/$userId") {
+        mockMvc.get("/users/current") {
             header("Authorization", "Bearer $token")
         }
             .andDo { print() }
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
-                jsonPath("$.userId") {value(userId)}
-                jsonPath("$.username") {value(user.username)}
             }
     }
 
     @Test
-    fun `should return is not found -status with id that doesn't exist`() {
-        val incorrectId = -1L
+    fun `should return is unauthorized if not logged in`() {
 
-        mockMvc.get("/users/$incorrectId") {
-            header("Authorization", "Bearer $token")
-        }
+        mockMvc.get("/users/current")
             .andDo { print() }
             .andExpect {
-                status { isNotFound() }
+                status { isUnauthorized() }
             }
     }
 
