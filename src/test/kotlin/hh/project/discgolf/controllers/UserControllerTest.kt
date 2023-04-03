@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.security.core.Authentication
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
@@ -83,15 +82,17 @@ internal class UserControllerTest
 
     @Test
     fun `saving new user with already taken username - Should return isBadRequest()`() {
-        val user = User(username = "Keijo")
+        val userValidation = NewUserValidation(username = "Keijo", password = "salasana", passwordCheck = "salasana")
 
         val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
-            content = objectMapper.writeValueAsString(user)
+            content = objectMapper.writeValueAsString(userValidation)
         }
         performPost
+            .andDo { print() }
             .andExpect {
                 status { isBadRequest() }
+                jsonPath("$") { value("Username is already in use!")}
             }
     }
 
