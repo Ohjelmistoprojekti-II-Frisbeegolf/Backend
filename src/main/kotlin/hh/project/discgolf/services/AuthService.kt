@@ -6,6 +6,7 @@ import hh.project.discgolf.dto.NewUserValidation
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.UserRepository
+import org.hibernate.exception.DataException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import javax.security.auth.login.CredentialException
@@ -42,7 +43,7 @@ class AuthService(
         }
 
         if (newUserValidation.password != newUserValidation.passwordCheck) {
-            throw Exception("") //:TODO handle exception.
+            throw DataException("Don't match", null, null)
         }
 
         userRepository.save(User(

@@ -2,6 +2,7 @@ package hh.project.discgolf.handlers
 
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
+import org.hibernate.exception.DataException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -52,5 +53,9 @@ class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(CredentialException::class)
     fun handleWrongCredentials( e : CredentialException) : ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.UNAUTHORIZED)
+
+    @ExceptionHandler(DataException::class)
+    fun handlePasswordsDontMatch(e: DataException) : ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.UNAUTHORIZED)
 }
