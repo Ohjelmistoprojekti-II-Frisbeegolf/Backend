@@ -48,7 +48,7 @@ class AuthService(
         userRepository.save(User(
             username = newUserValidation.username,
             password = hashService.hashBcrypt(newUserValidation.password),
-            role = UserRole.USER
+            role = "ROLE_USER"
         ))
 
     }

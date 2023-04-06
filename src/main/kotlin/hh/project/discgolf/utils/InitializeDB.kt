@@ -41,7 +41,7 @@ class InitializeDB @Autowired constructor(
             User(
                 username = "Keijo",
                 password = hashService.hashBcrypt("salasana"),
-                role = UserRole.USER
+                role = "ROLE_USER"
             )
         )
 
@@ -49,7 +49,7 @@ class InitializeDB @Autowired constructor(
             User(
                 username = "Maija",
                 password = hashService.hashBcrypt("salasana"),
-                role = UserRole.USER
+                role = "ROLE_USER"
             )
         )
 
@@ -57,7 +57,7 @@ class InitializeDB @Autowired constructor(
             User(
                 username = "admin",
                 password = hashService.hashBcrypt("admin"),
-                role = UserRole.ADMIN
+                role = "ROLE_ADMIN"
             )
         )
     }

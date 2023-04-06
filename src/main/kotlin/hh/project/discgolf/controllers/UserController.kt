@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @CrossOrigin
 class UserController(
-    private val userService: UserService,
+    private val userService: UserService
 ) {
 
     @GetMapping(value = ["/users"])
@@ -23,6 +23,6 @@ class UserController(
     fun updateUser(@PathVariable("id") id: Long, @RequestBody payload: User): User = userService.updateUser(id, payload)
 
     @DeleteMapping(value = ["/users/{id}"])
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     fun deleteUser(@PathVariable("id") id: Long) = userService.deleteUser(id)
 }

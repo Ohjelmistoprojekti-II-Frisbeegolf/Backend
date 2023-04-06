@@ -25,9 +25,8 @@ class User(
     @JsonIgnore
     var password: String = "",
 
-    @Enumerated(EnumType.STRING)
-    @JsonIgnore
-    var role: UserRole? = null,
+
+    var role: String = "",
 
     @Transient
     var gamesPlayed:  Int = 0,
