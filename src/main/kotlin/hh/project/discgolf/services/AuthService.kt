@@ -42,7 +42,7 @@ class AuthService(
         }
 
         if (newUserValidation.password != newUserValidation.passwordCheck) {
-            throw DataIntegrityViolationException("Passwords don't match!")
+            throw Exception("") //:TODO handle exception.
         }
 
         userRepository.save(User(

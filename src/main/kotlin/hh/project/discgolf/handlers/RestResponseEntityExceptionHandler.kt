@@ -52,5 +52,5 @@ class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(CredentialException::class)
     fun handleWrongCredentials( e : CredentialException) : ResponseEntity<String> =
-        ResponseEntity(e.message, HttpStatus.FORBIDDEN)
+        ResponseEntity(e.message, HttpStatus.UNAUTHORIZED)
 }
