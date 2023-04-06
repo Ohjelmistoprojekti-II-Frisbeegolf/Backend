@@ -61,7 +61,7 @@ class AuthControllerTest @Autowired constructor(
         performPost
             .andDo { print() }
             .andExpect {
-                status { isForbidden() }
+                status { isUnauthorized() }
                 jsonPath("$") { value("Wrong credentials.")}
             }
     }
@@ -78,7 +78,7 @@ class AuthControllerTest @Autowired constructor(
         performPost
             .andDo { print() }
             .andExpect {
-                status { isForbidden() }
+                status { isUnauthorized() }
                 jsonPath("$") { value("Wrong credentials.")}
             }
     }
@@ -100,7 +100,7 @@ class AuthControllerTest @Autowired constructor(
 
     @Test
     fun `should return bad request id passwords don't match`() {
-        val userValidation = NewUserValidation(username = "Marko", password = "salasana", passwordCheck = "salasan")
+        val userValidation = NewUserValidation(username = "Marko", password = "salasana", passwordCheck = "salasanaa")
 
         val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
@@ -109,7 +109,7 @@ class AuthControllerTest @Autowired constructor(
         performPost
             .andDo { print() }
             .andExpect {
-                status { isBadRequest() }
+                status { isUnauthorized() }
                 jsonPath("$") { value("Passwords don't match!")}
             }
     }

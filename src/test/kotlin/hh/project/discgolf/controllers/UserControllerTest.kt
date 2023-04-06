@@ -99,7 +99,7 @@ internal class UserControllerTest
 
     @Test
     fun `saving new user without an username - Should return isBadRequest()`() {
-        val newUser = User(password = "password", role = UserRole.USER)
+        val newUser = User(password = "password", role = "ROLE_USER")
 
         val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
@@ -114,7 +114,7 @@ internal class UserControllerTest
 
     @Test
     fun `saving new user without a password - Should return isBadRequest()`() {
-        val newUser = User(username = "Keijo1", role = UserRole.USER)
+        val newUser = User(username = "Keijo1", role = "ROLE_USER")
 
         val performPost = mockMvc.post("/register") {
             contentType = MediaType.APPLICATION_JSON
