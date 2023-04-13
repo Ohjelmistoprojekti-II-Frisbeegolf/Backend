@@ -23,6 +23,5 @@ class UserController(
     fun updateUser(@PathVariable("id") id: Long, @RequestBody payload: User): User = userService.updateUser(id, payload)
 
     @DeleteMapping(value = ["/users/{id}"])
-    @PreAuthorize("hasRole('ADMIN')")
-    fun deleteUser(@PathVariable("id") id: Long) = userService.deleteUser(id)
+    fun deleteUser(@PathVariable("id") id: Long, authentication: Authentication) = userService.deleteUser(id, authentication)
 }

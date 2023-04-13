@@ -3,7 +3,6 @@ package hh.project.discgolf.controllers
 import com.fasterxml.jackson.databind.ObjectMapper
 import hh.project.discgolf.dto.NewUserValidation
 import hh.project.discgolf.entities.User
-import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.UserRepository
 import hh.project.discgolf.services.TokenService
 import org.hamcrest.Matchers.hasSize

@@ -18,6 +18,8 @@ class GameService(private val gameRepository: GameRepository) {
     fun createGame(game: Game): Game = gameRepository.save(game)
 
     fun deleteGame(gameId: Long) {
+
+
         return if (gameRepository.existsById(gameId)) {
             gameRepository.deleteById(gameId)
         } else throw NoSuchElementException("User doesn't exist with given id!")

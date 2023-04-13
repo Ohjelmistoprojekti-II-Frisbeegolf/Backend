@@ -3,6 +3,7 @@ package hh.project.discgolf.controllers
 import hh.project.discgolf.entities.Course
 import hh.project.discgolf.enums.CourseDifficulty
 import hh.project.discgolf.services.CourseService
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -29,6 +30,7 @@ class CourseController(private val courseService: CourseService) {
         courseService.getCoursesByDifficulty(courseDifficulty)
 
     @PostMapping(value = ["/courses"])
+    // @PreAuthorize("hasRole('ADMIN')")
     fun createNewCourse(@RequestBody payload: Course): Course =
         courseService.createNewCourse(payload)
 }

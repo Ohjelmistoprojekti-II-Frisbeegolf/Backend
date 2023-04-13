@@ -28,10 +28,14 @@ class UserService (private val userRepository: UserRepository){
         } else throw NoSuchElementException("User doesn't exist!")
     }
 
-    fun deleteUser(userId: Long) {
-        return if (userRepository.existsById(userId)) {
-            userRepository.deleteById(userId)
-        } else throw NoSuchElementException("User doesn't exist with given id!")
+    fun deleteUser(userId: Long, authentication: Authentication) {
+        val user = authentication.principal as User
+
+        if (user.userId == userId) {
+            if (userRepository.existsById(userId)) {
+                userRepository.deleteById(userId)
+            } else throw NoSuchElementException("User doesn't exist with given id!")
+        } else throw Exception ("You cannot delete this user!")
     }
 
     fun updateUser(userId: Long, user: User): User {

@@ -110,7 +110,7 @@ class AuthControllerTest @Autowired constructor(
             .andDo { print() }
             .andExpect {
                 status { isUnauthorized() }
-                jsonPath("$") { value("Passwords don't match!")}
+                jsonPath("$") { value("Don't match")}
             }
     }
 }
