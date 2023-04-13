@@ -4,6 +4,7 @@ import hh.project.discgolf.entities.Game
 import hh.project.discgolf.repositories.GameRepository
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class GameService(private val gameRepository: GameRepository) {
@@ -37,6 +38,14 @@ class GameService(private val gameRepository: GameRepository) {
                     endingDatetime = game.endingDatetime
                 )
             )
+        } else throw NotFoundException()
+    }
+
+    fun updateEndingGame(gameId: Long): Game {
+        return if (gameRepository.existsById(gameId)) {
+            val updatedGame = gameRepository.findById(gameId).get()
+            updatedGame.endingDatetime = LocalDateTime.now()
+            gameRepository.save(updatedGame)
         } else throw NotFoundException()
     }
 }
