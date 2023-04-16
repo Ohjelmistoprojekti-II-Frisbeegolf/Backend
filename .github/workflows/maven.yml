@@ -41,7 +41,7 @@ jobs:
    
           
       - name: Run tests
-        run:
+        run: |
           export SECERT=${{ secrets.SECRET }}
           mvn test
           unset SECRET
