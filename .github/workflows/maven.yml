@@ -37,7 +37,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          SECRET:${{ secrets.SECRET }}
+          SECRET:
+            ${{ secrets.SECRET }}
          
       - name: Run tests
         run: mvn test
