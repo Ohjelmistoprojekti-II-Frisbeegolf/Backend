@@ -38,7 +38,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
           env:
-            SECRET:${{ secrets.SECRET }}
+            SECRET=${{ secrets.SECRET }}
         
    
           
