@@ -29,10 +29,8 @@ jobs:
 
     steps:
       - shell: bash
-        env:
-          SECRET: ${{ secrets.SECRET }}
         run: |
-          EXPORT="$SECRET"
+          EXPORT=${{ secrets.SECRET }}
       - uses: actions/checkout@v3
      
       - name: Set up JDK 17
