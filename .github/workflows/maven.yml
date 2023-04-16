@@ -42,9 +42,9 @@ jobs:
           
       - name: Run tests
         run: |
-          export SECERT=${{ secrets.SECRET }}
+          env:
+            SECERT:${{ secrets.SECRET }}
           mvn test
-          unset SECRET
 
       - name: Report
         uses: dorny/test-reporter@v1
