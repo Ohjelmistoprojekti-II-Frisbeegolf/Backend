@@ -29,6 +29,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          env:
+            SECRET:${{ secrets.SECRET }}
      
       - name: Set up JDK 17       
         uses: actions/setup-java@v3
@@ -37,8 +40,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          SECRET:
-            ${{ secrets.SECRET }}
          
       - name: Run tests
         run: mvn test
