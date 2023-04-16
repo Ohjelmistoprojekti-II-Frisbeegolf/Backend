@@ -28,11 +28,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - shell: bash
+        env:
+          SECRET: ${{ secrets.SECRET }}
+        run: |
+          EXPORT="$SECRET"
       - uses: actions/checkout@v3
      
       - name: Set up JDK 17
-        env:
-          SECRET: ${{ secrets.SECRET }}
+       
         uses: actions/setup-java@v3
  
         with:
