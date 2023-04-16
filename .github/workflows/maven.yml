@@ -34,8 +34,6 @@ jobs:
         
         uses: actions/setup-java@v3
         with:
-          env: 
-            SECRET:${{ secrets.SECRET }}
           java-version: '17'
           distribution: 'temurin'
           cache: maven
@@ -43,8 +41,10 @@ jobs:
    
           
       - name: Run tests
-        run: | 
-          echo ${{ secrets.SECRET }}
+        run:
+          export SECERT=${{ secrets.SECRET }}
+          mvn test
+          unset SECRET
 
       - name: Report
         uses: dorny/test-reporter@v1
