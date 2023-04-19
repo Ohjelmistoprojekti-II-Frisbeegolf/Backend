@@ -5,6 +5,7 @@ import hh.project.discgolf.dto.LoginCredentials
 import hh.project.discgolf.dto.NewUserValidation
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.UserRepository
+import hh.project.discgolf.services.HashService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,13 +22,14 @@ import org.springframework.test.web.servlet.post
 class AuthControllerTest @Autowired constructor(
     val mockMvc: MockMvc,
     val objectMapper: ObjectMapper,
-    val userRepository: UserRepository
+    val userRepository: UserRepository,
+    val hashService: HashService
 ) {
 
     @BeforeEach
     fun `create user`() {
         userRepository.deleteAll()
-        userRepository.save(User(username = "Keijo", password = "salasana"))
+        userRepository.save(User(username = "Keijo", password = hashService.hashBcrypt("salasana")))
     }
     @Test
     fun `should return token when users logs in`() {
