@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 import org.springframework.validation.BindingResult
 
 @Service
-class UserService (private val userRepository: UserRepository){
+class UserService (private val userRepository: UserRepository, private val hashService: HashService){
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
@@ -45,7 +45,7 @@ class UserService (private val userRepository: UserRepository){
                     userId = userId,
                     games = user.games,
                     username = user.username,
-                    password = user.password,
+                    password = hashService.hashBcrypt(user.password),
                     role = user.role
                 )
             )
