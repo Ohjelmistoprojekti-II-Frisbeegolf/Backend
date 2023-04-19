@@ -27,18 +27,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps:
+    steps:     
       - uses: actions/checkout@v2
-
       - name: Set up JDK 17
+      
+       
         uses: actions/setup-java@v3
+ 
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
+         
       - name: Run tests
-        run: mvn test
+        run: |
+          export SECRET=${{ secrets.SECRET }}
+          mvn test
 
       - name: Report
         uses: dorny/test-reporter@v1
@@ -48,3 +52,4 @@ jobs:
           path: target/surefire-reports/*.xml
           reporter: java-junit
           fail-on-error: true
+          
