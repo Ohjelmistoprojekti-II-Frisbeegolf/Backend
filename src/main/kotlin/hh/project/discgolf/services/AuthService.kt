@@ -8,6 +8,9 @@ import hh.project.discgolf.enums.UserRole
 import hh.project.discgolf.repositories.UserRepository
 import org.hibernate.exception.DataException
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import javax.security.auth.login.CredentialException
 
@@ -21,7 +24,7 @@ class AuthService(
 
 ) {
 
-    fun handleLogin(loginCredentials: LoginCredentials) : LoginResponseDto {
+    fun handleLogin(loginCredentials: LoginCredentials) : ResponseEntity<Any> {
         if (userRepository.findByUsername(loginCredentials.username).isEmpty) {
             throw CredentialException("Wrong credentials.")
         }
@@ -32,9 +35,11 @@ class AuthService(
             throw CredentialException("Wrong credentials.")
         }
 
-        return LoginResponseDto(
-                token = tokenService.createToken(user)
-                )
+        val token = tokenService.createToken(user)
+
+        val headers = HttpHeaders().add(HttpHeaders.AUTHORIZATION, token)
+
+        return ResponseEntity(headers, HttpStatus.OK)
     }
 
     fun handleRegister(newUserValidation: NewUserValidation) {
