@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.post
-import kotlin.reflect.typeOf
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -31,6 +30,7 @@ class AuthControllerTest @Autowired constructor(
             .andDo { print() }
             .andExpect {
                 status { isOk() }
+                header { "Authorization".isNotEmpty() }
             }
     }
 
