@@ -24,7 +24,7 @@ class AuthService(
 
 ) {
 
-    fun handleLogin(loginCredentials: LoginCredentials) : ResponseEntity<Any> {
+    fun handleLogin(loginCredentials: LoginCredentials) : ResponseEntity<Unit> {
         if (userRepository.findByUsername(loginCredentials.username).isEmpty) {
             throw CredentialException("Wrong credentials.")
         }
@@ -37,7 +37,9 @@ class AuthService(
 
         val token = tokenService.createToken(user)
 
-        val headers = HttpHeaders().add(HttpHeaders.AUTHORIZATION, token)
+        val headers = HttpHeaders().apply {
+            add(HttpHeaders.AUTHORIZATION, token)
+        }
 
         return ResponseEntity(headers, HttpStatus.OK)
     }
