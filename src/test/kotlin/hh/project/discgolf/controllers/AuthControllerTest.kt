@@ -3,24 +3,35 @@ package hh.project.discgolf.controllers
 import com.fasterxml.jackson.databind.ObjectMapper
 import hh.project.discgolf.dto.LoginCredentials
 import hh.project.discgolf.dto.NewUserValidation
+import hh.project.discgolf.entities.User
+import hh.project.discgolf.repositories.UserRepository
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.post
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class AuthControllerTest @Autowired constructor(
     val mockMvc: MockMvc,
-    val objectMapper: ObjectMapper
+    val objectMapper: ObjectMapper,
+    val userRepository: UserRepository
 ) {
 
+    @BeforeEach
+    fun `create user`() {
+        userRepository.deleteAll()
+        userRepository.save(User(username = "Keijo", password = "salasana"))
+    }
     @Test
     fun `should return token when users logs in`() {
-        val userCredentials = LoginCredentials(username = "Maija", password = "salasana")
+        val userCredentials = LoginCredentials(username = "Keijo", password = "salasana")
 
         val performPost = mockMvc.post("/login") {
             contentType = MediaType.APPLICATION_JSON
