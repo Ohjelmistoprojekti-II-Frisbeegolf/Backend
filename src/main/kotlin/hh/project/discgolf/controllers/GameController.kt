@@ -2,6 +2,7 @@ package hh.project.discgolf.controllers
 
 import hh.project.discgolf.entities.Game
 import hh.project.discgolf.services.GameService
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,7 +24,7 @@ class GameController(private val gameService: GameService) {
     fun getGameById(@PathVariable("id") gameId: Long): Game = gameService.getGameById(gameId)
 
     @PostMapping(value = ["/games"])
-    fun createGame(@RequestBody payload: Game): Game = gameService.createGame(payload)
+    fun createGame(@RequestBody payload: Game, authentication: Authentication): Game = gameService.createGame(payload, authentication)
 
     @PatchMapping(value = ["/games/{id}"])
     fun updateGame(@PathVariable("id") id: Long): Game = gameService.updateEndingGame(id)
