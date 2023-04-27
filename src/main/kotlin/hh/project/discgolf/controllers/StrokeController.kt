@@ -19,6 +19,10 @@ class StrokeController (private val strokeService: StrokeService) {
     @GetMapping(value = ["/strokes"])
     fun getAllStrokes(): List<Stroke> = strokeService.getAllStrokes()
 
+    @GetMapping(value = ["/strokes/games/{id}"])
+    fun getStrokesByGame(@PathVariable("id") gameId: Long): List<Stroke> =
+        strokeService.getStrokesByGame(gameId)
+
     @GetMapping(value = ["/strokes/{id}"])
     fun getSingleStroke(@PathVariable("id") strokeId: Long): Stroke =
         strokeService.getSingleStrokeById(strokeId)
