@@ -23,6 +23,7 @@ internal class CourseControllerTest @Autowired constructor(
 ) {
 
     val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
+    val tokenAdmin = tokenService.createToken(userRepository.findByUsername("admin").get())
     @Test
     fun `should return all courses`() {
         mockMvc.get("/courses") {
@@ -69,7 +70,7 @@ internal class CourseControllerTest @Autowired constructor(
         val performPost = mockMvc.post("/courses") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(newCourse)
-            header("Authorization", "Bearer $token")
+            header("Authorization", "Bearer $tokenAdmin")
         }
         performPost
             .andDo { print() }
@@ -100,7 +101,7 @@ internal class CourseControllerTest @Autowired constructor(
         val performPost = mockMvc.post("/courses") {
             contentType = MediaType.APPLICATION_JSON
             content = objectMapper.writeValueAsString(invalidCourse)
-            header("Authorization", "Bearer $token")
+            header("Authorization", "Bearer $tokenAdmin")
         }
         performPost
             .andDo { print() }
