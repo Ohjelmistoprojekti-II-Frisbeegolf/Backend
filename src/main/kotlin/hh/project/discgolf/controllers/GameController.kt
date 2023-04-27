@@ -1,6 +1,7 @@
 package hh.project.discgolf.controllers
 
 import hh.project.discgolf.entities.Game
+import hh.project.discgolf.entities.User
 import hh.project.discgolf.services.GameService
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -30,5 +31,11 @@ class GameController(private val gameService: GameService) {
     fun updateGame(@PathVariable("id") id: Long): Game = gameService.updateEndingGame(id)
 
     @DeleteMapping(value = ["/games/{id}"])
-    fun deleteGame(@PathVariable("id") id: Long) = gameService.deleteGame(id)
+    fun deleteGame(@PathVariable("id") id: Long, authentication: Authentication) {
+        val user = authentication.principal as User
+        gameService.deleteGame(id, user.userId, authentication)
+    }
+    @GetMapping(value = ["/games/users/{id}"])
+        fun getUserGames(@PathVariable("id") userId: Long): List<Game> = gameService.getUserGames(userId)
+
 }
