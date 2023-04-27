@@ -64,7 +64,7 @@ internal class GameControllerTest @Autowired constructor(
         }
         @Test
         fun `should return a saved game`() {
-            val newGame = Game(steps = 7000, gameId = 6L)
+            val newGame = Game(steps = 7000)
 
             val performPost = mockMvc.post("/games") {
                 header("Authorization", "Bearer $token")

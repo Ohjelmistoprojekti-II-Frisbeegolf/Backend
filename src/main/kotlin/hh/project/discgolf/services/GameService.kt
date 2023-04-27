@@ -23,15 +23,17 @@ class GameService(
         gameRepository.findById(gameId)
         .orElseThrow { NoSuchElementException("Game with given id not present!")}
 
-    fun createGame(game: Game, authentication: Authentication) {
+    fun createGame(game: Game, authentication: Authentication): Game {
         val user = authentication.principal as User
         val newGame = Game()
         newGame.user = user
         newGame.course = game.course
         newGame.startingDatetime = game.startingDatetime
         newGame.endingDatetime = LocalDateTime.now()
+        newGame.steps = game.steps
         val savedGame = gameRepository.save(newGame)
         saveStrokesToGame(savedGame, game.strokes)
+        return savedGame
     }
 
     private fun saveStrokesToGame(game : Game, strokes : List<Stroke>) {
