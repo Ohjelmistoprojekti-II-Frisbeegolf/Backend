@@ -412,5 +412,61 @@
         "holePar": 3
       }
     ]
+  },
+  {
+    "courseName": "Oittaa frisbeegolf - Rantapuisto",
+    "courseStreetaddress": "Oittaantie",
+    "courseTown": "Espoo",
+    "coursePostalcode": "02740",
+    "courseDifficulty": "C1",
+    "latitude": 60.24022,
+    "longitude": 24.66274,
+    "holes": [
+      {
+        "holeNumber": 1,
+        "holeLength": 37,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 2,
+        "holeLength": 34,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 3,
+        "holeLength": 54,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 4,
+        "holeLength": 45,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 5,
+        "holeLength": 61,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 6,
+        "holeLength": 58,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 7,
+        "holeLength": 49,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 8,
+        "holeLength": 45,
+        "holePar": 3
+      },
+      {
+        "holeNumber": 9,
+        "holeLength": 47,
+        "holePar": 3
+      }
+    ]
   }
 ]
