@@ -26,9 +26,10 @@ class GameService(private val gameRepository: GameRepository, private val stroke
         val newGame = Game()
         newGame.user = user
         newGame.course = game.course
+        newGame.endingDatetime = LocalDateTime.now()
         val savedGame = gameRepository.save(newGame)
         saveStrokesToGame(savedGame, game.strokes)
-
+        println(game.strokes[3].score)
     }
 
     private fun saveStrokesToGame(game : Game, strokes : List<Stroke>) {
