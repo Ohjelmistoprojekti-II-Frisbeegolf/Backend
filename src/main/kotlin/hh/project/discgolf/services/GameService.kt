@@ -1,16 +1,18 @@
 package hh.project.discgolf.services
 
 import hh.project.discgolf.entities.Game
+import hh.project.discgolf.entities.Stroke
 import hh.project.discgolf.entities.User
 import hh.project.discgolf.repositories.CourseRepository
 import hh.project.discgolf.repositories.GameRepository
+import hh.project.discgolf.repositories.StrokeRepository
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class GameService(private val gameRepository: GameRepository, private val courseRepository: CourseRepository) {
+class GameService(private val gameRepository: GameRepository, private val strokeRepository: StrokeRepository) {
 
 
     fun getAllGames(): List<Game> = gameRepository.findAll()
@@ -24,10 +26,19 @@ class GameService(private val gameRepository: GameRepository, private val course
         val newGame = Game()
         newGame.user = user
         newGame.course = game.course
-        newGame.strokes = game.strokes
         val savedGame = gameRepository.save(newGame)
+        saveStrokesToGame(savedGame, game.strokes)
 
+    }
 
+    private fun saveStrokesToGame(game : Game, strokes : List<Stroke>) {
+        strokes.forEach{
+            val stroke = Stroke()
+            stroke.game = game
+            stroke.score = it.score
+            stroke.hole = it.hole
+            strokeRepository.save(stroke)
+             }
     }
 
     fun deleteGame(gameId: Long) {
