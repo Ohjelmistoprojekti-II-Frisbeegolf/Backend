@@ -12,7 +12,7 @@ interface UserRepository : JpaRepository<User, Long> {
     @Query("SELECT SUM(EXTRACT(EPOCH FROM (ending_datetime - starting_datetime))) FROM Game WHERE user_id = :userId", nativeQuery = true)
     fun totalTimePlayed(userId : Long) : Long? = 0
 
-    @Query("SELECT SUM(DISTINCT s.score)" +
+    @Query("SELECT SUM(s.score)" +
             "FROM STROKE s " +
             "JOIN GAME g on s.game_id = g.game_id " +
             "JOIN USERS u on g.user_id = u.user_id " +
