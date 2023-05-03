@@ -23,7 +23,7 @@ class InitializeDB @Autowired constructor(
 
     fun initialize() {
         deleteEverythingFromDB()
-        createTestUsersToDB()
+        //createTestUsersToDB()
         createTestCoursesToDB()
         //createTestGamesToDB()
     }
@@ -50,14 +50,6 @@ class InitializeDB @Autowired constructor(
                 username = "Maija",
                 password = hashService.hashBcrypt("salasana"),
                 role = "ROLE_USER"
-            )
-        )
-
-        userRepo.save(
-            User(
-                username = "admin",
-                password = hashService.hashBcrypt("admin"),
-                role = "ROLE_ADMIN"
             )
         )
     }
@@ -94,7 +86,7 @@ class InitializeDB @Autowired constructor(
         }
     }
 
-    /*
+
     private fun createTestGamesToDB() {
         val gameAtPuolarmaari = gameRepo.save(
             Game(
@@ -106,7 +98,7 @@ class InitializeDB @Autowired constructor(
             )
         )
 
-        createStrokesForGame(game = gameAtPuolarmaari)
+        //createStrokesForGame(game = gameAtPuolarmaari)
 
 
          val gameAtOittaaKalliometsa = gameRepo.save(
@@ -119,7 +111,7 @@ class InitializeDB @Autowired constructor(
             )
         )
 
-        createStrokesForGame(game = gameAtOittaaKalliometsa)
+        //createStrokesForGame(game = gameAtOittaaKalliometsa)
 
         val gameAtTali = gameRepo.save(
             Game(
@@ -131,17 +123,14 @@ class InitializeDB @Autowired constructor(
             )
         )
 
-        createStrokesForGame(game = gameAtTali)
-    }*/
+        //createStrokesForGame(game = gameAtTali)
+    }
 
-    /*private fun createStrokesForGame(game: Game){
+    private fun createStrokesForGame(game: Game){
         for (hole: Hole in game.course!!.holes) {
             strokeRepo.save(
                 Stroke(hole = hole, game = game, score = (1..5).random())
             )
         }
     }
-    */
-
-
 }
