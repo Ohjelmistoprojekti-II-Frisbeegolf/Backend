@@ -16,7 +16,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "FROM STROKE s " +
             "JOIN GAME g on s.game_id = g.game_id " +
             "JOIN USERS u on g.user_id = u.user_id " +
-            "WHERE u.user_id = :userId",
+            "WHERE u.user_id = :userId AND s.score != 0",
             nativeQuery = true
     )
     fun getTotalThrowsThrown(userId : Long) : Int
