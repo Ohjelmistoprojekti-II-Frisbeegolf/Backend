@@ -41,9 +41,9 @@ class GameService(
             val stroke = Stroke()
             stroke.game = game
             if (it.score == 0) {
-                stroke.score = -1_000
+                stroke.score = null
             } else{
-                stroke.score = it.score - it.hole!!.holePar
+                stroke.score = it.score!! - it.hole!!.holePar
             }
             stroke.hole = it.hole
             strokeRepository.save(stroke)

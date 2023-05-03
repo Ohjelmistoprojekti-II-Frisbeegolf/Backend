@@ -143,7 +143,7 @@ class UserRepositoryTests @Autowired constructor(
         val newGame = Game(user = savedUser, course = savedCourse)
         val savedGame = gameRepository.save(newGame)
 
-        val newStroke = Stroke(game = savedGame, score = 4, hole = savedHole)
+        val newStroke = Stroke(game = savedGame, score = 2, hole = savedHole)
         val savedStroke = strokeRepository.save(newStroke)
 
         assertThat(userRepository.getResults(2, savedUser.userId)).isEqualTo(1)

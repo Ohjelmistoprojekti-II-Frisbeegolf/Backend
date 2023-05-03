@@ -18,6 +18,6 @@ class Stroke (
     @JsonIgnore
     var game: Game? = null,
 
-    var score: Int = 0,
+    var score: Int? = 0,
 
 )
