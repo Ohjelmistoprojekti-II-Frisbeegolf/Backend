@@ -22,9 +22,9 @@ class InitializeDB @Autowired constructor(
 ) {
 
     fun initialize() {
-        deleteEverythingFromDB()
+        //deleteEverythingFromDB()
         //createTestUsersToDB()
-        createTestCoursesToDB()
+        //createTestCoursesToDB()
         //createTestGamesToDB()
     }
 

@@ -40,7 +40,11 @@ class GameService(
         strokes.forEach{
             val stroke = Stroke()
             stroke.game = game
-            stroke.score = it.score - it.hole!!.holePar
+            if (it.score == 0) {
+                stroke.score = 0
+            } else{
+                stroke.score = it.score - it.hole!!.holePar
+            }
             stroke.hole = it.hole
             strokeRepository.save(stroke)
              }
