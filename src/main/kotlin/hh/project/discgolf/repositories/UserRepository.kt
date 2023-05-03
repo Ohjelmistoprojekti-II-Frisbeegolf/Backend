@@ -16,7 +16,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "FROM STROKE s " +
             "JOIN GAME g on s.game_id = g.game_id " +
             "JOIN USERS u on g.user_id = u.user_id " +
-            "WHERE u.user_id = :userId AND s.score IS NOT NULL",
+            "WHERE u.user_id = :userId AND s.score != -1000",
             nativeQuery = true
     )
     fun getTotalThrowsThrown(userId : Long) : Int
@@ -29,7 +29,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score = :result AND u.user_id = :userId AND s.score IS NOT NULL",
+            "WHERE s.score = :result AND u.user_id = :userId",
             nativeQuery = true
     )
     fun getResults(result : Int, userId: Long) : Int
@@ -39,7 +39,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score + h.holePar = 1 AND u.user_id = :userId AND s.score IS NOT NULL",
+            "WHERE s.score + h.holePar = 1 AND u.user_id = :userId",
         nativeQuery = true
     )
     fun getAces(userId: Long) : Int
@@ -49,7 +49,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score - h.hole_par > 3 AND u.user_id = :userId AND s.score IS NOT NULL",
+            "WHERE s.score - h.hole_par > 3 AND u.user_id = :userId",
         nativeQuery = true
     )
     fun getOverTripleBogeys(userId: Long) : Int
