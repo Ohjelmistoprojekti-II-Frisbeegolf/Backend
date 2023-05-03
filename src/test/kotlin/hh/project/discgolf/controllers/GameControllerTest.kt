@@ -34,8 +34,8 @@ internal class GameControllerTest @Autowired constructor(
     fun `create user`() {
         userRepository.deleteAll()
         gameRepository.deleteAll()
-        userRepository.save(User(username = "Keijo", password = "salasana", role = "ROLE_USER"))
-        gameRepository.save(Game())
+        val savedUser = userRepository.save(User(username = "Keijo", password = "salasana", role = "ROLE_USER"))
+        gameRepository.save(Game(user = savedUser))
     }
 
 
@@ -82,8 +82,9 @@ internal class GameControllerTest @Autowired constructor(
         }
         @Test
         fun `should return a saved game`() {
-            val newGame = Game(steps = 7000, gameId = 6L)
             val token = tokenService.createToken(userRepository.findAll()[0])
+            val newGame = Game(steps = 7000)
+
             val performPost = mockMvc.post("/games") {
                 header("Authorization", "Bearer $token")
                 contentType = MediaType.APPLICATION_JSON

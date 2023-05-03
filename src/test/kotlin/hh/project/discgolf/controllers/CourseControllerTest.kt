@@ -32,10 +32,9 @@ internal class CourseControllerTest @Autowired constructor(
     fun init() {
         userRepository.deleteAll()
         courseRepository.deleteAll()
-        userRepository.save(User(username = "Keijo", password = "passwordfortesting", role = "ROLE_USER"))
+        userRepository.save(User(username = "Keijo", password = "passwordfortesting", role = "ROLE_ADMIN"))
         courseRepository.save(Course(courseName = "Test course"))
     }
-
 
     @Test
     fun `should return all courses`() {

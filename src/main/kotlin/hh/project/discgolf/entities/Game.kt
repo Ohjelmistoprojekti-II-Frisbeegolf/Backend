@@ -19,7 +19,6 @@ class Game(
     var course: Course? = null,
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JsonIgnore
     var strokes: List<Stroke> = emptyList(),
 
     var steps: Int = 0,

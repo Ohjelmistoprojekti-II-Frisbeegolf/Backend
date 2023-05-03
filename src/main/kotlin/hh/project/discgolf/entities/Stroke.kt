@@ -1,5 +1,6 @@
 package hh.project.discgolf.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 @Entity
@@ -14,6 +15,7 @@ class Stroke (
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gameId")
+    @JsonIgnore
     var game: Game? = null,
 
     var score: Int = 0,

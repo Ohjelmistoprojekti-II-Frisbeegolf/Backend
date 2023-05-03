@@ -30,7 +30,7 @@ class CourseController(private val courseService: CourseService) {
         courseService.getCoursesByDifficulty(courseDifficulty)
 
     @PostMapping(value = ["/courses"])
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     fun createNewCourse(@RequestBody payload: Course): Course =
         courseService.createNewCourse(payload)
 }
