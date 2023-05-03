@@ -9,18 +9,20 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.http.MediaType
+import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 internal class HoleControllerTest @Autowired constructor(
     val mockMvc: MockMvc,
-    tokenService: TokenService,
-    userRepository: UserRepository
+    val tokenService: TokenService,
+    val userRepository: UserRepository
 ) {
 
-    val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
     @Test
     fun `should return all holes`() {
+        val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
         mockMvc.get("/holes") {
             header("Authorization", "Bearer $token")
         }
