@@ -29,7 +29,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score - h.hole_par = :result AND u.user_id = :userId AND s.score > 1",
+            "WHERE s.score - h.hole_par = :result AND u.user_id = :userId AND s.score != -1000",
             nativeQuery = true
     )
     fun getResults(result : Int, userId: Long) : Int
