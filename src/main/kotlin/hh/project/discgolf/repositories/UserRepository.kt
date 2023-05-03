@@ -12,11 +12,11 @@ interface UserRepository : JpaRepository<User, Long> {
     @Query("SELECT SUM(EXTRACT(EPOCH FROM (ending_datetime - starting_datetime))) FROM Game WHERE user_id = :userId", nativeQuery = true)
     fun totalTimePlayed(userId : Long) : Long? = 0
 
-    @Query("SELECT COUNT(s.score)" +
+    @Query("SELECT SUM(DISTINCT s.score)" +
             "FROM STROKE s " +
             "JOIN GAME g on s.game_id = g.game_id " +
             "JOIN USERS u on g.user_id = u.user_id " +
-            "WHERE u.user_id = :userId AND s.score != -1000",
+            "WHERE u.user_id = :userId",
             nativeQuery = true
     )
     fun getTotalThrowsThrown(userId : Long) : Int
@@ -29,7 +29,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score = :result AND u.user_id = :userId",
+            "WHERE s.score - h.hole_par = :result AND u.user_id = :userId AND s.score != 1 AND s.score != 0",
             nativeQuery = true
     )
     fun getResults(result : Int, userId: Long) : Int
@@ -39,7 +39,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score + h.hole_par = 1 AND u.user_id = :userId",
+            "WHERE s.score = 1 AND u.user_id = :userId",
         nativeQuery = true
     )
     fun getAces(userId: Long) : Int
