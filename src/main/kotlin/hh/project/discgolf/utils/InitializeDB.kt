@@ -25,7 +25,7 @@ class InitializeDB @Autowired constructor(
         deleteEverythingFromDB()
         createTestUsersToDB()
         createTestCoursesToDB()
-        createTestGamesToDB()
+        //createTestGamesToDB()
     }
 
     private fun deleteEverythingFromDB() {
@@ -94,6 +94,7 @@ class InitializeDB @Autowired constructor(
         }
     }
 
+    /*
     private fun createTestGamesToDB() {
         val gameAtPuolarmaari = gameRepo.save(
             Game(
@@ -131,15 +132,16 @@ class InitializeDB @Autowired constructor(
         )
 
         createStrokesForGame(game = gameAtTali)
-    }
+    }*/
 
-    private fun createStrokesForGame(game: Game){
+    /*private fun createStrokesForGame(game: Game){
         for (hole: Hole in game.course!!.holes) {
             strokeRepo.save(
                 Stroke(hole = hole, game = game, score = (1..5).random())
             )
         }
     }
+    */
 
 
 }
