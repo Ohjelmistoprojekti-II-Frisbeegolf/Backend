@@ -11,10 +11,16 @@ This is a school team project developed using Spring Boot, Kotlin and Maven.
 - A command-line interface (e.g., Terminal on macOS, Command Prompt on Windows)
 
 ### Cloning the repository
-To clone the repository, run the following command:
+1. To clone the repository, run the following command:
 
 ```
 git clone [repository URL]
+```
+
+2. Switch to "dev" branch, run the following command: 
+
+```
+git switch dev
 ```
 
 ### Adding secrets to environment variables
