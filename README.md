@@ -17,7 +17,6 @@ To clone the repository, run the following command:
 git clone [repository URL]
 ```
 
-### Switch branch to "dev"
 Switch to "dev" branch by running the following command: 
 
 ```
