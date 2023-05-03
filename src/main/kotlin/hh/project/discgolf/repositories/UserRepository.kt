@@ -24,7 +24,7 @@ interface UserRepository : JpaRepository<User, Long> {
     @Query("SELECT SUM(steps) FROM GAME WHERE user_id = :userId", nativeQuery = true)
     fun getStepsForUser(userId: Long) : Int? = 0
 
-    @Query("SELECT COUNT(s.score) " +
+    @Query("SELECT COUNT(DISTINCT s.score) " +
             "FROM STROKE s " +
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
@@ -34,7 +34,7 @@ interface UserRepository : JpaRepository<User, Long> {
     )
     fun getResults(result : Int, userId: Long) : Int
 
-    @Query("SELECT COUNT(s.score) " +
+    @Query("SELECT COUNT(DISTINCT s.score) " +
             "FROM STROKE s " +
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
@@ -44,7 +44,7 @@ interface UserRepository : JpaRepository<User, Long> {
     )
     fun getAces(userId: Long) : Int
 
-    @Query("SELECT COUNT(s.score) " +
+    @Query("SELECT COUNT(DISTINCT s.score) " +
             "FROM STROKE s " +
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
