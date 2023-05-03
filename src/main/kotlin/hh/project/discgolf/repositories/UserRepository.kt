@@ -39,7 +39,7 @@ interface UserRepository : JpaRepository<User, Long> {
             "JOIN HOLE h ON s.hole_id = h.hole_id " +
             "JOIN GAME g ON h.course_id = g.course_id " +
             "JOIN USERS u ON g.user_id = u.user_id " +
-            "WHERE s.score + h.holePar = 1 AND u.user_id = :userId",
+            "WHERE s.score + h.hole_par = 1 AND u.user_id = :userId",
         nativeQuery = true
     )
     fun getAces(userId: Long) : Int
