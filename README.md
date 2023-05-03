@@ -48,15 +48,15 @@ To add a secret to environment variables in Kotlin, follow these steps:
 
 3. Click on the "+" button and select "Kotlin".
 
-4. In the "Environment variables" section, add the name and value of the secret. For example, to add a secret named "DATABASE_PASSWORD" with the value "mypassword", add the following line:
+4. In the "Environment variables" section, add the name and value of the secret. For example, to add a secret named "SECRET" with the value "mysecret", add the following line:
 
 ```
-DATABASE_PASSWORD=mypassword
+SECRET=mysecret
 ```
 
 5. Click "OK" to save the configuration.
 
-Now the secret is added to the environment variables and can be accessed in the Kotlin code using the System.getenv("DATABASE_PASSWORD") method.
+Now the secret is added to the environment variables and can be accessed in the Kotlin code using the System.getenv("SECRET") method.
 
 ### About
 
