@@ -27,12 +27,10 @@ internal class UserControllerTest
         val tokenService: TokenService
 ) {
 
-    val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
-
     @Test
     fun `should return all users`() {
         val quantityOfUsers = userRepository.findAll().size
-
+        val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
         mockMvc.get("/users") {
             header("Authorization", "Bearer $token")
         }
@@ -46,7 +44,7 @@ internal class UserControllerTest
 
     @Test
     fun `should return authenticated user`() {
-
+        val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
         mockMvc.get("/users/current") {
             header("Authorization", "Bearer $token")
         }

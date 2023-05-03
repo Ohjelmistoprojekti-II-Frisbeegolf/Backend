@@ -3,6 +3,7 @@ package hh.project.discgolf.controllers
 import com.fasterxml.jackson.databind.ObjectMapper
 import hh.project.discgolf.entities.Game
 import hh.project.discgolf.entities.User
+import hh.project.discgolf.repositories.GameRepository
 import hh.project.discgolf.repositories.UserRepository
 import hh.project.discgolf.services.TokenService
 import org.junit.jupiter.api.BeforeEach
@@ -24,18 +25,25 @@ internal class GameControllerTest @Autowired constructor(
         val mockMvc: MockMvc,
         val objectMapper: ObjectMapper,
         val tokenService: TokenService,
-        val userRepository: UserRepository
+        val userRepository: UserRepository,
+        val gameRepository: GameRepository
     )
 {
+
     @BeforeEach
     fun `create user`() {
         userRepository.deleteAll()
-        userRepository.save(User(username = "Keijo", password = "salasana"))
+        gameRepository.deleteAll()
+        userRepository.save(User(username = "Keijo", password = "salasana", role = "ROLE_USER"))
+        gameRepository.save(Game())
     }
 
-    val token = tokenService.createToken(userRepository.findByUsername("Keijo").get())
+
+
+
         @Test
         fun `should return all games`() {
+            val token = tokenService.createToken(userRepository.findAll()[0])
             mockMvc.get("/games") {
                 header("Authorization", "Bearer $token")
             }
@@ -49,7 +57,7 @@ internal class GameControllerTest @Autowired constructor(
         @Test
         fun `should return game by given id`() {
             val id = 2L
-
+            val token = tokenService.createToken(userRepository.findAll()[0])
             mockMvc.get("/games/$id"){
                 header("Authorization", "Bearer $token")
             }
@@ -63,7 +71,7 @@ internal class GameControllerTest @Autowired constructor(
         @Test
         fun `should return not found if the game with that id doesn't exist`() {
             val incorrectId = -1L
-
+            val token = tokenService.createToken(userRepository.findAll()[0])
             mockMvc.get("/games/$incorrectId"){
                 header("Authorization", "Bearer $token")
             }
@@ -75,7 +83,7 @@ internal class GameControllerTest @Autowired constructor(
         @Test
         fun `should return a saved game`() {
             val newGame = Game(steps = 7000, gameId = 6L)
-
+            val token = tokenService.createToken(userRepository.findAll()[0])
             val performPost = mockMvc.post("/games") {
                 header("Authorization", "Bearer $token")
                 contentType = MediaType.APPLICATION_JSON
@@ -91,8 +99,8 @@ internal class GameControllerTest @Autowired constructor(
         }
         @Test
         fun `should delete a game by gameId`() {
-            val givenGameId = 1L
-
+            val givenGameId = gameRepository.findAll()[0].gameId
+            val token = tokenService.createToken(userRepository.findAll()[0])
                 mockMvc.delete("/games/$givenGameId"){
                     header("Authorization", "Bearer $token")
                 }
